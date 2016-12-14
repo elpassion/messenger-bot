@@ -1,0 +1,4 @@
+project=career_bot
+architecture=container
+test=rspec
+template=erb
