@@ -7,6 +7,7 @@ gem 'hanami-model', '~> 0.7'
 
 gem 'pg'
 gem 'facebook-messenger'
+gem 'wit'
 
 group :development do
   # Code reloading
