@@ -4,6 +4,7 @@ require 'hanami/model'
 require 'facebook/messenger'
 require_relative '../lib/career_bot'
 require_relative '../apps/web/application'
+require_relative 'initializers/facebook_messenger'
 
 Hanami.configure do
   mount Web::Application, at: '/'
