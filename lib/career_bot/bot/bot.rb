@@ -28,6 +28,6 @@ Bot.on :postback do |postback|
        }
      })
   elsif postback.payload == 'JOB_OFFERS'
-    postback.reply(text: 'To be done')
+    postback.reply(attachment: GenericTemplate.new.attachment)
   end
 end
