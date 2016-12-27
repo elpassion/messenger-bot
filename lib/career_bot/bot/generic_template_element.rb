@@ -23,13 +23,13 @@ class GenericTemplateElement
   end
 
   def buttons
-    @buttons ||= BUTTONS.reduce([]) do |result, button|
+    BUTTONS.reduce([]) do |result, button|
       result << button(button)
     end
   end
 
   def button(button)
-    @button_hash ||= {
+    {
       type: 'web_url',
       url: job[button[:url]],
       title: button[:title]

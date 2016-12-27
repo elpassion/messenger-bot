@@ -24,7 +24,7 @@ describe GenericTemplateElement do
       },
       buttons: [
         { type: 'web_url', url: 'https://elpassion.workable.com/jobs/36607', title: 'View offer'},
-        { type: 'web_url', url: 'https://elpassion.workable.com/jobs/36607', title: 'View offer'}
+        { type: 'web_url', url: 'https://elpassion.workable.com/jobs/36607/candidates/new', title: 'Apply for offer'}
       ]
     }
   }
