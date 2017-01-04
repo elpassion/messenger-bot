@@ -32,7 +32,7 @@ describe GenericTemplateElement do
   subject { described_class.new(offer) }
   describe '#element' do
     it 'returns proper response' do
-      expect(subject.element).to eq element_hash
+      expect(subject.to_hash).to eq element_hash
     end
   end
 end

@@ -1,6 +1,7 @@
 class GenericTemplate
-  def attachment
-    @attachment ||= {
+  
+  def to_hash
+    {
       type: 'template',
       payload: {
         template_type: 'generic',
@@ -10,14 +11,16 @@ class GenericTemplate
   end
 
   private
+  
+  attr_reader :data
 
-  def offers
-    @offers = WorkableService.new.get_active_jobs
+  def initialize(data)
+    @data = data
   end
 
   def elements
-    @elements = offers.reduce([]) do |result, job|
-      result << GenericTemplateElement.new(job).element
+    @elements = data.reduce([]) do |result, job|
+      result << GenericTemplateElement.new(job).to_hash
     end
   end
 end
