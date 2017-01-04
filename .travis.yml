@@ -1,0 +1,19 @@
+language: ruby
+sudo: false
+rvm: 2.3.3
+cache: bundler
+before_script:
+- HANAMI_ENV=test bundle exec hanami db create
+- HANAMI_ENV=test bundle exec hanami db migrate
+script:
+- bundle exec rspec
+deploy:
+  provider: heroku
+  strategy: git
+  api_key:
+    secure: OHt+UyEj/+DIZyr+IE0edp5sKN1JIvC816y9OKiPL3JK1pxG0iuTS3eDX5bmniPsnXiUkCCTfD5KHBPSkviLJ+pRAYtTEU/0KRyBAzHXSv+nQFI2EvWCrxTHo+kYUsvUHHoAUYDTfFRO+lPTmFsZ8q67/LxhbCaqyf5Av+i63w8T6qqcfsUiU2fnXVWyCJbaClu1OMitxSx2SCB80+sBynMPPMHP7WxcWkoGFwCPcwjO+mAbQXHDUXdixgR8N+dCg7Pfzz9wy0j4wKrs0F/hSrXFoJcsoyHjLJCDqTOhUjIdK0Wj3l8PPPYr8zFQOLciDEsAEeTjOoUGRR4FxizUtmc2n9mqNaBFtORAVwbhG6OH9RT6ioKbNJUG3K6CVup8jc03XIAPhKF5ngSz9g5FsFzQ4ABsH1vKaUxHU73lPgLXx0clxei5PB0TAOC/JK524bKD5ziVUNKRkdHmS1pVvKAUgwsYIFivW+SKaakNBQzE5XFngXHhM6lhCoq6qWCUI84TBMQdHkXo+4oj+tvmx/1EC1FU2c8inWqmXoO+yl9QJTJAJWVDfBswuU84HrliOcSWE9IVlGtfnHJ0IMmWYQ+zlTQ/2wQjbs4iyNN+lSYplPBMFGjSH06hn8Y2nLbolBc1byzo0mp/E5x12/DzdAVEd6IRtVEs9003iCAMXoA=
+  skip_cleanup: true
+  app: career-bot
+  on: master
+  run:
+  - hanami db prepare
