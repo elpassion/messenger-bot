@@ -10,13 +10,11 @@ describe GenericTemplate do
     }
   }
 
-  before :each do
-    allow_any_instance_of(WorkableService).to receive(:get_active_jobs).and_return []
-  end
-
+  subject { described_class.new([])}
+  
   describe '#attachment' do
     it 'returns proper response' do
-      expect(subject.attachment).to eq attachment_hash
+      expect(subject.to_hash).to eq attachment_hash
     end
   end
 end

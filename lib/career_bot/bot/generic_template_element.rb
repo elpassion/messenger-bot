@@ -4,7 +4,7 @@ class GenericTemplateElement
     { title: 'Apply for offer', url: 'application_url' }
   ].freeze
 
-  def element
+  def to_hash
     {
       title: job['title'],
       image_url: 'https://workablehr.s3.amazonaws.com/uploads/account/logo/13617/large_logo_elpasison_v1.1.png',
@@ -29,11 +29,7 @@ class GenericTemplateElement
   end
 
   def button(button)
-    {
-      type: 'web_url',
-      url: job[button[:url]],
-      title: button[:title]
-    }
+    UrlButton.new(job[button[:url]], button[:title]).to_hash
   end
 
   def default_action

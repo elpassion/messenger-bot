@@ -11,23 +11,19 @@ Bot.on :message do |message|
 end
 
 Bot.on :postback do |postback|
-  if postback.payload == 'WELCOME_PAYLOAD'
-    postback.reply(attachment:
-     {
-       type: 'template',
-       payload: {
-         template_type: 'button',
-         text: 'This is el Passions career bot. What would you like to do?',
-         buttons: [
-           {
-             type: 'postback',
-             title: 'Show opened positions',
-             payload: 'JOB_OFFERS'
-           }
-         ]
-       }
-     })
-  elsif postback.payload == 'JOB_OFFERS'
-    postback.reply(attachment: GenericTemplate.new.attachment)
+  case postback.payload
+    when 'WELCOME_PAYLOAD'
+      buttons = [
+        PostbackButton.new('Develompent', 'TO_BE_DONE').to_hash,
+        PostbackButton.new('Job Offers', 'JOB_OFFERS').to_hash,
+        PostbackButton.new('About Us', 'TO_BE_DONE').to_hash
+      ]
+      text = 'Hello! I am EL Passion Messenger Bot! What would you like to talk about?'
+      postback.reply(attachment: ButtonTemplate.new(text).to_hash(buttons) )
+    when 'JOB_OFFERS'
+      data = WorkableService.new.get_active_jobs
+      postback.reply(attachment: GenericTemplate.new(data).to_hash)
+    when 'TO_BE_DONE'
+      postback.reply(text: 'TO BE DONE...')
   end
 end
