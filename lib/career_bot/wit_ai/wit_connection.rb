@@ -10,7 +10,7 @@ class WitConnection
     access_token = ENV['WIT_ACCESS_TOKEN']
     actions = {
       send: -> (request, response) {
-        send_response(request, response)
+        found_job_offer(request, response)
       },
       get_job: -> (request) {
         context = request['context']
@@ -39,10 +39,24 @@ class WitConnection
     )
   end
 
+  def found_job_offer(request, response)
+    Bot.deliver(
+      {
+        recipient:
+          {
+            id: request['session_id']
+          },
+        message: {
+          attachment: GenericTemplate.new(JobService.new('ruby').get_jobs).to_hash
+        }
+      }, access_token: ENV['ACCESS_TOKEN']
+    )
+  end
+
   def first_entity_value(entities, entity)
-    return nil unless entities.has_key? entity
+    return unless entities.has_key? entity
     val = entities[entity][0]['value']
-    return nil if val.nil?
+    return if val.nil?
     return val.is_a?(Hash) ? val['value'] : val
   end
 end
