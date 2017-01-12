@@ -40,6 +40,8 @@ class WitConnection
   end
 
   def found_job_offer(request, response)
+    key_word = request['context']['testFunction']
+    data = JobService.new(key_word).get_jobs
     Bot.deliver(
       {
         recipient:
@@ -47,7 +49,7 @@ class WitConnection
             id: request['session_id']
           },
         message: {
-          attachment: GenericTemplate.new(JobService.new('ruby').get_jobs).to_hash
+          attachment: data.any? ? GenericTemplate.new(data).to_hash : GenericTemplate.new(WorkableService.new.get_active_jobs).to_hash
         }
       }, access_token: ENV['ACCESS_TOKEN']
     )
