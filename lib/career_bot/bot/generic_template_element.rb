@@ -1,13 +1,10 @@
 class GenericTemplateElement
-  BUTTONS = [
-    { title: 'View offer', url: 'url' },
-    { title: 'Apply for offer', url: 'application_url' }
-  ].freeze
+  IMG_URLS = %w[70 26-1 27-1 65 28-1 66].freeze
 
   def to_hash
     {
       title: job['title'],
-      image_url: 'https://workablehr.s3.amazonaws.com/uploads/account/logo/13617/large_logo_elpasison_v1.1.png',
+      image_url: "http://www.elpassion.com/wp-content/uploads/2015/03/Bez-nazwy-#{IMG_URLS.sample}.jpg",
       subtitle: job['full_title'],
       default_action: default_action,
       buttons: buttons
@@ -23,13 +20,11 @@ class GenericTemplateElement
   end
 
   def buttons
-    BUTTONS.reduce([]) do |result, button|
-      result << button(button)
-    end
-  end
-
-  def button(button)
-    UrlButton.new(job[button[:url]], button[:title]).to_hash
+    [
+      UrlButton.new(job['url'], 'View offer on page').to_hash,
+      UrlButton.new(job['application_url'], 'Apply for offer').to_hash,
+      PostbackButton.new('Show requirements', payload).to_hash
+    ]
   end
 
   def default_action
@@ -37,5 +32,13 @@ class GenericTemplateElement
       type: 'web_url',
       url: job['url']
     }
+  end
+
+  def job_shortcode
+    job['shortcode']
+  end
+
+  def payload
+    "JOB_DETAILS|#{job_shortcode}"
   end
 end
