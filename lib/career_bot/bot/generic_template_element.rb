@@ -1,6 +1,6 @@
 class GenericTemplateElement
   BUTTONS = [
-    { title: 'View offer', url: 'url' },
+    { title: 'View offer on page', url: 'url' },
     { title: 'Apply for offer', url: 'application_url' }
   ].freeze
 
@@ -23,13 +23,11 @@ class GenericTemplateElement
   end
 
   def buttons
-    BUTTONS.reduce([]) do |result, button|
-      result << button(button)
-    end
-  end
-
-  def button(button)
-    UrlButton.new(job[button[:url]], button[:title]).to_hash
+    [
+      UrlButton.new(job['url'], 'View offer on page').to_hash,
+      UrlButton.new(job['application_url'], 'Apply for offer').to_hash,
+      PostbackButton.new('Show offer requirements', payload).to_hash
+    ]
   end
 
   def default_action
@@ -37,5 +35,13 @@ class GenericTemplateElement
       type: 'web_url',
       url: job['url']
     }
+  end
+
+  def job_shortcode
+    job['shortcode']
+  end
+
+  def payload
+    "JOB_DETAILS|#{job_shortcode}"
   end
 end

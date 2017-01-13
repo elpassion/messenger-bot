@@ -23,8 +23,9 @@ describe GenericTemplateElement do
         url: 'https://elpassion.workable.com/jobs/36607'
       },
       buttons: [
-        { type: 'web_url', url: 'https://elpassion.workable.com/jobs/36607', title: 'View offer'},
-        { type: 'web_url', url: 'https://elpassion.workable.com/jobs/36607/candidates/new', title: 'Apply for offer'}
+        { type: 'web_url', url: 'https://elpassion.workable.com/jobs/36607', title: 'View offer on page'},
+        { type: 'web_url', url: 'https://elpassion.workable.com/jobs/36607/candidates/new', title: 'Apply for offer'},
+        { type: 'postback', title: 'Show offer requirements', payload: 'JOB_DETAILS|32BD741385'}
       ]
     }
   }

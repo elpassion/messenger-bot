@@ -11,7 +11,8 @@ Bot.on :message do |message|
 end
 
 Bot.on :postback do |postback|
-  case postback.payload
+  payload = postback.payload
+  case payload
     when 'WELCOME_PAYLOAD'
       buttons = [
         PostbackButton.new('Develompent', 'TO_BE_DONE').to_hash,
@@ -21,9 +22,13 @@ Bot.on :postback do |postback|
       text = 'Hello! I am EL Passion Messenger Bot! What would you like to talk about?'
       postback.reply(attachment: ButtonTemplate.new(text).to_hash(buttons) )
     when 'JOB_OFFERS'
-      data = WorkableService.new.get_active_jobs
-      postback.reply(attachment: GenericTemplate.new(data).to_hash)
+      postback.reply(text: 'What job you are looking for?')
     when 'TO_BE_DONE'
       postback.reply(text: 'TO BE DONE...')
+    else
+      response = ParseJobService.new(payload).get_job_details
+      if response
+        postback.reply(text: response)
+      end
   end
 end
