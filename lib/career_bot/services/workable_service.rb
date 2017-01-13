@@ -1,5 +1,3 @@
-require 'nokogiri'
-
 class WorkableService
   def get_active_jobs
     @active_jobs ||= get_jobs.select{|job| job['state'] == 'published'}

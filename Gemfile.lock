@@ -177,6 +177,7 @@ DEPENDENCIES
   facebook-messenger
   hanami (~> 0.9)
   hanami-model (~> 0.7)
+  nokogiri
   pg
   pry
   rake

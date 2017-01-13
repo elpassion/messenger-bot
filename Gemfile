@@ -10,6 +10,7 @@ gem 'pg'
 gem 'facebook-messenger'
 gem 'wit'
 gem 'workable'
+gem 'nokogiri'
 
 group :development do
   # Code reloading
