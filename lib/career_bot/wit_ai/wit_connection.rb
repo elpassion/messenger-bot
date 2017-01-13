@@ -22,6 +22,19 @@ class WitConnection
 
         context['testFunction'] = first_entity_value(entities, 'position')
         return context
+      },
+      play_game: -> (request) {
+        context = request['context']
+        entities = request['entities']
+
+        number = first_entity_value(entities, 'number')
+        if number.nil?
+          context['wrongParam'] = true
+        else
+          context['lost'] = first_entity_value(entities, 'number') + 1
+          context['number'] = number + 1
+        end
+        return context
       }
     }
     @client = Wit.new(access_token: access_token, actions: actions)
@@ -42,6 +55,7 @@ class WitConnection
 
     bot_deliver(request, { text: message })
     bot_deliver(request, { attachment: GenericTemplate.new(attachment).to_hash })
+    bot_deliver(request, { text: 'Found anything interesting? If not, you can try again! Or maybe you want to play a game now? :)' })
   end
 
   def first_entity_value(entities, entity)

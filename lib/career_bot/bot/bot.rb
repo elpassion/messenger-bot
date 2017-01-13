@@ -16,14 +16,18 @@ Bot.on :postback do |postback|
   case payload
     when 'WELCOME_PAYLOAD'
       buttons = [
-        PostbackButton.new('Develompent', 'TO_BE_DONE').to_hash,
-        PostbackButton.new('Job Offers', 'JOB_OFFERS').to_hash,
-        PostbackButton.new('About Us', 'TO_BE_DONE').to_hash
+        PostbackButton.new('I wanna find a job!', 'JOB_OFFERS').to_hash,
+        PostbackButton.new('I wanna play a game!', 'PLAY_A_GAME').to_hash
       ]
-      text = 'Hello! :) I am EL Passion Messenger Bot! What would you like to talk about?'
+      text = 'Hello! :) I am EL Passion Messenger Bot! What would you like to do?'
       postback.reply(attachment: ButtonTemplate.new(text).to_hash(buttons) )
     when 'JOB_OFFERS'
-      postback.reply(text: 'What job you are looking for?')
+      postback.reply(text: 'Nice! :D Fortunately, we are looking for some cool people to join us! Sooo... What kind of job are you interested in?')
+    when 'PLAY_A_GAME'
+      postback.type
+      sender = postback.sender
+      client = WitConnection.instance.client
+      client.run_actions(sender['id'], 'play_a_game', {})
     when 'TO_BE_DONE'
       postback.reply(text: 'TO BE DONE...')
     else
