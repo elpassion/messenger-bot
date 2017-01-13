@@ -1,13 +1,10 @@
 class GenericTemplateElement
-  BUTTONS = [
-    { title: 'View offer on page', url: 'url' },
-    { title: 'Apply for offer', url: 'application_url' }
-  ].freeze
+  IMG_URLS = %w[70 26-1 27-1 65 28-1 66].freeze
 
   def to_hash
     {
       title: job['title'],
-      image_url: 'https://workablehr.s3.amazonaws.com/uploads/account/logo/13617/large_logo_elpasison_v1.1.png',
+      image_url: "http://www.elpassion.com/wp-content/uploads/2015/03/Bez-nazwy-#{IMG_URLS.sample}.jpg",
       subtitle: job['full_title'],
       default_action: default_action,
       buttons: buttons
@@ -26,7 +23,7 @@ class GenericTemplateElement
     [
       UrlButton.new(job['url'], 'View offer on page').to_hash,
       UrlButton.new(job['application_url'], 'Apply for offer').to_hash,
-      PostbackButton.new('Show offer requirements', payload).to_hash
+      PostbackButton.new('Show requirements', payload).to_hash
     ]
   end
 

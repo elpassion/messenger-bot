@@ -4,6 +4,7 @@ Bot.on :message do |message|
   if message.text == 'test'
     message.reply(text: 'OK, I am working! <3')
   else
+    message.type
     sender = message.sender
     client = WitConnection.instance.client
     client.run_actions(sender['id'], message.text, {})
@@ -19,7 +20,7 @@ Bot.on :postback do |postback|
         PostbackButton.new('Job Offers', 'JOB_OFFERS').to_hash,
         PostbackButton.new('About Us', 'TO_BE_DONE').to_hash
       ]
-      text = 'Hello! I am EL Passion Messenger Bot! What would you like to talk about?'
+      text = 'Hello! :) I am EL Passion Messenger Bot! What would you like to talk about?'
       postback.reply(attachment: ButtonTemplate.new(text).to_hash(buttons) )
     when 'JOB_OFFERS'
       postback.reply(text: 'What job you are looking for?')
