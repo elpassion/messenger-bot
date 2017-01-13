@@ -42,6 +42,7 @@ class WitConnection
 
     bot_deliver(request, { text: message })
     bot_deliver(request, { attachment: GenericTemplate.new(attachment).to_hash })
+    bot_deliver(request, { text: 'Found anything interesting? If not, you can try again! Or maybe you want to play a game now? :)' })
   end
 
   def first_entity_value(entities, entity)
