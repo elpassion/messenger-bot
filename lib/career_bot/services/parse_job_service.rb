@@ -1,5 +1,4 @@
 class ParseJobService
-
   def initialize(payload)
     @payload = payload
   end

@@ -4,7 +4,11 @@ class WorkableService
   end
 
   def get_job_details(shortcode)
-    Nokogiri::HTML(job_description(shortcode)).text.first(630)
+    Nokogiri::HTML(job_description(shortcode)).css('li').map { |li| li.text }
+  end
+
+  def job_full_description(shortcode)
+    client.job_details(shortcode)['full_description']
   end
 
   private

@@ -52,6 +52,7 @@ class WitConnection
   def found_job_offer(request)
     key_word = request['context']['testFunction']
     @data = JobService.new(key_word).get_jobs
+    @more_data = JobService.new(key_word).get_jobs_description
 
     bot_deliver(request, { text: message })
     bot_deliver(request, { attachment: GenericTemplate.new(attachment).to_hash })
@@ -78,12 +79,17 @@ class WitConnection
   end
 
   def attachment
-    @data.any? ? @data : WorkableService.new.get_active_jobs
-
+    if @data.any?
+      @data
+    elsif @more_data.any?
+      @more_data
+    else
+      WorkableService.new.get_active_jobs
+    end
   end
 
   def message
-    if @data.any?
+    if @data.any? || @more_data.any?
       'Yay! :) We have something you may be interested in! Check this out!'
     else
       "Unfortunately we don't have any matching job offers :( buuuut... you can still check out all of our open positions!"
