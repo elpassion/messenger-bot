@@ -7,6 +7,7 @@ gem 'hanami',       '~> 0.9'
 gem 'hanami-model', '~> 0.7'
 
 gem 'pg'
+gem 'sidekiq', '~> 4.0.2'
 gem 'facebook-messenger'
 gem 'wit'
 gem 'workable'
@@ -16,11 +17,14 @@ group :development do
   # Code reloading
   # See: http://hanamirb.org/guides/projects/code-reloading
   gem 'shotgun'
+  gem 'foreman'
 end
 
 group :test, :development do
   gem 'pry'
   gem 'dotenv', '~> 2.0'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :test do

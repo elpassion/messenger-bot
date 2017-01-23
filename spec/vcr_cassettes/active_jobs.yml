@@ -1,0 +1,79 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.workable.com/spi/v3/accounts/elpassion/jobs
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - application/json
+      authorization:
+      - Bearer
+      content-type:
+      - application/json
+      user-agent:
+      - Workable Ruby Client
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      server:
+      - Cowboy
+      connection:
+      - close
+      date:
+      - Mon, 23 Jan 2017 12:39:30 GMT
+      status:
+      - 401 Unauthorized
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      vary:
+      - User-Agent
+      cache-control:
+      - no-store
+      pragma:
+      - no-cache
+      www-authenticate:
+      - Bearer realm="Doorkeeper", error="invalid_token", error_description="The access
+        token is invalid"
+      content-type:
+      - application/json; charset=utf-8
+      x-request-id:
+      - 3ce456f3-8f15-475a-a245-862d979d50e7
+      x-runtime:
+      - '0.011511'
+      via:
+      - 1.1 vegur
+      set-cookie:
+      - visid_incap_856719=jfAuB85dTpWzdfy1NTWZdIH5hVgAAAAAQUIPAAAAAADAgnNdrV2NN6VHMRxfWxie;
+        expires=Mon, 22 Jan 2018 13:26:36 GMT; path=/; Domain=.workable.com
+      - nlbi_856719=Cq2sdhobYFrKSagi/UGXsAAAAACiNLNDygqgkWpE/e7sScit; path=/; Domain=.workable.com
+      - incap_ses_325_856719=W+THUZdex3gpNvRCR6KCBIH5hVgAAAAAZBSJRbziEBeC0r4cCrWUkQ==;
+        path=/; Domain=.workable.com
+      strict-transport-security:
+      - max-age=31536000
+      x-iinfo:
+      - 10-58898466-58898469 NNNN CT(111 110 0) RT(1485175169295 15) q(0 0 2 1) r(3
+        3) U16
+      x-cdn:
+      - Incapsula
+      content-encoding:
+      - gzip
+      transfer-encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: '{"error":{"error":{"error":{"name":"invalid_token","state":"unauthorized"},"redirect_uri":null,"response_on_fragment":null,"reason":"unknown","description":"The
+        access token is invalid"}}}'
+    http_version: '1.1'
+  recorded_at: Mon, 23 Jan 2017 12:39:30 GMT
+recorded_with: VCR 3.0.3

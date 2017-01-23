@@ -12,6 +12,9 @@ GEM
       xpath (~> 2.0)
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
+    connection_pool (2.2.1)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
     dotenv (2.1.1)
     dry-configurable (0.4.0)
@@ -45,6 +48,8 @@ GEM
     facebook-messenger (0.11.1)
       httparty (~> 0.13, >= 0.13.7)
       rack (>= 1.6.4)
+    foreman (0.83.0)
+      thor (~> 0.19.1)
     hanami (0.9.1)
       bundler (~> 1.13)
       concurrent-ruby (~> 1.0)
@@ -87,6 +92,7 @@ GEM
     hanami-view (0.8.0)
       hanami-utils (~> 0.9)
       tilt (~> 2.0, >= 2.0.1)
+    hashdiff (0.3.2)
     http_router (0.11.2)
       rack (>= 1.0.0)
       url_mount (~> 0.2.1)
@@ -113,6 +119,7 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     rake (12.0.0)
+    redis (3.3.2)
     rom (2.0.2)
       concurrent-ruby (~> 1.0)
       dry-equalizer (~> 0.2)
@@ -152,15 +159,25 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    safe_yaml (1.0.4)
     sequel (4.41.0)
     shotgun (0.9.2)
       rack (>= 1.0)
+    sidekiq (4.0.2)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      redis (~> 3.2, >= 3.2.1)
     slop (3.6.0)
     thor (0.19.4)
     tilt (2.0.5)
     transproc (0.4.1)
     url_mount (0.2.1)
       rack
+    vcr (3.0.3)
+    webmock (2.3.2)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
     wisper (1.6.1)
     wit (4.1.0)
     workable (2.0.0)
@@ -175,6 +192,7 @@ DEPENDENCIES
   capybara
   dotenv (~> 2.0)
   facebook-messenger
+  foreman
   hanami (~> 0.9)
   hanami-model (~> 0.7)
   nokogiri
@@ -183,6 +201,9 @@ DEPENDENCIES
   rake
   rspec
   shotgun
+  sidekiq (~> 4.0.2)
+  vcr
+  webmock
   wit
   workable
 
