@@ -7,6 +7,8 @@ before_script:
 - HANAMI_ENV=test bundle exec hanami db migrate
 script:
 - bundle exec rspec
+services:
+- redis-server
 deploy:
   provider: heroku
   strategy: git

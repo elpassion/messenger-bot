@@ -23,7 +23,7 @@ describe GenericTemplateElement do
       },
       buttons: [
         { type: 'web_url', url: 'https://elpassion.workable.com/jobs/36607/candidates/new', title: 'Apply for offer' },
-        { type: 'postback', title: 'Show requirements', payload: 'JOB_DETAILS|32BD741385' }
+        { type: 'postback', title: 'Show requirements', payload: '32BD741385' }
       ]
     }
   }

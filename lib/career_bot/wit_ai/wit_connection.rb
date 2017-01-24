@@ -84,7 +84,7 @@ class WitConnection
     elsif @more_data.any?
       @more_data
     else
-      WorkableService.new.get_active_jobs
+      WorkableService.new.get_jobs
     end
   end
 

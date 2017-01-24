@@ -1,24 +1,36 @@
 class WorkableService
-  def get_active_jobs
-    @active_jobs ||= get_jobs.select{|job| job['state'] == 'published'}
+  def set_jobs
+    Sidekiq.redis do |connection|
+      connection.set('jobs', parsed_jobs.to_json)
+    end
   end
 
-  def get_job_details(shortcode)
-    Nokogiri::HTML(job_description(shortcode)).css('li').map { |li| li.text }
-  end
-
-  def job_full_description(shortcode)
-    client.job_details(shortcode)['full_description']
+  def get_jobs
+    jobs = Sidekiq.redis { |connection| connection.get 'jobs' }
+    JSON.parse(jobs)
   end
 
   private
 
-  def job_description(shortcode)
-    client.job_details(shortcode)['requirements']
+  def parsed_jobs
+    get_active_jobs.map do |job|
+      {
+        title: job['title'],
+        shortcode: job['shortcode'],
+        url: job['url'],
+        application_url: job['application_url'],
+        full_description: job_details(job)['full_description'],
+        requirements: job_details(job)['requirements']
+      }
+    end
   end
 
-  def get_jobs
-    @jobs ||= client.jobs.data
+  def get_active_jobs
+    @active_jobs ||= client.jobs(state: 'published').data
+  end
+
+  def job_details(job)
+    client.job_details(job['shortcode'])
   end
 
   def client
