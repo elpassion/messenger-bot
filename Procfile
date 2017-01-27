@@ -1,2 +1,2 @@
-app: bin/hanami server --host 127.0.0.1
-sidekiq: bin/sidekiq -e development -r ./config/environment.rb
+web: bin/hanami server
+sidekiq: bin/sidekiq -e production -r ./config/environment.rb
