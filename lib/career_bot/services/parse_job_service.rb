@@ -11,13 +11,13 @@ class ParseJobService
     Nokogiri::HTML(job_full_description.split('Benefits').last).css('li').map { |li| li.text }
   end
 
-  private
-
-  attr_reader :shortcode
-
   def job_full_description
     job['full_description']
   end
+
+  private
+
+  attr_reader :shortcode
 
   def job
     active_jobs.detect { |job| job['shortcode'] == shortcode }
