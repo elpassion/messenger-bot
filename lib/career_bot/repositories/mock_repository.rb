@@ -1,5 +1,5 @@
 class MockRepository
-  def initialize(matching_jobs: [], matching_descriptions: [])
+  def initialize(matching_jobs, matching_descriptions)
     @matching_jobs = matching_jobs
     @matching_descriptions = matching_descriptions
   end

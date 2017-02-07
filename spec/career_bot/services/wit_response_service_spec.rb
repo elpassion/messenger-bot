@@ -6,7 +6,8 @@ describe WitResponseService do
 
   context 'when no matching jobs found' do
     before(:each) do
-      job_repository = MockRepository.new
+      job_repository = MockRepository.new([], [])
+
       described_class.new(context, session_id, response, bot_interface: bot_interface, job_repository: job_repository).send_response
     end
 
@@ -21,7 +22,7 @@ describe WitResponseService do
 
   context 'when found two matching jobs' do
     before(:each) do
-      job_repository = MockRepository.new(matching_jobs: [{}, {}])
+      job_repository = MockRepository.new([{}, {}], [])
       described_class.new(context, session_id, response, bot_interface: bot_interface, job_repository: job_repository).send_response
     end
 
@@ -36,7 +37,7 @@ describe WitResponseService do
 
   context 'when found job with matching description' do
     before(:each) do
-      job_repository = MockRepository.new(matching_descriptions: [{}])
+      job_repository = MockRepository.new([], [{}])
       described_class.new(context, session_id, response, bot_interface: bot_interface, job_repository: job_repository).send_response
     end
 
