@@ -98,6 +98,7 @@ GEM
       url_mount (~> 0.2.1)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
+    i18n (0.7.0)
     inflecto (0.0.2)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
@@ -195,6 +196,7 @@ DEPENDENCIES
   foreman
   hanami (~> 0.9)
   hanami-model (~> 0.7)
+  i18n
   nokogiri
   pg
   pry

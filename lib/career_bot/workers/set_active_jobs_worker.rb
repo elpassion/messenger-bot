@@ -1,4 +1,4 @@
-class SetActiveJobs
+class SetActiveJobsWorker
   include Sidekiq::Worker
 
   def perform

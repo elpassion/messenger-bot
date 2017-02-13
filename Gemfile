@@ -12,6 +12,7 @@ gem 'facebook-messenger'
 gem 'wit'
 gem 'workable'
 gem 'nokogiri'
+gem 'i18n'
 
 group :development do
   # Code reloading

@@ -6,6 +6,7 @@ require 'sidekiq'
 require_relative '../lib/career_bot'
 require_relative '../apps/web/application'
 require_relative 'initializers/facebook_messenger'
+require_relative 'initializers/locale'
 
 Hanami.configure do
   mount Web::Application, at: '/'
