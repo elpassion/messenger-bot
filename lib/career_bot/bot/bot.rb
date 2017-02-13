@@ -50,10 +50,7 @@ Bot.on :postback do |postback|
       postback.reply(text: 'You can check our squad here: http://www.elpassion.com/about-us/')
       postback.reply(attachment: ButtonTemplate.new('Like it?').to_hash([PostbackButton.new('Yep! Take me back.', 'ABOUT_US').to_hash]))
     else
-      response = ParseJobService.new(payload).get_job_requirements
-      if response
-        postback.reply(text: 'Want to get this job? Good! Here are some nice-to-have things:')
-        response.first(5).each { |a| postback.reply(text: "- #{a}") }
-      end
+      response = JobDetailsResponseService.new(payload).get_response
+      JobDetailsResponsePrinter.new(postback, response).print_response
   end
 end

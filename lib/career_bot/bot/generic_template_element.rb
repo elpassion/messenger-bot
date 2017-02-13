@@ -22,7 +22,8 @@ class GenericTemplateElement
   def buttons
     [
       UrlButton.new(job['application_url'], 'Apply for offer').to_hash,
-      PostbackButton.new('Show requirements', job_shortcode).to_hash
+      PostbackButton.new('Show requirements', "requirements|#{job_shortcode}").to_hash,
+      PostbackButton.new('Show benefits', "benefits|#{job_shortcode}").to_hash
     ]
   end
 
