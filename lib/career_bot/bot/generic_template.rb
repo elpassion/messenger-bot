@@ -1,5 +1,4 @@
 class GenericTemplate
-  
   def to_hash
     {
       type: 'template',

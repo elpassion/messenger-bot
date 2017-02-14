@@ -11,8 +11,16 @@ class ParseJobService
     Nokogiri::HTML(job_full_description.split('Benefits').last).css('li').map { |li| li.text }
   end
 
+  def job_title
+    job['title']
+  end
+
   def job_full_description
     job['full_description']
+  end
+
+  def job_urls
+    { job_url: job['url'], application_url: job['application_url'] }
   end
 
   private
