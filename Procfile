@@ -1,2 +1,2 @@
-web: bin/hanami server
-sidekiq: bin/sidekiq -e production -r ./config/environment.rb
+web: hanami server
+sidekiq: sidekiq -e production -r ./config/environment.rb
