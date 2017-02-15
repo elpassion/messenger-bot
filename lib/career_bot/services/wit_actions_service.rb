@@ -10,7 +10,7 @@ class WitActionsService
       send: -> (request, response) {
         context = request['context']['job_position']
 
-        WitResponseService.new(context, request['session_id'], response).send_response
+        WitResponder.new(context, request['session_id'], response).send_response
       }
     }
   end
