@@ -11,6 +11,6 @@ class PostbackResponder
 
   def initialize(postback, messages)
     @postback = postback
-    @messages = messages
+    @messages = Array(messages)
   end
 end
