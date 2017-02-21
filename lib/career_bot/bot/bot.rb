@@ -11,5 +11,5 @@ Bot.on :message do |message|
 end
 
 Bot.on :postback do |postback|
-  MessengerResponseHandler.new.handle_postback(postback)
+  PostbackResponder.new(postback, PostbackResponse.new.message(postback.payload)).send
 end

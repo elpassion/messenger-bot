@@ -10,7 +10,7 @@ class MockPostback
     sent_messages << message
   end
 
-  def sender
-    { 'id' => '1' }
+  def payload
+    @payload
   end
 end
