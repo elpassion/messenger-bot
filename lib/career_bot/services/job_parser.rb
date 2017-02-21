@@ -1,13 +1,13 @@
-class ParseJobService
+class JobParser
   def initialize(shortcode)
     @shortcode = shortcode
   end
 
-  def get_job_requirements
+  def job_requirements
     Nokogiri::HTML(job['requirements']).css('li').map { |li| li.text }
   end
 
-  def get_job_benefits
+  def job_benefits
     Nokogiri::HTML(job_full_description.split('Benefits').last).css('li').map { |li| li.text }
   end
 
@@ -19,8 +19,12 @@ class ParseJobService
     job['full_description']
   end
 
-  def job_urls
-    { job_url: job['url'], application_url: job['application_url'] }
+  def job_url
+    job['url']
+  end
+
+  def application_url
+    job['application_url']
   end
 
   private
