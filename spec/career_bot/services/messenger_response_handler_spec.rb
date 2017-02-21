@@ -24,17 +24,21 @@ describe MessengerResponseHandler do
   end
 
   let(:welcome_payload_message) do
-    [{ attachment: { type: 'template', payload: { template_type: 'button', text: I18n.t('text_messages.welcome_message'),
-                                                  buttons: [{ type: 'postback', title: I18n.t('buttons.find_a_job'), payload: 'JOB_OFFERS' },
-                                                            { type: 'postback', title: I18n.t('buttons.play_a_game'), payload: 'PLAY_A_GAME' },
-                                                            { type: 'postback', title: I18n.t('buttons.about_us'), payload: 'ABOUT_US' }]}}}]
+    [{ attachment: { type: 'template', payload:
+      { template_type: 'button', text: I18n.t('text_messages.welcome_message'),
+        buttons: [{ type: 'postback', title: I18n.t('buttons.find_a_job'), payload: 'JOB_OFFERS' },
+                  { type: 'postback', title: I18n.t('buttons.play_a_game'), payload: 'PLAY_A_GAME' },
+                  { type: 'postback', title: I18n.t('buttons.about_us'), payload: 'ABOUT_US' }] }
+    } } ]
   end
 
   let(:about_us_message) do
-    [{ attachment: { type: 'template', payload: { template_type: 'button', text: I18n.t('text_messages.about_us_text'),
-                                                  buttons: [{ type: 'postback', title: I18n.t('buttons.company'), payload: 'COMPANY' },
-                                                            { type: 'postback', title: I18n.t('buttons.people'), payload: 'PEOPLE' },
-                                                            { type: 'postback', title: I18n.t('buttons.what_we_do'), payload: 'WHAT_WE_DO' }]}}}]
+    [{ attachment: { type: 'template', payload:
+      { template_type: 'button', text: I18n.t('text_messages.about_us_text'),
+       buttons: [{ type: 'postback', title: I18n.t('buttons.company'), payload: 'COMPANY' },
+                 { type: 'postback', title: I18n.t('buttons.people'), payload: 'PEOPLE' },
+                 { type: 'postback', title: I18n.t('buttons.what_we_do'), payload: 'WHAT_WE_DO' }] }
+    } } ]
   end
 
   let(:what_we_do_message) do
