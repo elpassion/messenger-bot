@@ -9,6 +9,9 @@ script:
 - bundle exec rspec
 services:
 - redis-server
+- postgresql
+addons:
+  postgresql: 9.5
 deploy:
   provider: heroku
   strategy: git
