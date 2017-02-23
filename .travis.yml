@@ -1,16 +1,19 @@
 language: ruby
 sudo: false
 rvm: 2.3.3
+addons:
+  postgresql: '9.5'
+cache: bundler
 before_script:
-- HANAMI_ENV=test bundle exec hanami db create
+- psql --version
+- psql -c 'SELECT version();' -U postgres
+- psql -c 'create database career_bot_test;' -U postgres
 - HANAMI_ENV=test bundle exec hanami db migrate
 script:
 - bundle exec rspec
 services:
 - redis-server
 - postgresql
-addons:
-  postgresql: 9.5
 deploy:
   provider: heroku
   strategy: git
