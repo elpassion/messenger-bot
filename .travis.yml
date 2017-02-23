@@ -2,6 +2,8 @@ language: ruby
 sudo: false
 rvm: 2.3.3
 cache: bundler
+addons:
+  postgresql: "9.5"
 before_script:
 - HANAMI_ENV=test bundle exec hanami db create
 - HANAMI_ENV=test bundle exec hanami db migrate
