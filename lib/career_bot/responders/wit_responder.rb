@@ -1,4 +1,4 @@
-class WitResponseService
+class WitResponder
   def initialize(context, session_uid, response, **options)
     @context = context
     @session_uid = session_uid

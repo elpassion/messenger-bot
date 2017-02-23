@@ -1,10 +1,8 @@
 class GenericTemplateElement
-  IMG_URLS = %w[70 26-1 27-1 65 28-1 66].freeze
-
   def to_hash
     {
       title: job['title'],
-      image_url: "http://www.elpassion.com/wp-content/uploads/2015/03/Bez-nazwy-#{IMG_URLS.sample}.jpg",
+      image_url: "https://s3.eu-west-2.amazonaws.com/elpassion/#{rand(1..7)}.jpg",
       subtitle: job['full_title'],
       default_action: default_action,
       buttons: buttons

@@ -1,4 +1,4 @@
-describe WitResponseService do
+describe WitResponder do
   let(:context) { 'ruby' }
   let(:session_uid) { '123' }
   let(:bot_interface) { MockMessenger.new }
