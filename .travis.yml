@@ -22,3 +22,8 @@ deploy:
   on: master
   run:
   - hanami db prepare
+env:
+  global:
+    - PGPORT=5433
+    - PGHOST=localhost
+    - DATABASE_URL=postgres://localhost:5433/career_bot_test
