@@ -1,6 +1,6 @@
 class WitActionsService
   def wit_actions
-    [send, get_job, start_game, play_game, clean_context].reduce(:merge)
+    [send, get_job, start_game, play_game, clean_context, continue_game].reduce(:merge)
   end
 
   private
@@ -35,6 +35,14 @@ class WitActionsService
     {
       start_game: -> (request) {
         WitAction::StartGameService.new(request: request).call
+      }
+    }
+  end
+
+  def continue_game
+    {
+      continue_game: -> (request) {
+        WitAction::ContinueGameService.new(request: request).call
       }
     }
   end

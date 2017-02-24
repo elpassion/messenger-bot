@@ -1,13 +1,13 @@
 class WitAction::PlayGameService < WitAction
   def call
     if number.nil?
-      context['wrongParam'] = true
-      context['notWon'] = nil
+      set_wrong_param_context
     elsif number == winning_number
       set_won_context
     else
       set_not_won_context
     end
+    update_context(context, session_uid)
     context
   end
 
@@ -26,11 +26,18 @@ class WitAction::PlayGameService < WitAction
     context['number'] = number
     context['notWon'] = nil
     update_counter
+    context['wrongParam'] = nil
   end
 
   def set_not_won_context
     context['notWon'] = number > winning_number ? 'bigger' : 'smaller'
+    context['wrongParam'] = nil
     update_counter
+  end
+
+  def set_wrong_param_context
+    context['wrongParam'] = true
+    context['notWon'] = nil
   end
 
   def counter
@@ -39,6 +46,5 @@ class WitAction::PlayGameService < WitAction
 
   def update_counter
     context['counter'] = counter ? counter + 1 : 1
-    update_context(context, session_uid)
   end
 end
