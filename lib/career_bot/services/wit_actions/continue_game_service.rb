@@ -6,6 +6,7 @@ class WitAction::ContinueGameService < WitAction
       context['continue'] = true
       context['wrongParam'] = nil
     end
+    update_context(context, session_uid)
     context
   end
 

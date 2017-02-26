@@ -1,10 +1,14 @@
 describe WitAction::PlayGameService do
 
   let(:session_uid) { 'session_uid' }
-  let(:context) { { 'play' =>  true, 'winningNumber' =>  winning_number } }
+  let(:context) { { 'play' =>  true, 'winningNumber' =>  winning_number} }
   let(:winning_number) { 79 }
-  let!(:conversation) { create(:conversation, session_uid: session_uid, context: {play:  true, winningNumber: winning_number })}
-  let(:user_value) { 5 }
+  let!(:conversation) {
+    create(:conversation, session_uid: session_uid,
+     context: {
+         play:  true, winningNumber: winning_number
+     })
+  }
   let(:request) {
     { 'session_id' => session_uid,
       'context' => context,
@@ -20,8 +24,32 @@ describe WitAction::PlayGameService do
     context 'with user value equal to winning number' do
       let(:user_value) { winning_number }
 
-      it 'returns won status' do
-        expect(subject.call['won']).to eq true
+      it 'updates conversation context' do
+        expect {
+          subject.call
+        }.to change {
+          repository.find(conversation.id).context
+        }
+      end
+
+      it 'should return proper context' do
+        expect(subject.call).to include(
+                                    'play' => true,
+                                    'winningNumber' => winning_number,
+                                    'won' => true,
+                                    'number' => winning_number,
+                                    'notWon' => nil,
+                                    'wrongParam' => nil
+                                  )
+      end
+
+      it 'should count turns properly' do
+        session_uid = 'new_session_id'
+        user_value = 1
+        subject.call
+        subject.call
+        user_value = winning_number
+        expect(subject.call['counter']).to eq 3
       end
     end
 
@@ -29,16 +57,43 @@ describe WitAction::PlayGameService do
       context 'with smaller value' do
         let(:user_value) { winning_number - 5 }
 
-        it 'should return proper not won status' do
-          expect(subject.call['notWon']).to eq 'smaller'
+        it 'updates conversation context' do
+          expect {
+            subject.call
+          }.to change {
+            repository.find(conversation.id).context
+          }
         end
+
+        it 'should return proper not won status' do
+          expect(subject.call).to include(
+                                      'play' => true,
+                                      'winningNumber' => winning_number,
+                                      'notWon' => 'smaller',
+                                      'wrongParam' => nil
+                                    )
+        end
+
       end
 
       context 'with greater value' do
         let(:user_value) { winning_number + 5 }
 
+        it 'updates conversation context' do
+          expect {
+            subject.call
+          }.to change {
+            repository.find(conversation.id).context
+          }
+        end
+
         it 'should return proper not won status' do
-          expect(subject.call['notWon']).to eq 'bigger'
+          expect(subject.call).to include(
+                                      'play' => true,
+                                      'winningNumber' => winning_number,
+                                      'notWon' => 'bigger',
+                                      'wrongParam' => nil
+                                    )
         end
       end
     end
@@ -46,8 +101,21 @@ describe WitAction::PlayGameService do
     context 'when user value is empty' do
       let(:user_value) { nil }
 
+      it 'updates conversation context' do
+        expect {
+          subject.call
+        }.to change {
+          repository.find(conversation.id).context
+        }
+      end
+
       it 'should return wrong param status' do
-        expect(subject.call['wrongParam']).to eq true
+        expect(subject.call).to include(
+                                  'play' => true,
+                                  'winningNumber' => winning_number,
+                                  'notWon' => nil,
+                                  'wrongParam' => true
+                                )
       end
     end
   end
