@@ -2,7 +2,7 @@ class GenericTemplateElement
   def to_hash
     {
       title: job['title'],
-      image_url: "https://s3.eu-west-2.amazonaws.com/elpassion/#{rand(1..7)}.jpg",
+      image_url: "http://imgur.com/#{I18n.t('urls.images').sample}.jpg",
       subtitle: job['full_title'],
       default_action: default_action,
       buttons: buttons
