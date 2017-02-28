@@ -1,7 +1,7 @@
 class WitResponder
-  def initialize(context, session_id, response, **options)
+  def initialize(context, session_uid, response, **options)
     @context = context
-    @session_id = session_id
+    @session_uid = session_uid
     @response = response
     @bot_interface = options[:bot_interface] || FacebookMessenger.new
     @job_repository = options[:job_repository] || JobRepository.new
@@ -13,7 +13,7 @@ class WitResponder
 
   private
 
-  attr_reader :context, :session_id, :response, :bot_interface, :job_repository
+  attr_reader :context, :session_uid, :response, :bot_interface, :job_repository
 
   def text_response
     bot_deliver({ text: response['text'] })
@@ -26,7 +26,7 @@ class WitResponder
   end
 
   def bot_deliver(message)
-    bot_interface.deliver(session_id, message)
+    bot_interface.deliver(messenger_id, message)
   end
 
   def attachment
@@ -45,5 +45,13 @@ class WitResponder
 
   def matching_descriptions
     job_repository.get_matching_descriptions(context)
+  end
+
+  def messenger_id
+    repository.find_by_session_uid(session_uid).messenger_id
+  end
+
+  def repository
+    @repository ||= ConversationRepository.new
   end
 end
