@@ -26,11 +26,13 @@ group :test, :development do
   gem 'dotenv', '~> 2.0'
   gem 'vcr'
   gem 'webmock'
+  gem 'factory_girl'
 end
 
 group :test do
   gem 'rspec'
   gem 'capybara'
+  gem 'database_cleaner'
 end
 
 group :production do

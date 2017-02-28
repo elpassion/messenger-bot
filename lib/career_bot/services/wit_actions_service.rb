@@ -1,6 +1,6 @@
 class WitActionsService
   def wit_actions
-    [send, get_job, play_game].reduce(:merge)
+    [send, get_job, start_game, play_game, clean_context, continue_game].reduce(:merge)
   end
 
   private
@@ -18,10 +18,7 @@ class WitActionsService
   def get_job
     {
       get_job: -> (request) {
-        context = request['context']
-
-        context['job_position'] = first_entity_value(request['entities'], 'position')
-        context
+        WitAction::GetJobService.new(request: request).call
       }
     }
   end
@@ -29,21 +26,32 @@ class WitActionsService
   def play_game
     {
       play_game: -> (request) {
-        context = request['context']
-
-        number = first_entity_value(request['entities'], 'number')
-        if number.nil?
-          context['wrongParam'] = true
-        else
-          context['lost'] = true
-          context['number'] = number + 1
-        end
-        context
+        WitAction::PlayGameService.new(request: request).call
       }
     }
   end
 
-  def first_entity_value(entities, entity)
-    entities[entity][0]['value'] if entities.has_key? entity
+  def start_game
+    {
+      start_game: -> (request) {
+        WitAction::StartGameService.new(request: request).call
+      }
+    }
+  end
+
+  def continue_game
+    {
+      continue_game: -> (request) {
+        WitAction::ContinueGameService.new(request: request).call
+      }
+    }
+  end
+
+  def clean_context
+    {
+      clean_context: -> (request) {
+        WitAction::CleanContextService.new(request: request).call
+      }
+    }
   end
 end

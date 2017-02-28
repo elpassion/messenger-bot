@@ -24,13 +24,13 @@ describe PostbackResponder do
   end
 
   let(:what_we_do_message) do
-    [{ attachment: { 'type' => 'image', 'payload' => { 'url' => 'https://media.giphy.com/media/l3q2Chwola4nfdNra/source.gif' } } },
+    [{ attachment: { type: 'image', payload: { url: 'https://media.giphy.com/media/l3q2Chwola4nfdNra/source.gif' } } },
      { text: 'In EL Passion we create cool stuff, we use many fancy technologies!' },
      { text: 'Wanna see more? Check out our website! http://www.elpassion.com/projects/. Looking for a job? Type things you are good at and I will show you what we got! :)' }]
   end
 
   let(:company_message) do
-    [{ attachment: { 'type' => 'image', 'payload' => {'url' => 'https://media.giphy.com/media/l3q2FwrtK2lURaeeA/source.gif' } } },
+    [{ attachment: { type: 'image', payload: { url: 'https://media.giphy.com/media/l3q2FwrtK2lURaeeA/source.gif' } } },
      { text: 'Here are useful links! Our website: http://www.elpassion.com/, Facebook: https://www.facebook.com/elpassion, Dribbble: https://dribbble.com/elpassion and our Blog: https://blog.elpassion.com/' }]
   end
 

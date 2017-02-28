@@ -1,8 +1,9 @@
 describe WitResponder do
   let(:context) { 'ruby' }
-  let(:session_id) { '123' }
+  let(:session_uid) { '123' }
   let(:bot_interface) { MockMessenger.new }
   let(:response) { ' ' }
+  let!(:conversation) { create(:conversation, session_uid: session_uid)}
 
   before do
     VCR.use_cassette 'active_jobs' do
@@ -15,7 +16,7 @@ describe WitResponder do
     before(:each) do
       job_repository = MockRepository.new([], [])
 
-      described_class.new(context, session_id, response, bot_interface: bot_interface, job_repository: job_repository).send_response
+      described_class.new(context, session_uid, response, bot_interface: bot_interface, job_repository: job_repository).send_response
     end
 
     it 'returns proper text message' do
@@ -30,7 +31,7 @@ describe WitResponder do
   context 'when found two jobs with matching titles' do
     before(:each) do
       job_repository = MockRepository.new([{}, {}], [])
-      described_class.new(context, session_id, response, bot_interface: bot_interface, job_repository: job_repository).send_response
+      described_class.new(context, session_uid, response, bot_interface: bot_interface, job_repository: job_repository).send_response
     end
 
     it 'returns proper text message' do
@@ -45,7 +46,7 @@ describe WitResponder do
   context 'when found job with matching description' do
     before(:each) do
       job_repository = MockRepository.new([], [{}])
-      described_class.new(context, session_id, response, bot_interface: bot_interface, job_repository: job_repository).send_response
+      described_class.new(context, session_uid, response, bot_interface: bot_interface, job_repository: job_repository).send_response
     end
 
     it 'returns proper text message' do
