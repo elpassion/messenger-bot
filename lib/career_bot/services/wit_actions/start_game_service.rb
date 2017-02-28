@@ -1,7 +1,7 @@
 class WitAction::StartGameService < WitAction
   def call
-    context['winningNumber'] = rand(1..100)
-    context['play'] = true
+    set_value 'winningNumber', rand(1..100)
+    set_true 'play'
     update_context(context, session_uid)
     context
   end

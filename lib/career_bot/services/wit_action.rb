@@ -12,11 +12,15 @@ class WitAction
   end
 
   def context
-    request['context']
+    @context ||= request['context']
   end
 
-  def first_entity_value(entities, entity)
+  def first_entity_value(entity)
     entities[entity][0]['value'] if entities.has_key? entity
+  end
+
+  def entities
+    @entities ||= request['entities']
   end
 
   def update_context(context, session_uid)
@@ -29,5 +33,17 @@ class WitAction
 
   def repository
     @repository ||= ConversationRepository.new
+  end
+
+  def set_nil *keys
+    keys.each { |key| set_value(key, nil) }
+  end
+
+  def set_true *keys
+    keys.each { |key| set_value(key, true) }
+  end
+
+  def set_value(key, value)
+    context[key] = value
   end
 end

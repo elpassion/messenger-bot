@@ -3,14 +3,18 @@ class ConversationRepository < Hanami::Repository
   def find_by_session_uid(session_uid)
     conversations
       .where(session_uid: session_uid)
-      .order(:created_at)
       .first
   end
 
   def find_by_messenger_id(messenger_id)
     conversations
       .where(messenger_id: messenger_id)
-      .order(:created_at)
       .first
+  end
+
+  def find_or_create_by_messenger_id(messenger_id)
+    conversation = find_by_messenger_id(messenger_id)
+    conversation ||= create(messenger_id: messenger_id)
+    conversation
   end
 end

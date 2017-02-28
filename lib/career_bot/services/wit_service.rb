@@ -29,9 +29,7 @@ class WitService
   end
 
   def conversation
-    @conversation = repository.find_by_messenger_id(sender_id)
-    @conversation ||= repository.create(messenger_id: sender_id)
-    @conversation
+    repository.find_or_create_by_messenger_id(sender_id)
   end
 
   def context

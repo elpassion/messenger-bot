@@ -1,5 +1,13 @@
 class WitAction::PlayGameService < WitAction
   def call
+    set_context
+    update_context(context, session_uid)
+    context
+  end
+
+  private
+
+  def set_context
     if number.nil?
       set_wrong_param_context
     elsif number == winning_number
@@ -7,14 +15,10 @@ class WitAction::PlayGameService < WitAction
     else
       set_not_won_context
     end
-    update_context(context, session_uid)
-    context
   end
 
-  private
-
   def number
-    first_entity_value(request['entities'], 'number')
+    first_entity_value 'number'
   end
 
   def winning_number
@@ -22,22 +26,21 @@ class WitAction::PlayGameService < WitAction
   end
 
   def set_won_context
-    context['won'] = true
-    context['number'] = number
-    context['notWon'] = nil
+    set_value 'number', number
+    set_true 'won'
+    set_nil 'notWon', 'wrongParam'
     update_counter
-    context['wrongParam'] = nil
   end
 
   def set_not_won_context
-    context['notWon'] = number > winning_number ? 'bigger' : 'smaller'
-    context['wrongParam'] = nil
+    set_value 'notWon', not_won_status
+    set_nil 'wrongParam'
     update_counter
   end
 
   def set_wrong_param_context
-    context['wrongParam'] = true
-    context['notWon'] = nil
+    set_true 'wrongParam'
+    set_nil 'notWon'
   end
 
   def counter
@@ -45,6 +48,14 @@ class WitAction::PlayGameService < WitAction
   end
 
   def update_counter
-    context['counter'] = counter ? counter + 1 : 1
+    set_value 'counter', new_counter_value
+  end
+
+  def not_won_status
+    number > winning_number ? 'bigger' : 'smaller'
+  end
+
+  def new_counter_value
+    counter ? counter + 1 : 1
   end
 end

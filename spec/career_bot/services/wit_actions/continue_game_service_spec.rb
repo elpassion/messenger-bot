@@ -20,7 +20,7 @@ describe WitAction::ContinueGameService do
       it 'updates conversation context' do
         expect {
           subject.call
-        }.to change {
+        }.not_to change {
           repository.find(conversation.id).context
         }
       end
@@ -39,7 +39,7 @@ describe WitAction::ContinueGameService do
       it 'updates conversation context' do
         expect {
           subject.call
-        }.to change {
+        }.not_to change {
           repository.find(conversation.id).context
         }
       end
