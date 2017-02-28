@@ -22,3 +22,4 @@ deploy:
   on: master
   run:
   - hanami db prepare
+  - hanami db migrate
