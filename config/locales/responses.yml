@@ -1,19 +1,56 @@
 responses:
-  WELCOME_PAYLOAD: [ { type: 'template', payload: { template_type: 'button',
-    text: 'Hello! :) I am EL Passion Messenger Bot! What would you like to do?',
-    buttons: [ { type: 'postback', title: 'I wanna find a job!', payload: 'JOB_OFFERS' },
-    { type: 'postback', title: 'I wanna play a game!', payload: 'PLAY_A_GAME' },
-    { type: 'postback', title: 'Tell me about ELP!', payload: 'ABOUT_US' } ] } } ]
-  JOB_OFFERS: 'Nice! :D Fortunately, we are looking for some cool people to join us! Sooo... What kind of job are you interested in?'
-  ABOUT_US: [ { type: 'template', payload: { template_type: 'button',
-    text: 'Cool! Which of those things you are interested in? :)',
-    buttons: [ { type: 'postback', title: 'Company', payload: 'COMPANY' },
-    { type: 'postback', title: 'People', payload: 'PEOPLE' },
-    { type: 'postback', title: 'What we do?', payload: 'WHAT_WE_DO' } ] } } ]
-  WHAT_WE_DO: [ { type: 'image', payload: { url: 'https://media.giphy.com/media/l3q2Chwola4nfdNra/source.gif' } },
-    'In EL Passion we create cool stuff, we use many fancy technologies!',
-    'Wanna see more? Check out our website! http://www.elpassion.com/projects/.
-    Looking for a job? Type things you are good at and I will show you what we got! :)' ]
-  COMPANY: [ { type: 'image', payload: { url: 'https://media.giphy.com/media/l3q2FwrtK2lURaeeA/source.gif' } },
-    'Here are useful links! Our website: http://www.elpassion.com/, Facebook: https://www.facebook.com/elpassion, Dribbble: https://dribbble.com/elpassion and our Blog: https://blog.elpassion.com/' ]
+  WELCOME_PAYLOAD:
+    - type: 'template'
+      payload:
+        template_type: 'button'
+        text: >
+          You can find job offers, get some info about my company by clicking
+          on button below, you can also play a game! :) Sooo, what would you like to do?
+        buttons:
+          - type: 'postback'
+            title: 'I wanna find a job!'
+            payload: 'JOB_OFFERS'
+          - type: 'postback'
+            title: 'Tell me about ELP!'
+            payload: 'ABOUT_US'
+          - type: 'postback'
+            title: 'Internship'
+            payload: 'INTERNSHIP_INFO'
+  ABOUT_US:
+    - type: 'template'
+      payload:
+        template_type: 'button'
+        text: 'Cool! Which of those things you are interested in? :)'
+        buttons:
+          - type: 'postback'
+            title: 'Company'
+            payload: 'COMPANY'
+          - type: 'postback'
+            title: 'People'
+            payload: 'PEOPLE'
+          - type: 'postback'
+            title: 'What we do?'
+            payload: 'WHAT_WE_DO'
+  WHAT_WE_DO:
+    - type: 'image'
+      payload:
+        url: 'https://media.giphy.com/media/l3q2Chwola4nfdNra/source.gif'
+    - In EL Passion we create cool stuff, we use many fancy technologies!
+    - >
+      Wanna see more? Check out our website! http://www.elpassion.com/projects/.
+      Looking for a job? Type things you are good at and I will show you what we got! :)
+  COMPANY:
+    - type: 'image'
+      payload:
+        url: 'https://media.giphy.com/media/l3q2FwrtK2lURaeeA/source.gif'
+    - >
+      Here are useful links! Our website: http://www.elpassion.com/,
+      Facebook: https://www.facebook.com/elpassion,
+      Dribbble: https://dribbble.com/elpassion and our Blog: https://blog.elpassion.com/
   PEOPLE: 'You can check our squad here: http://www.elpassion.com/about-us/'
+  INTERNSHIP_INFO: >
+    Unfortunately we dont have any upcoming internships for now :(
+    But stay tuned, there will be something in the future!
+  JOB_OFFERS: >
+    Nice! :D Fortunately, we are looking for some cool people to join us!
+    Sooo... What kind of job are you interested in?
