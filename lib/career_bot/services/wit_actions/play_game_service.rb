@@ -1,7 +1,7 @@
 class WitAction::PlayGameService < WitAction
   def call
     set_context
-    update_context(context, session_uid)
+    update_context(context)
     context
   end
 
@@ -26,21 +26,21 @@ class WitAction::PlayGameService < WitAction
   end
 
   def set_won_context
-    set_value 'number', number
-    set_true 'won'
-    set_nil 'notWon', 'wrongParam'
+    set_context_value 'number', number
+    set_context_true 'won'
+    set_context_nil 'notWon', 'wrongParam'
     update_counter
   end
 
   def set_not_won_context
-    set_value 'notWon', not_won_status
-    set_nil 'wrongParam'
+    set_context_value 'notWon', not_won_status
+    set_context_nil 'wrongParam'
     update_counter
   end
 
   def set_wrong_param_context
-    set_true 'wrongParam'
-    set_nil 'notWon'
+    set_context_true 'wrongParam'
+    set_context_nil 'notWon'
   end
 
   def counter
@@ -48,7 +48,7 @@ class WitAction::PlayGameService < WitAction
   end
 
   def update_counter
-    set_value 'counter', new_counter_value
+    set_context_value 'counter', new_counter_value
   end
 
   def not_won_status

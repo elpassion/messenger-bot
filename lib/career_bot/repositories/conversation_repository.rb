@@ -13,8 +13,6 @@ class ConversationRepository < Hanami::Repository
   end
 
   def find_or_create_by_messenger_id(messenger_id)
-    conversation = find_by_messenger_id(messenger_id)
-    conversation ||= create(messenger_id: messenger_id)
-    conversation
+    find_by_messenger_id(messenger_id) || create(messenger_id: messenger_id)
   end
 end

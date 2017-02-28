@@ -23,11 +23,11 @@ class WitAction
     @entities ||= request['entities']
   end
 
-  def update_context(context, session_uid)
-    repository.update(conversation(session_uid).id, context: context )
+  def update_context(context)
+    repository.update(conversation.id, context: context )
   end
 
-  def conversation(session_uid)
+  def conversation
     @conversation ||= repository.find_by_session_uid(session_uid)
   end
 
@@ -35,15 +35,15 @@ class WitAction
     @repository ||= ConversationRepository.new
   end
 
-  def set_nil *keys
-    keys.each { |key| set_value(key, nil) }
+  def set_context_nil *keys
+    keys.each { |key| set_context_value(key, nil) }
   end
 
-  def set_true *keys
-    keys.each { |key| set_value(key, true) }
+  def set_context_true *keys
+    keys.each { |key| set_context_value(key, true) }
   end
 
-  def set_value(key, value)
+  def set_context_value(key, value)
     context[key] = value
   end
 end
