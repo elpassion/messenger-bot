@@ -1,12 +1,6 @@
 en:
   text_messages:
-    welcome_message: 'Hello! :) I am EL Passion Messenger Bot! What would you like to do?'
-    job_offers_message: 'Nice! :D Fortunately, we are looking for some cool people to join us! Sooo... What kind of job are you interested in?'
     about_us_text: 'Cool! Which of those things you are interested in? :)'
-    what_we_do_message: 'In EL Passion we create cool stuff, we use many fancy technologies!'
-    see_more_message: 'Wanna see more? Check out our website! http://www.elpassion.com/projects/. Looking for a job? Type things you are good at and I will show you what we got! :)'
-    social_media_links: 'Here are useful links! Our website: http://www.elpassion.com/, Facebook: https://www.facebook.com/elpassion, Dribbble: https://dribbble.com/elpassion and our Blog: https://blog.elpassion.com/'
-    team_members_message: 'You can check our squad here: http://www.elpassion.com/about-us/'
     found_matching_jobs: 'Yayy! :) We have something you may be interested in! Check this out!'
     found_matching_descriptions: 'I have found some offers including the thing you are looking for!'
     no_jobs_found: "Unfortunately we don't have any matching job offers :( buuuut... you can still check out all of our open positions!"
@@ -14,14 +8,5 @@ en:
     job_requirements_info: 'Here are some nice-to-have things for %{position}:'
     job_benefits_info: 'We can offer you following benefits:'
     apply_for_job: 'To see full job offer visit %{job_url}. Want to be %{position}? Apply now here: %{application_url} and see you at EL Passion! :)'
-  buttons:
-    find_a_job: 'I wanna find a job!'
-    play_a_game: 'I wanna play a game!'
-    about_us: 'Tell me about ELP!'
-    company: 'Company'
-    people: 'People'
-    what_we_do: 'What we do?'
   urls:
-    projects_gif: 'https://media.giphy.com/media/l3q2Chwola4nfdNra/source.gif'
-    company_gif: 'https://media.giphy.com/media/l3q2FwrtK2lURaeeA/source.gif'
     images: ['LgDApmT', 'SIl0Mfv', 'wtgo9qd', 'gSNMXhd', 'VWulrUm', 'WNd5E64', 'XgnUldW']

@@ -23,33 +23,15 @@ describe PostbackResponder do
                     application_url: 'https://elpassion.workable.com/jobs/51167/candidates/new') }]
   end
 
-  let(:welcome_payload_message) do
-    [{ attachment: { type: 'template', payload:
-      { template_type: 'button', text: I18n.t('text_messages.welcome_message'),
-        buttons: [{ type: 'postback', title: I18n.t('buttons.find_a_job'), payload: 'JOB_OFFERS' },
-                  { type: 'postback', title: I18n.t('buttons.play_a_game'), payload: 'PLAY_A_GAME' },
-                  { type: 'postback', title: I18n.t('buttons.about_us'), payload: 'ABOUT_US' }] }
-    } } ]
-  end
-
-  let(:about_us_message) do
-    [{ attachment: { type: 'template', payload:
-      { template_type: 'button', text: I18n.t('text_messages.about_us_text'),
-       buttons: [{ type: 'postback', title: I18n.t('buttons.company'), payload: 'COMPANY' },
-                 { type: 'postback', title: I18n.t('buttons.people'), payload: 'PEOPLE' },
-                 { type: 'postback', title: I18n.t('buttons.what_we_do'), payload: 'WHAT_WE_DO' }] }
-    } } ]
-  end
-
   let(:what_we_do_message) do
-    [{ attachment: { type: 'image', payload: {url: I18n.t('urls.projects_gif') } } },
-     { text: I18n.t('text_messages.what_we_do_message') },
-     { text: I18n.t('text_messages.see_more_message') }]
+    [{ attachment: { type: 'image', payload: { url: 'https://media.giphy.com/media/l3q2Chwola4nfdNra/source.gif' } } },
+     { text: 'In EL Passion we create cool stuff, we use many fancy technologies!' },
+     { text: "Wanna see more? Check out our website! http://www.elpassion.com/projects/. Looking for a job? Type things you are good at and I will show you what we got! :)\n" }]
   end
 
   let(:company_message) do
-    [{ attachment: { type: 'image', payload: { url: I18n.t('urls.company_gif') } } },
-     { text: I18n.t('text_messages.social_media_links') }]
+    [{ attachment: { type: 'image', payload: { url: 'https://media.giphy.com/media/l3q2FwrtK2lURaeeA/source.gif' } } },
+     { text: "Here are useful links! Our website: http://www.elpassion.com/, Facebook: https://www.facebook.com/elpassion, Dribbble: https://dribbble.com/elpassion and our Blog: https://blog.elpassion.com/\n" }]
   end
 
   before do
@@ -62,19 +44,19 @@ describe PostbackResponder do
   it 'handles WELCOME_PAYLOAD postback' do
     postback = MockPostback.new('WELCOME_PAYLOAD')
     described_class.new(postback, PostbackResponse.new.message(postback.payload)).send
-    expect(postback.sent_messages).to eq(welcome_payload_message)
+    expect(postback.sent_messages).to eq([{ attachment: I18n.t('WELCOME_PAYLOAD', locale: :responses).first }])
   end
 
   it 'handles JOB_OFFERS postback' do
     postback = MockPostback.new('JOB_OFFERS')
     described_class.new(postback, PostbackResponse.new.message(postback.payload)).send
-    expect(postback.sent_messages).to eq([{ text: I18n.t('text_messages.job_offers_message') }])
+    expect(postback.sent_messages).to eq([{ text: I18n.t('JOB_OFFERS', locale: :responses) }])
   end
 
   it 'handles ABOUT_US postback' do
     postback = MockPostback.new('ABOUT_US')
     described_class.new(postback, PostbackResponse.new.message(postback.payload)).send
-    expect(postback.sent_messages).to eq(about_us_message)
+    expect(postback.sent_messages).to eq([{ attachment: I18n.t('ABOUT_US', locale: :responses).first }])
   end
 
   it 'handles WHAT_WE_DO postback' do
@@ -92,7 +74,7 @@ describe PostbackResponder do
   it 'handles PEOPLE postback' do
     postback = MockPostback.new('PEOPLE')
     described_class.new(postback, PostbackResponse.new.message(postback.payload)).send
-    expect(postback.sent_messages).to eq([{ text: I18n.t('text_messages.team_members_message') }])
+    expect(postback.sent_messages).to eq([{ text: I18n.t('PEOPLE', locale: :responses) }])
   end
 
   it 'handles benefits postback' do
