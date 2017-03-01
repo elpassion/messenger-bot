@@ -13,6 +13,7 @@ gem 'wit'
 gem 'workable'
 gem 'nokogiri'
 gem 'i18n'
+gem 'faraday'
 
 group :development do
   # Code reloading
