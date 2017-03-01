@@ -1,6 +1,5 @@
 class WitAction::GetUserService < WitAction
   def call
-    binding.pry
     set_context_value 'name', name
     context
   end
