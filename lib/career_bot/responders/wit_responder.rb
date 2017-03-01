@@ -1,19 +1,19 @@
 class WitResponder
-  def initialize(context, session_uid, response, **options)
-    @context = context
-    @session_uid = session_uid
+  def initialize(request, response, **options)
+    @job_position = request['context']['job_position']
+    @session_uid = request['session_id']
     @response = response
     @bot_interface = options[:bot_interface] || FacebookMessenger.new
     @job_repository = options[:job_repository] || JobRepository.new
   end
 
   def send_response
-    context ? found_job_offers : text_response
+    job_position ? found_job_offers : text_response
   end
 
   private
 
-  attr_reader :context, :session_uid, :response, :bot_interface, :job_repository
+  attr_reader :job_position, :session_uid, :response, :bot_interface, :job_repository
 
   def text_response
     bot_deliver({ text: response['text'] })
@@ -40,11 +40,11 @@ class WitResponder
   end
 
   def matching_jobs
-    job_repository.get_matching_jobs(context)
+    job_repository.get_matching_jobs(job_position)
   end
 
   def matching_descriptions
-    job_repository.get_matching_descriptions(context)
+    job_repository.get_matching_descriptions(job_position)
   end
 
   def messenger_id
