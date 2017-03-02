@@ -6,7 +6,7 @@ describe WitAction::GetUserService do
     { 'session_id' => session_uid,
      'context' => {},
      'text' => 'Hi bot',
-     'entities' => {'play_game' => [{ 'type' => 'value', 'value' => 'Hi'}]}
+     'entities' => {'greetings' => [{ 'type' => 'value', 'value' => 'Hi'}]}
     }
   }
   let(:repository) { ConversationRepository.new }
