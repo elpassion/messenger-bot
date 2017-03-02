@@ -11,7 +11,7 @@ class WitAction::GetUserService < WitAction
   end
 
   def user_request
-    Faraday.get "https://graph.facebook.com/v2.6/#{messenger_id}?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=#{ENV['ACCESS_TOKEN']}"
+    Faraday.get user_profile
   end
 
   def user_data
@@ -20,5 +20,11 @@ class WitAction::GetUserService < WitAction
 
   def messenger_id
     conversation.messenger_id
+  end
+
+  def user_profile
+    "https://graph.facebook.com/v2.6/#{messenger_id}"\
+    '?fields=first_name,last_name,profile_pic,locale,'\
+    "timezone,gender&access_token=#{ENV['ACCESS_TOKEN']}"
   end
 end

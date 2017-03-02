@@ -1,71 +1,79 @@
 class WitActionsService
   def wit_actions
-    [send, clean_context, continue_game, get_job, get_social_network, get_user, play_game, start_game].reduce(:merge)
+    [
+      send,
+      clean_context,
+      continue_game,
+      get_job,
+      get_social_network,
+      get_user, play_game,
+      start_game
+    ].reduce(:merge)
   end
 
   private
 
   def send
     {
-      send: -> (request, response) {
+      send: lambda do |request, response|
         WitResponder.new(request, response).send_response
-      }
+      end
     }
   end
 
   def clean_context
     {
-      clean_context: -> (request) {
+      clean_context: lambda do |request|
         WitAction::CleanContextService.new(request: request).call
-      }
+      end
     }
   end
 
   def continue_game
     {
-      continue_game: -> (request) {
+      continue_game: lambda do |request|
         WitAction::ContinueGameService.new(request: request).call
-      }
+      end
     }
   end
 
   def get_job
     {
-      get_job: -> (request) {
+      get_job: lambda do |request|
         WitAction::GetJobService.new(request: request).call
-      }
+      end
     }
   end
 
   def get_social_network
     {
-      get_social_network: -> (request) {
+      get_social_network: lambda do |request|
         WitAction::GetSocialNetworkService.new(request: request).call
-      }
+      end
     }
   end
 
   def get_user
     {
-      get_user: -> (request) {
+      get_user: lambda do |request|
         WitAction::GetUserService.new(request: request).call
-      }
+      end
     }
   end
 
   def play_game
     {
-      play_game: -> (request) {
+      play_game: lambda do |request|
         WitAction::PlayGameService.new(request: request).call
-      }
+      end
     }
   end
 
   def start_game
     {
-      start_game: -> (request) {
+      start_game: lambda do |request|
         WitAction::StartGameService.new(request: request).call
-      }
+      end
     }
   end
 end

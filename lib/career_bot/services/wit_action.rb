@@ -16,7 +16,7 @@ class WitAction
   end
 
   def first_entity_value(entity)
-    entities[entity][0]['value'] if entities.has_key? entity
+    entities[entity][0]['value'] if entities.key? entity
   end
 
   def entities
@@ -24,7 +24,7 @@ class WitAction
   end
 
   def update_context(context)
-    repository.update(conversation.id, context: context )
+    repository.update(conversation.id, context: context)
   end
 
   def conversation
@@ -35,11 +35,11 @@ class WitAction
     @repository ||= ConversationRepository.new
   end
 
-  def set_context_nil *keys
+  def set_context_nil(*keys)
     keys.each { |key| set_context_value(key, nil) }
   end
 
-  def set_context_true *keys
+  def set_context_true(*keys)
     keys.each { |key| set_context_value(key, true) }
   end
 

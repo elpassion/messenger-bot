@@ -1,5 +1,4 @@
 class WitAction::GetSocialNetworkService < WitAction
-
   def call
     if check_social_network
       context['found'] = true
@@ -13,7 +12,11 @@ class WitAction::GetSocialNetworkService < WitAction
   private
 
   def check_social_network
-    I18n.t(social_network, locale: :social_networks) if I18n.exists?(social_network, :social_networks)
+    I18n.t(social_network, locale: :social_networks) if social_network_exists?
+  end
+
+  def social_network_exists?
+    I18n.exists?(social_network, :social_networks)
   end
 
   def social_network
