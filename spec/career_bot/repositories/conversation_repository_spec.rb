@@ -1,4 +1,4 @@
-RSpec.describe ConversationRepository do
+describe ConversationRepository do
   let(:repository) { described_class.new }
 
   describe '#find_by_session_uid' do

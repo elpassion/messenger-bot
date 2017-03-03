@@ -2,6 +2,7 @@ class WitActionsService
   def wit_actions
     [
       send,
+      check_sentiment,
       clean_context,
       continue_game,
       get_job,
@@ -17,6 +18,14 @@ class WitActionsService
     {
       send: lambda do |request, response|
         WitResponder.new(request, response).send_response
+      end
+    }
+  end
+
+  def check_sentiment
+    {
+      check_sentiment: lambda do |request|
+        WitAction::CheckSentimentService.new(request: request).call
       end
     }
   end

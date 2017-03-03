@@ -46,4 +46,17 @@ class WitAction
   def set_context_value(key, value)
     context[key] = value
   end
+
+  def messenger_id
+    conversation.messenger_id
+  end
+
+  def messenger_user_repository
+    @messenger_user_repository ||=
+      MessengerUserRepository.new(messenger_id: messenger_id)
+  end
+
+  def user_first_name
+    messenger_user_repository.name
+  end
 end

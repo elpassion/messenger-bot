@@ -11,19 +11,11 @@ describe WitAction::GetUserService do
   }
   let(:repository) { ConversationRepository.new }
   let(:user_first_name) { 'Jane' }
-  let(:facebook_user_data) {
-    {
-      'first_name' => user_first_name,
-      'last_name' => 'Doe',
-      'locale' => 'pl_PL',
-      'timezone' => 1,
-      'gender' => 'female'
-    }
-  }
+
   subject { described_class.new(request: request) }
 
   before do
-    allow(subject).to receive(:user_data).and_return(facebook_user_data)
+    allow_any_instance_of(MessengerUserRepository).to receive(:name).and_return(user_first_name)
   end
 
   describe '#call' do
