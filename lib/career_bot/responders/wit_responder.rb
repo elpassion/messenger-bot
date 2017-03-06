@@ -1,19 +1,22 @@
 class WitResponder
   def initialize(request, response, **options)
-    @job_position = request['context']['job_position']
-    @session_uid = request['session_id']
+    @request = request
     @response = response
     @bot_interface = options[:bot_interface] || FacebookMessenger.new
     @job_repository = options[:job_repository] || JobRepository.new
   end
 
   def send_response
-    job_position ? found_job_offers : text_response
+    if about_us
+      show_about_us
+    else
+      job_position ? found_job_offers : text_response
+    end
   end
 
   private
 
-  attr_reader :job_position, :session_uid, :response, :bot_interface, :job_repository
+  attr_reader :request, :response, :bot_interface, :job_repository
 
   def text_response
     bot_deliver({ text: response['text'] })
@@ -27,6 +30,14 @@ class WitResponder
 
   def bot_deliver(message)
     bot_interface.deliver(messenger_id, message)
+  end
+
+  def show_about_us
+    bot_deliver({ attachment: I18n.t('ABOUT_US', locale: :responses)[0] })
+  end
+
+  def show_beginning
+    bot_deliver({ attachment: I18n.t('WELCOME_PAYLOAD', locale: :responses)[0] })
   end
 
   def attachment
@@ -53,5 +64,21 @@ class WitResponder
 
   def repository
     @repository ||= ConversationRepository.new
+  end
+
+  def context
+    @context ||= request['context']
+  end
+
+  def job_position
+    @job_position ||= context['job_position']
+  end
+
+  def session_uid
+    @session_uid ||= request['session_id']
+  end
+
+  def about_us
+    @about_us ||= context['about_us']
   end
 end

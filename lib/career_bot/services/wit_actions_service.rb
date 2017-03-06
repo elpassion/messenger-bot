@@ -7,7 +7,9 @@ class WitActionsService
       continue_game,
       get_job,
       get_social_network,
-      get_user, play_game,
+      get_user,
+      play_game,
+      show_about_us,
       start_game
     ].reduce(:merge)
   end
@@ -74,6 +76,14 @@ class WitActionsService
     {
       play_game: lambda do |request|
         WitAction::PlayGameService.new(request: request).call
+      end
+    }
+  end
+
+  def show_about_us
+    {
+      show_about_us: lambda do |request|
+        WitAction::ShowAboutUsService.new(request: request).call
       end
     }
   end
