@@ -21,7 +21,6 @@ class MessengerUserRepository
 
   def user_profile
     "https://graph.facebook.com/v2.6/#{messenger_id}"\
-    '?fields=first_name,last_name,profile_pic,locale,'\
-    "timezone,gender&access_token=#{ENV['ACCESS_TOKEN']}"
+    "?fields=first_name&access_token=#{ENV['ACCESS_TOKEN']}"
   end
 end

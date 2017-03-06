@@ -7,27 +7,31 @@ class WitResponder
   end
 
   def send_response
-    if job_position
-      found_job_offers
-    elsif about_us
-      show_about_us
-    else
-      text_response
-    end
+    responses[context_key] || text_response
   end
 
   private
 
   attr_reader :request, :response, :bot_interface, :job_repository
 
+  def responses
+    {
+      job_position: found_job_offers,
+      about_us: show_about_us,
+      main_menu: show_main_menu
+    }
+  end
+
   def text_response
     bot_deliver({ text: response['text'] })
   end
 
   def found_job_offers
-    bot_deliver({ text: attachment[:text] })
-    bot_deliver({ attachment: GenericTemplate.new(attachment[:data]).to_hash })
-    bot_deliver({ text: I18n.t('text_messages.try_again') })
+    if job_position
+      bot_deliver({text: attachment[:text]})
+      bot_deliver({attachment: GenericTemplate.new(attachment[:data]).to_hash})
+      bot_deliver({text: I18n.t('text_messages.try_again')})
+    end
   end
 
   def bot_deliver(message)
@@ -35,7 +39,11 @@ class WitResponder
   end
 
   def show_about_us
-    bot_deliver({ attachment: I18n.t(about_us, locale: :responses)[0] })
+    bot_deliver({attachment: I18n.t('ABOUT_US', locale: :responses).first}) if about_us
+  end
+
+  def show_main_menu
+    bot_deliver({attachment: I18n.t('WELCOME_PAYLOAD', locale: :responses).first}) if main_menu
   end
 
   def attachment
@@ -68,6 +76,10 @@ class WitResponder
     @context ||= request['context']
   end
 
+  def context_key
+    context.keys.first.to_sym
+  end
+
   def job_position
     @job_position ||= context['job_position']
   end
@@ -78,5 +90,9 @@ class WitResponder
 
   def about_us
     @about_us ||= context['about_us']
+  end
+
+  def main_menu
+    @main_menu ||= context['main_menu']
   end
 end

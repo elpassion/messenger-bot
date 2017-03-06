@@ -1,17 +1,7 @@
 class WitActionsService
   def wit_actions
-    [
-      send,
-      check_sentiment,
-      clean_context,
-      continue_game,
-      get_job,
-      get_social_network,
-      get_user,
-      play_game,
-      show_about_us,
-      start_game
-    ].reduce(:merge)
+    [check_sentiment, clean_context, continue_game, get_job, get_social_network,
+     get_user, play_game, send, show_about_us, show_main_menu, start_game].reduce(:merge)
   end
 
   private
@@ -68,6 +58,14 @@ class WitActionsService
     {
       get_user: lambda do |request|
         WitAction::GetUserService.new(request: request).call
+      end
+    }
+  end
+
+  def show_main_menu
+    {
+      show_main_menu: lambda do |request|
+        WitAction::MainMenuService.new(request: request).call
       end
     }
   end
