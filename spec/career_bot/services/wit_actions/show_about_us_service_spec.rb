@@ -2,7 +2,7 @@ describe WitAction::ShowAboutUsService do
 
   let(:session_uid) { 'session_uid' }
   let!(:conversation) { create(:conversation, session_uid: session_uid)}
-  let(:value) { 'about elpqssion'}
+  let(:value) { 'ABOUT_US'}
   let(:request) {
     { 'session_id' => session_uid,
      'context' => {},

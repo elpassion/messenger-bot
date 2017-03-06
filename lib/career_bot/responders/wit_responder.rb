@@ -7,10 +7,12 @@ class WitResponder
   end
 
   def send_response
-    if about_us
+    if job_position
+      found_job_offers
+    elsif about_us
       show_about_us
     else
-      job_position ? found_job_offers : text_response
+      text_response
     end
   end
 
@@ -33,11 +35,7 @@ class WitResponder
   end
 
   def show_about_us
-    bot_deliver({ attachment: I18n.t('ABOUT_US', locale: :responses)[0] })
-  end
-
-  def show_beginning
-    bot_deliver({ attachment: I18n.t('WELCOME_PAYLOAD', locale: :responses)[0] })
+    bot_deliver({ attachment: I18n.t(about_us, locale: :responses)[0] })
   end
 
   def attachment
