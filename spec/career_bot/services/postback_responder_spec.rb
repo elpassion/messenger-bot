@@ -26,12 +26,18 @@ describe PostbackResponder do
   let(:what_we_do_message) do
     [{ attachment: { type: 'image', payload: { url: 'https://media.giphy.com/media/l3q2Chwola4nfdNra/source.gif' } } },
      { text: 'In EL Passion we create cool stuff, we use many fancy technologies!' },
-     { text: "Wanna see more? Check out our website! http://www.elpassion.com/projects/. Looking for a job? Type things you are good at and I will show you what we got! :)\n" }]
+     { text: "Wanna see more? Check out our website! http://www.elpassion.com/projects/. "\
+       "Looking for a job? Type things you are good at and I will show you what we got! :) "\
+       "We can also talk about (almost) anything you want! :)\n" }]
   end
 
   let(:company_message) do
     [{ attachment: { type: 'image', payload: { url: 'https://media.giphy.com/media/l3q2FwrtK2lURaeeA/source.gif' } } },
-     { text: "Here are useful links! Our website: http://www.elpassion.com/, Facebook: https://www.facebook.com/elpassion, Dribbble: https://dribbble.com/elpassion and our Blog: https://blog.elpassion.com/\n" }]
+     { text: "<There will be EL Passion history & few words about our company, but we need to ask Aga for help w/ that."\
+     "> Here are useful links! Our website: http://www.elpassion.com/, "\
+     "Facebook: https://www.facebook.com/elpassion, Dribbble: https://dribbble.com/elpassion "\
+     "and our Blog: https://blog.elpassion.com/. Feel invited to check them out! :) "\
+     "Would you like to do something else now? Play a game? See main menu? Anything? :D\n" }]
   end
 
   before do
