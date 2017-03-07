@@ -77,7 +77,7 @@ class WitResponder
   end
 
   def context_key
-    context.keys.first.to_sym unless context.keys.empty?
+    context.keys.first.to_sym if context.keys.any? 
   end
 
   def job_position
