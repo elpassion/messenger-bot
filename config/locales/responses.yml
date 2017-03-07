@@ -5,7 +5,8 @@ responses:
         template_type: 'button'
         text: >
           You can find job offers, get some info about my company by clicking
-          on button below, you can also play a game! :) Sooo, what would you like to do?
+          on button below. You can also play a game or try to entertain me with conversation! B)
+          Sooo, what would you like to do? :)
         buttons:
           - type: 'postback'
             title: 'I wanna find a job!'
@@ -39,18 +40,24 @@ responses:
     - >
       Wanna see more? Check out our website! http://www.elpassion.com/projects/.
       Looking for a job? Type things you are good at and I will show you what we got! :)
+      We can also talk about (almost) anything you want! :)
   COMPANY:
     - type: 'image'
       payload:
         url: 'https://media.giphy.com/media/l3q2FwrtK2lURaeeA/source.gif'
     - >
-      Here are useful links! Our website: http://www.elpassion.com/,
+      <There will be EL Passion history & few words about our company, but we need to ask Aga for
+      help w/ that.> Here are useful links! Our website: http://www.elpassion.com/,
       Facebook: https://www.facebook.com/elpassion,
-      Dribbble: https://dribbble.com/elpassion and our Blog: https://blog.elpassion.com/
+      Dribbble: https://dribbble.com/elpassion and our Blog: https://blog.elpassion.com/.
+      Feel invited to check them out! :)
+      Would you like to do something else now? Play a game? See main menu? Anything? :D
   PEOPLE: 'You can check our squad here: http://www.elpassion.com/about-us/'
   INTERNSHIP_INFO: >
     Unfortunately we dont have any upcoming internships for now :(
-    But stay tuned, there will be something in the future!
+    But stay tuned, there will be something in the future! :D Is there anything else
+    may I help you with? Maybe you want to play a game or go back to beginning? We can also
+    talk about anything you want! :)
   JOB_OFFERS: >
     Nice! :D Fortunately, we are looking for some cool people to join us!
     Sooo... What kind of job are you interested in?

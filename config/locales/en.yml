@@ -3,10 +3,14 @@ en:
     about_us_text: 'Cool! Which of those things you are interested in? :)'
     found_matching_jobs: 'Yayy! :) We have something you may be interested in! Check this out!'
     found_matching_descriptions: 'I have found some offers including the thing you are looking for!'
-    no_jobs_found: "Unfortunately we don't have any matching job offers :( buuuut... you can still check out all of our open positions!"
+    no_jobs_found: >
+      Unfortunately we don't have any matching job offers :(
+      Buuuut... you can still check out all of our open positions!
     try_again: 'Found anything interesting? If not, you can try again!'
     job_requirements_info: 'Here are some nice-to-have things for %{position}:'
     job_benefits_info: 'We can offer you following benefits:'
-    apply_for_job: 'To see full job offer visit %{job_url}. Want to be %{position}? Apply now here: %{application_url} and see you at EL Passion! :)'
+    apply_for_job: >
+      To see full job offer visit %{job_url}. Want to be %{position}?
+      Apply now here: %{application_url} and see you at EL Passion! :)'
   urls:
     images: ['LgDApmT', 'SIl0Mfv', 'wtgo9qd', 'gSNMXhd', 'VWulrUm', 'WNd5E64', 'XgnUldW']
