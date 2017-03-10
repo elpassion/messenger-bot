@@ -37,7 +37,7 @@ describe WitResponder do
 
   context 'when found two jobs with matching titles' do
     before(:each) do
-      job_repository = MockRepository.new([{}, {}], [])
+      job_repository = MockRepository.new([{ 'shortcode' => '1234' }, { 'shortcode' => '2345' }], [])
       described_class.new(request, response, bot_interface: bot_interface, job_repository: job_repository).send_response
     end
 
@@ -52,7 +52,7 @@ describe WitResponder do
 
   context 'when found job with matching description' do
     before(:each) do
-      job_repository = MockRepository.new([], [{}])
+      job_repository = MockRepository.new([], [{ 'shortcode' => '1234' }])
       described_class.new(request, response, bot_interface: bot_interface, job_repository: job_repository).send_response
     end
 

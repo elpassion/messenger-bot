@@ -11,6 +11,12 @@ class JobRepository
     end
   end
 
+  def get_job(shortcodes)
+    active_jobs.select do |job|
+      shortcodes.include? job['shortcode']
+    end
+  end
+
   private
 
   def active_jobs

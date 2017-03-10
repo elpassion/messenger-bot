@@ -18,12 +18,13 @@ class WitResponder
     {
       job_position: found_job_offers,
       about_us: show_about_us,
+      offer_details: show_details,
       main_menu: show_main_menu
     }
   end
 
   def text_response
-    bot_deliver({ text: response['text'] })
+    bot_deliver({ text: response['text'] }) unless details
   end
 
   def found_job_offers
@@ -46,13 +47,32 @@ class WitResponder
     bot_deliver({attachment: I18n.t('WELCOME_PAYLOAD', locale: :responses).first}) if main_menu
   end
 
+  def show_details
+    if details
+      JobDetailsService.new(session_uid: session_uid, details: details).response
+    end
+  end
+
   def attachment
     if matching_jobs.any?
+      save_job_codes
       { data: matching_jobs, text: I18n.t('text_messages.found_matching_jobs') }
     elsif matching_descriptions.any?
+      save_job_codes
       { data: matching_descriptions, text: I18n.t('text_messages.found_matching_descriptions') }
     else
       { data: WorkableService.new.get_jobs, text: I18n.t('text_messages.no_jobs_found') }
+    end
+  end
+
+  def save_job_codes
+    repository.update(conversation.id, job_codes: job_codes)
+  end
+
+  def job_codes
+    matching_jobs.reduce('') do |codes, job|
+      codes << job['shortcode']
+      codes << ','
     end
   end
 
@@ -72,6 +92,10 @@ class WitResponder
     @repository ||= ConversationRepository.new
   end
 
+  def conversation
+    repository.find_by_session_uid(session_uid)
+  end
+
   def context
     @context ||= request['context']
   end
@@ -82,6 +106,10 @@ class WitResponder
 
   def job_position
     @job_position ||= context['job_position']
+  end
+
+  def details
+    @details ||= context['details']
   end
 
   def session_uid
