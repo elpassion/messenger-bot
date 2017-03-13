@@ -52,8 +52,7 @@ class WitAction
   end
 
   def messenger_user_repository
-    @messenger_user_repository ||=
-      MessengerUserRepository.new(messenger_id: messenger_id)
+    @messenger_user_repository ||= MessengerUserRepository.new(messenger_id: messenger_id)
   end
 
   def user_first_name
