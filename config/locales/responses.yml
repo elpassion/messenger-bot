@@ -46,8 +46,7 @@ responses:
       payload:
         url: 'https://media.giphy.com/media/l3q2FwrtK2lURaeeA/source.gif'
     - >
-      <There will be EL Passion history & few words about our company, but we need to ask Aga for
-      help w/ that.> Here are useful links! Our website: http://www.elpassion.com/,
+      Here are useful links! Our website: http://www.elpassion.com/,
       Facebook: https://www.facebook.com/elpassion,
       Dribbble: https://dribbble.com/elpassion and our Blog: https://blog.elpassion.com/.
       Feel invited to check them out! :)
@@ -61,3 +60,9 @@ responses:
   JOB_OFFERS: >
     Nice! :D Fortunately, we are looking for some cool people to join us!
     Sooo... What kind of job are you interested in?
+  HELP: >
+    I am just a bot, you know. But I am also quite simple in use! :D
+    If you want to go back to main menu - just type 'beginning' :) You can play a game by typing
+    'game', or ask me about our Facebook/website/any social media. You can also try
+    to ask me about something else. I cannot promise I will know answers for all questions you may
+    have but remember - I learn new stuff everyday! :B :)
