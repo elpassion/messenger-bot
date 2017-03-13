@@ -49,7 +49,7 @@ class WitResponder
 
   def show_details
     if details
-      JobDetailsService.new(session_uid: session_uid, details: details).response
+      JobDetailsResponder.new(session_uid: session_uid, details: details).response
     end
   end
 

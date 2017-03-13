@@ -1,7 +1,8 @@
-class JobDetailsService
-  def initialize(session_uid:, details:)
+class JobDetailsResponder
+  def initialize(session_uid:, details:, **options)
     @session_uid = session_uid
     @details = details
+    @bot_interface = options[:bot_interface] || FacebookMessenger.new
   end
 
   def response
@@ -37,7 +38,7 @@ class JobDetailsService
   def show_quick_responses
     bot_deliver(
       {
-        text: 'Which offer would you like to check?',
+        text: I18n.t('text_messages.which_offer'),
         quick_replies: quick_replies(job_codes)
       }
     )

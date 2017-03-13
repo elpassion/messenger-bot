@@ -15,5 +15,6 @@ en:
     no_available_details: >
       You did not requested for any offers jet (or they are not available any more).
       What you are interested in?
+    which_offer: Which offer would you like to check?
   urls:
     images: ['LgDApmT', 'SIl0Mfv', 'wtgo9qd', 'gSNMXhd', 'VWulrUm', 'WNd5E64', 'XgnUldW']
