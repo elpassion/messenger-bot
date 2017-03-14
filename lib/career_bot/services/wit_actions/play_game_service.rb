@@ -52,7 +52,7 @@ class WitAction::PlayGameService < WitAction
   end
 
   def not_won_status
-    number > winning_number ? 'bigger' : 'smaller'
+    number < winning_number ? 'bigger' : 'smaller'
   end
 
   def new_counter_value

@@ -1,10 +1,10 @@
 class WitAction::ContinueGameService < WitAction
   def call
-    if answer == 'no'
-      set_context_true 'stop'
-    else
+    if answer && answer == 'yes'
       set_context_true 'continue'
       set_context_nil 'wrongParam'
+    else
+      set_context_true 'stop'
     end
     context
   end
