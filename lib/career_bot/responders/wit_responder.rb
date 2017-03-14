@@ -82,7 +82,7 @@ class WitResponder
   end
 
   def matching_jobs_or_description
-    matching_jobs || description
+    matching_jobs.any? ? matching_jobs : matching_descriptions
   end
 
   def matching_jobs
