@@ -1,15 +1,10 @@
 class ConversationRepository < Hanami::Repository
-  
   def find_by_session_uid(session_uid)
-    conversations
-      .where(session_uid: session_uid)
-      .first
+    conversations.where(session_uid: session_uid).first
   end
 
   def find_by_messenger_id(messenger_id)
-    conversations
-      .where(messenger_id: messenger_id)
-      .first
+    conversations.where(messenger_id: messenger_id).first
   end
 
   def find_or_create_by_messenger_id(messenger_id)

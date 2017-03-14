@@ -36,7 +36,16 @@ responses:
     - type: 'image'
       payload:
         url: 'https://media.giphy.com/media/l3q2Chwola4nfdNra/source.gif'
-    - In EL Passion we create cool stuff, we use many fancy technologies!
+    - >
+      In EL Passion we create cool stuff, we use many fancy technologies!
+      We design and develop stunning native mobile apps for iOS (iPhone, iPad) and Android.
+      Our team builds high performance apps using optimal coding and best programming practices.
+    - >
+      Using modern technologies and Agile principles, we deliver web and mobile apps with
+      uncompromising quality.
+    - >
+      Our UI & UX Design Team bridges the distance between the human brain
+      and the digital product in every project!
     - >
       Wanna see more? Check out our website! http://www.elpassion.com/projects/.
       Looking for a job? Type things you are good at and I will show you what we got! :)
@@ -46,12 +55,14 @@ responses:
       payload:
         url: 'https://media.giphy.com/media/l3q2FwrtK2lURaeeA/source.gif'
     - >
-      <There will be EL Passion history & few words about our company, but we need to ask Aga for
-      help w/ that.> Here are useful links! Our website: http://www.elpassion.com/,
+      We are EL Passion - Warsaw based software house with years of experience. You can see
+      our office location here: https://goo.gl/km42Fj.
+    - >
+      And here are useful links! Our website: http://www.elpassion.com/,
       Facebook: https://www.facebook.com/elpassion,
       Dribbble: https://dribbble.com/elpassion and our Blog: https://blog.elpassion.com/.
       Feel invited to check them out! :)
-      Would you like to do something else now? Play a game? See main menu? Anything? :D
+    - Would you like to do something else now? Play a game? See main menu? Anything? :D
   PEOPLE: 'You can check our squad here: http://www.elpassion.com/about-us/'
   INTERNSHIP_INFO: >
     Unfortunately we dont have any upcoming internships for now :(
@@ -61,3 +72,13 @@ responses:
   JOB_OFFERS: >
     Nice! :D Fortunately, we are looking for some cool people to join us!
     Sooo... What kind of job are you interested in?
+  HELP:
+    - >
+      I am just a bot, you know :) But I am also quite simple in use! :D
+      Type job position you are interested in (Senior Ruby Developer for example) to see
+      whether we have job offers for you.
+    - >
+      If you want to go back to main menu - just type 'beginning' :) You can play a game by typing
+      'game', or ask me about our Facebook, website or any other social media. You can also try
+      to ask me about something else. I cannot promise I will know answers for all questions you may
+      have, but remember - I learn new stuff everyday! :B :)
