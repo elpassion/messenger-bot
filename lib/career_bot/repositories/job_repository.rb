@@ -17,6 +17,10 @@ class JobRepository
     end
   end
 
+  def active_job_codes
+    active_jobs.map { |job| job['shortcode'] }
+  end
+
   private
 
   def active_jobs
