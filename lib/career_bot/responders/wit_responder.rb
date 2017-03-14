@@ -24,15 +24,15 @@ class WitResponder
   end
 
   def text_response
-    bot_deliver({ text: response['text'] }) unless details
+    bot_deliver(text: response['text']) unless details
   end
 
   def found_job_offers
-    if job_position
-      bot_deliver({text: attachment[:text]})
-      bot_deliver({attachment: GenericTemplate.new(attachment[:data]).to_hash})
-      bot_deliver({text: I18n.t('text_messages.try_again')})
-    end
+    return unless job_position
+    save_job_codes
+    bot_deliver(text: attachment[:text])
+    bot_deliver(attachment: GenericTemplate.new(attachment[:data]).to_hash)
+    bot_deliver(text: I18n.t('text_messages.try_again'))
   end
 
   def bot_deliver(message)
@@ -40,40 +40,49 @@ class WitResponder
   end
 
   def show_about_us
-    bot_deliver({attachment: I18n.t('ABOUT_US', locale: :responses).first}) if about_us
+    return unless about_us
+    bot_deliver(attachment: I18n.t('ABOUT_US', locale: :responses).first)
   end
 
   def show_main_menu
-    bot_deliver({attachment: I18n.t('WELCOME_PAYLOAD', locale: :responses).first}) if main_menu
+    return unless main_menu
+    bot_deliver(attachment: I18n.t('WELCOME_PAYLOAD', locale: :responses).first)
   end
 
   def show_details
-    if details
-      JobDetailsResponder.new(session_uid: session_uid, details: details).response
-    end
+    return unless details
+    JobDetailsResponder.new(session_uid: session_uid, details: details).response
   end
 
   def attachment
     if matching_jobs.any?
-      save_job_codes(matching_jobs)
       { data: matching_jobs, text: I18n.t('text_messages.found_matching_jobs') }
     elsif matching_descriptions.any?
-      save_job_codes(matching_descriptions)
-      { data: matching_descriptions, text: I18n.t('text_messages.found_matching_descriptions') }
+      {
+        data: matching_descriptions,
+        text: I18n.t('text_messages.found_matching_descriptions')
+      }
     else
-      { data: WorkableService.new.get_jobs, text: I18n.t('text_messages.no_jobs_found') }
+      {
+        data: WorkableService.new.get_jobs,
+        text: I18n.t('text_messages.no_jobs_found')
+      }
     end
   end
 
-  def save_job_codes(matching_jobs)
-    repository.update(conversation.id, job_codes: job_codes(matching_jobs))
+  def save_job_codes
+    return unless matching_jobs_or_description
+    repository.update(conversation.id, job_codes: job_codes)
   end
 
-  def job_codes(matching_jobs)
-    matching_jobs.reduce('') do |codes, job|
-      codes << job['shortcode']
-      codes << ','
+  def job_codes
+    matching_jobs_or_description.reduce('') do |codes, job|
+      codes << job['shortcode'] + ','
     end
+  end
+
+  def matching_jobs_or_description
+    matching_jobs || description
   end
 
   def matching_jobs
@@ -101,7 +110,7 @@ class WitResponder
   end
 
   def context_key
-    context.keys.first.to_sym if context.keys.any? 
+    context.keys.first.to_sym if context.keys.any?
   end
 
   def job_position
