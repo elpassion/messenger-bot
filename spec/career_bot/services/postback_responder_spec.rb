@@ -25,7 +25,13 @@ describe PostbackResponder do
 
   let(:what_we_do_message) do
     [{ attachment: { type: 'image', payload: { url: 'https://media.giphy.com/media/l3q2Chwola4nfdNra/source.gif' } } },
-     { text: 'In EL Passion we create cool stuff, we use many fancy technologies!' },
+     { text: "In EL Passion we create cool stuff, we use many fancy technologies! "\
+      "We design and develop stunning native mobile apps for iOS (iPhone, iPad) and Android. "\
+      "Our team builds high performance apps using optimal coding and best programming practices.\n"},
+     { text: "Using modern technologies and Agile principles, we deliver web and mobile apps with "\
+      "uncompromising quality.\n" },
+     { text:"Our UI & UX Design Team bridges the distance between the human brain "\
+      "and the digital product in every project!\n" },
      { text: "Wanna see more? Check out our website! http://www.elpassion.com/projects/. "\
        "Looking for a job? Type things you are good at and I will show you what we got! :) "\
        "We can also talk about (almost) anything you want! :)\n" }]
@@ -33,11 +39,12 @@ describe PostbackResponder do
 
   let(:company_message) do
     [{ attachment: { type: 'image', payload: { url: 'https://media.giphy.com/media/l3q2FwrtK2lURaeeA/source.gif' } } },
-     { text: "<There will be EL Passion history & few words about our company, but we need to ask Aga for help w/ that."\
-     "> Here are useful links! Our website: http://www.elpassion.com/, "\
-     "Facebook: https://www.facebook.com/elpassion, Dribbble: https://dribbble.com/elpassion "\
-     "and our Blog: https://blog.elpassion.com/. Feel invited to check them out! :) "\
-     "Would you like to do something else now? Play a game? See main menu? Anything? :D\n" }]
+     { text: "We are EL Passion - Warsaw based software house with years of experience. "\
+      "You can see our office location here: https://goo.gl/km42Fj.\n" },
+     { text: "And here are useful links! Our website: http://www.elpassion.com/, "\
+      "Facebook: https://www.facebook.com/elpassion, Dribbble: https://dribbble.com/elpassion "\
+      "and our Blog: https://blog.elpassion.com/. Feel invited to check them out! :)\n" },
+     { text: "Would you like to do something else now? Play a game? See main menu? Anything? :D" }]
   end
 
   before do
