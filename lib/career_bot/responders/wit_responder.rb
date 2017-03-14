@@ -55,21 +55,21 @@ class WitResponder
 
   def attachment
     if matching_jobs.any?
-      save_job_codes
+      save_job_codes(matching_jobs)
       { data: matching_jobs, text: I18n.t('text_messages.found_matching_jobs') }
     elsif matching_descriptions.any?
-      save_job_codes
+      save_job_codes(matching_descriptions)
       { data: matching_descriptions, text: I18n.t('text_messages.found_matching_descriptions') }
     else
       { data: WorkableService.new.get_jobs, text: I18n.t('text_messages.no_jobs_found') }
     end
   end
 
-  def save_job_codes
-    repository.update(conversation.id, job_codes: job_codes)
+  def save_job_codes(matching_jobs)
+    repository.update(conversation.id, job_codes: job_codes(matching_jobs))
   end
 
-  def job_codes
+  def job_codes(matching_jobs)
     matching_jobs.reduce('') do |codes, job|
       codes << job['shortcode']
       codes << ','
