@@ -69,7 +69,7 @@ describe WitAction::PlayGameService do
           expect(subject.call).to include(
                                       'play' => true,
                                       'winningNumber' => winning_number,
-                                      'notWon' => 'smaller',
+                                      'notWon' => 'bigger',
                                       'wrongParam' => nil
                                     )
         end
@@ -91,7 +91,7 @@ describe WitAction::PlayGameService do
           expect(subject.call).to include(
                                       'play' => true,
                                       'winningNumber' => winning_number,
-                                      'notWon' => 'bigger',
+                                      'notWon' => 'smaller',
                                       'wrongParam' => nil
                                     )
         end
