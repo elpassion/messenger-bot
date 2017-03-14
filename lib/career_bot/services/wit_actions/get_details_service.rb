@@ -1,7 +1,6 @@
 class WitAction::GetDetailsService < WitAction
   def call
-    set_context_value 'inProgress', true
-    set_context_value 'offer_details', details
+    set_context_value 'details', details
     context
   end
 

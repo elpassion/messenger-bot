@@ -4,7 +4,7 @@ Bot.on :message do |message|
   if message.text == 'test'
     message.reply(text: 'OK, I am working! <3')
   else
-    WitService.new(message).send
+    MessageResponder.new(message).send
   end
 end
 
