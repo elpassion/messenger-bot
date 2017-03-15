@@ -1,8 +1,8 @@
-class JobDetailsResponder
+class JobDetailsResponder < BotResponder
   def initialize(session_uid:, details:, **options)
     @session_uid = session_uid
     @details = details
-    @bot_interface = options[:bot_interface] || FacebookMessenger.new
+    super(**options)
   end
 
   def response
@@ -64,27 +64,7 @@ class JobDetailsResponder
     @single_job_code = "#{details}|#{job_codes.first}"
   end
 
-  def bot_deliver(message)
-    bot_interface.deliver(messenger_id, message)
-  end
-
-  def bot_interface
-    @bot_interface ||= FacebookMessenger.new
-  end
-
-  def repository
-    @repository ||= ConversationRepository.new
-  end
-
   def active_job_codes
     JobRepository.new.active_job_codes
-  end
-
-  def messenger_id
-    repository.find_by_session_uid(session_uid).messenger_id
-  end
-
-  def conversation
-    repository.find_by_session_uid(session_uid)
   end
 end

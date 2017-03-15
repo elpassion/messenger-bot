@@ -1,9 +1,8 @@
-class WitResponder
+class WitResponder < BotResponder
   def initialize(request, response, **options)
     @request = request
     @response = response
-    @bot_interface = options[:bot_interface] || FacebookMessenger.new
-    @job_repository = options[:job_repository] || JobRepository.new
+    super(**options)
   end
 
   def send_response
@@ -12,7 +11,7 @@ class WitResponder
 
   private
 
-  attr_reader :request, :response, :bot_interface, :job_repository
+  attr_reader :request, :response
 
   def responses
     {
@@ -29,14 +28,8 @@ class WitResponder
 
   def found_job_offers
     return unless job_position
-    save_job_codes
-    bot_deliver(text: attachment[:text])
-    bot_deliver(attachment: GenericTemplate.new(attachment[:data]).to_hash)
-    bot_deliver(text: I18n.t('text_messages.try_again'))
-  end
-
-  def bot_deliver(message)
-    bot_interface.deliver(messenger_id, message)
+    JobOffersResponder.new(session_uid: session_uid,
+                           job_position: job_position).response
   end
 
   def show_about_us
@@ -52,57 +45,6 @@ class WitResponder
   def show_details
     return unless details
     JobDetailsResponder.new(session_uid: session_uid, details: details).response
-  end
-
-  def attachment
-    if matching_jobs.any?
-      { data: matching_jobs, text: I18n.t('text_messages.found_matching_jobs') }
-    elsif matching_descriptions.any?
-      {
-        data: matching_descriptions,
-        text: I18n.t('text_messages.found_matching_descriptions')
-      }
-    else
-      {
-        data: WorkableService.new.get_jobs,
-        text: I18n.t('text_messages.no_jobs_found')
-      }
-    end
-  end
-
-  def save_job_codes
-    return unless matching_jobs_or_description
-    repository.update(conversation.id, job_codes: job_codes)
-  end
-
-  def job_codes
-    matching_jobs_or_description.reduce('') do |codes, job|
-      codes << job['shortcode'] + ','
-    end
-  end
-
-  def matching_jobs_or_description
-    matching_jobs.any? ? matching_jobs : matching_descriptions
-  end
-
-  def matching_jobs
-    job_repository.get_matching_jobs(job_position)
-  end
-
-  def matching_descriptions
-    job_repository.get_matching_descriptions(job_position)
-  end
-
-  def messenger_id
-    repository.find_by_session_uid(session_uid).messenger_id
-  end
-
-  def repository
-    @repository ||= ConversationRepository.new
-  end
-
-  def conversation
-    repository.find_by_session_uid(session_uid)
   end
 
   def context
