@@ -1,5 +1,6 @@
-describe WitResponder do
-  let(:context) { { 'job_position' => 'ruby'} }
+describe JobOffersResponder do
+  let(:job_position) { 'ruby' }
+  let(:context) { { 'job_position' => job_position } }
   let(:session_uid) { '123' }
   let(:bot_interface) { MockMessenger.new }
   let(:response) { ' ' }
@@ -11,6 +12,7 @@ describe WitResponder do
     }
   }
   let!(:conversation) { create(:conversation, session_uid: session_uid)}
+  let(:repository) { ConversationRepository.new}
 
   before do
     VCR.use_cassette 'active_jobs' do
@@ -19,12 +21,13 @@ describe WitResponder do
     end
   end
 
-  context 'when no matching jobs found' do
-    before(:each) do
-      job_repository = MockRepository.new([], [])
+  before(:each) do
+    subject.response
+  end
 
-      described_class.new(request, response, bot_interface: bot_interface, job_repository: job_repository).send_response
-    end
+  subject { described_class.new(session_uid: session_uid, job_position: job_position, job_repository: job_repository, bot_interface: bot_interface) }
+  context 'when no matching jobs found' do
+    let(:job_repository) { MockRepository.new([], []) }
 
     it 'returns proper text message' do
       expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.no_jobs_found')
@@ -33,13 +36,14 @@ describe WitResponder do
     it 'returns all available job offers' do
       expect(bot_interface.sent_messages[1][:attachment][:payload][:elements].size).to eq 4
     end
+
+    it 'should set conversation job codes to all active job codes' do
+      expect(conversation_job_codes).to eq JobRepository.new.active_job_codes
+    end
   end
 
   context 'when found two jobs with matching titles' do
-    before(:each) do
-      job_repository = MockRepository.new([{ 'shortcode' => '1234' }, { 'shortcode' => '2345' }], [])
-      described_class.new(request, response, bot_interface: bot_interface, job_repository: job_repository).send_response
-    end
+    let(:job_repository) { MockRepository.new([{ 'shortcode' => '1234' }, { 'shortcode' => '2345' }], []) }
 
     it 'returns proper text message' do
       expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.found_matching_jobs')
@@ -48,13 +52,14 @@ describe WitResponder do
     it 'returns proper amount of job offers' do
       expect(bot_interface.sent_messages[1][:attachment][:payload][:elements].size).to eq 2
     end
+
+    it 'should set conversation job codes to matched titles' do
+      expect(conversation_job_codes).to eq ['1234', '2345']
+    end
   end
 
   context 'when found job with matching description' do
-    before(:each) do
-      job_repository = MockRepository.new([], [{ 'shortcode' => '1234' }])
-      described_class.new(request, response, bot_interface: bot_interface, job_repository: job_repository).send_response
-    end
+    let(:job_repository) { MockRepository.new([], [{ 'shortcode' => '1234' }]) }
 
     it 'returns proper text message' do
       expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.found_matching_descriptions')
@@ -63,5 +68,14 @@ describe WitResponder do
     it 'returns proper amount of job offers' do
       expect(bot_interface.sent_messages[1][:attachment][:payload][:elements].size).to eq 1
     end
+
+    it 'should set conversation job codes to matched description' do
+      expect(conversation_job_codes).to eq ['1234']
+    end
   end
+
+  def conversation_job_codes
+    repository.find_by_session_uid(session_uid).job_codes.split(',')
+  end
+
 end
