@@ -31,10 +31,6 @@ class JobParser
 
   attr_reader :shortcode
 
-  def parse_list(list)
-    list.map(&:text)
-  end
-
   def requirement_separator
     separator(parsed_requirements)
   end
