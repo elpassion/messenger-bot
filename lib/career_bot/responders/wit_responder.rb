@@ -56,7 +56,7 @@ class WitResponder < BotResponder
   end
 
   def job_position
-    @job_position ||= I18n.transliterate(context['job_position'])
+    @job_position ||= context['job_position']
   end
 
   def details
