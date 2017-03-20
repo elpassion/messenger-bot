@@ -4,11 +4,11 @@ class JobParser
   end
 
   def job_requirements
-    Nokogiri::HTML(job['requirements']).css('li').map { |li| li.text }
+    parsed_requirements.css(requirement_separator).map(&:text)
   end
 
   def job_benefits
-    Nokogiri::HTML(job_full_description.split('Benefits').last).css('li').map { |li| li.text }
+    parsed_benefits.css(benefits_separator).map(&:text)
   end
 
   def job_title
@@ -30,6 +30,28 @@ class JobParser
   private
 
   attr_reader :shortcode
+
+  def requirement_separator
+    separator(parsed_requirements)
+  end
+
+  def benefits_separator
+    separator(parsed_benefits)
+  end
+
+  def separator(parsed_text)
+    separator = 'li'
+    separator << ' ul li' while parsed_text.css("#{separator} ul li").any?
+    separator
+  end
+
+  def parsed_requirements
+    Nokogiri::HTML(job['requirements'])
+  end
+
+  def parsed_benefits
+    Nokogiri::HTML(job_full_description.split('Benefits').last)
+  end
 
   def job
     active_jobs.detect { |job| job['shortcode'] == shortcode }

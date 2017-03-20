@@ -45,9 +45,7 @@ class JobOffersResponder < BotResponder
   end
 
   def job_codes
-    attachment_jobs.reduce('') do |codes, job|
-      codes << job['shortcode'] + ','
-    end
+    attachment_jobs.map { |job| job['shortcode'] }.join(',')
   end
 
   def matching_jobs

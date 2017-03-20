@@ -4,7 +4,8 @@ class WitService
   end
 
   def send
-    set_session_uid if context.empty?
+    clean_context
+    set_session_uid
     client.run_actions(session_uid, message.text, context)
   end
 
@@ -13,7 +14,15 @@ class WitService
   attr_reader :message
 
   def set_session_uid
-    repository.update(conversation.id, session_uid: SecureRandom.uuid)
+    if context.empty?
+      repository.update(conversation.id, session_uid: SecureRandom.uuid)
+    end
+  end
+
+  def clean_context
+    if context.any? && conversation.updated_at < Time.now - 15 * 60
+      repository.update(conversation.id, context: {})
+    end
   end
 
   def session_uid

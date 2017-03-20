@@ -6,7 +6,9 @@ en:
     no_jobs_found: >
       Unfortunately we don't have any matching job offers :(
       Buuuut... you can still check out all of our open positions!
-    try_again: 'Found anything interesting? If not, you can try again!'
+    try_again: >
+      Found anything interesting? If not, you can try again! :)
+      You can also ask for requirements or benefits of selected job offer!
     job_requirements_info: 'Here are some nice-to-have things for %{position}:'
     job_benefits_info: 'We can offer you following benefits:'
     apply_for_job: >
@@ -15,7 +17,7 @@ en:
     no_available_details: >
       You did not requested for any offers jet (or they are not available any more).
       What you are interested in?
-    which_offer: Which offer would you like to check?
+    which_offer: Nice! Which offer would you like to check?
     unrecognized:
       - They didn't teach me how to reply to this yet. Sorry! :(
       - Sorry, I didn't get that :(
