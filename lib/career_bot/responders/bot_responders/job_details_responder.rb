@@ -9,7 +9,7 @@ class JobDetailsResponder < BotResponder
     if no_job_codes?
       no_available_jobs_response
     elsif job_codes.length == 1
-      one_avialable_job_response
+      one_available_job_response
     else
       show_quick_responses
     end
@@ -19,22 +19,6 @@ class JobDetailsResponder < BotResponder
 
   attr_reader :session_uid, :details
 
-  def quick_replies
-    job_codes.reduce([]) do |replies, code|
-      replies << DetailsQuickResponse.new(code: code, details: details).reply
-    end.compact
-  end
-
-  def no_available_jobs_response
-    bot_deliver({text: I18n.t('text_messages.no_available_details')})
-  end
-
-  def one_avialable_job_response
-    JobDetailsResponse.new(single_job_code).messages.each do |line|
-      bot_deliver({text: line})
-    end
-  end
-
   def show_quick_responses
     bot_deliver(
       {
@@ -42,6 +26,22 @@ class JobDetailsResponder < BotResponder
         quick_replies: quick_replies
       }
     )
+  end
+
+  def quick_replies
+    job_codes.map do |code|
+      DetailsQuickResponse.new(code: code, details: details).reply
+    end
+  end
+
+  def no_available_jobs_response
+    bot_deliver({ text: I18n.t('text_messages.no_available_details') })
+  end
+
+  def one_available_job_response
+    JobDetailsResponse.new(single_job_code).messages.each do |line|
+      bot_deliver({ text: line })
+    end
   end
 
   def no_job_codes?
@@ -53,11 +53,7 @@ class JobDetailsResponder < BotResponder
   end
 
   def conversation_job_codes
-    @conversation_job_codes ||=  if !conversation.job_codes.nil?
-                      conversation.job_codes.split(',')
-                    else
-                      []
-                    end
+    conversation.job_codes ? conversation.job_codes.split(',') : []
   end
 
   def single_job_code
