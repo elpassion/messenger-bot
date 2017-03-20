@@ -16,7 +16,12 @@ class WitAction
   end
 
   def first_entity_value(entity)
-    entities[entity][0]['value'] if entities.key? entity
+    entity_value = entities[entity][0]['value'] if entities.key? entity
+    transliterate(entity_value)
+  end
+
+  def transliterate(entity_val)
+    entity_val.is_a?(String) ? I18n.transliterate(entity_val) : entity_val
   end
 
   def entities
