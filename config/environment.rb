@@ -1,6 +1,8 @@
 require 'bundler/setup'
 require 'hanami/setup'
 require 'hanami/model'
+require 'hanami/view'
+require 'hanami/assets'
 require 'facebook/messenger'
 require_relative './sidekiq'
 require_relative '../lib/career_bot'
