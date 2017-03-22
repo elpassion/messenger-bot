@@ -76,6 +76,8 @@ GEM
       hanami-helpers (~> 0.5)
       hanami-utils (~> 0.9)
       tilt (~> 2.0, >= 2.0.2)
+    hanami-bootstrap (0.3.0)
+      hanami-assets (~> 0.2)
     hanami-controller (0.8.0)
       hanami-utils (~> 0.9)
       rack (~> 1.6, >= 1.6.2)
@@ -213,7 +215,11 @@ DEPENDENCIES
   faraday
   foreman
   hanami (~> 0.9)
+  hanami-assets
+  hanami-bootstrap
+  hanami-controller
   hanami-model (~> 0.7)
+  hanami-view
   i18n
   nokogiri
   pg

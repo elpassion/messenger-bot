@@ -5,8 +5,8 @@ responses:
         template_type: 'button'
         text: >
           You can find job offers, get some info about my company by clicking
-          on button below. You can also play a game or try to entertain me with conversation! B)
-          Sooo, what would you like to do? :)
+          on button below. You can also take part in our special contest for WDI or
+          try to entertain me with conversation! B) Sooo, what would you like to do? :)
         buttons:
           - type: 'postback'
             title: 'I wanna find a job!'
@@ -15,8 +15,8 @@ responses:
             title: 'Tell me about ELP!'
             payload: 'ABOUT_US'
           - type: 'postback'
-            title: 'Internship'
-            payload: 'INTERNSHIP_INFO'
+            title: 'EL CONCURSO'
+            payload: 'CONTEST'
   ABOUT_US:
     - type: 'template'
       payload:
@@ -78,7 +78,10 @@ responses:
       Type job position you are interested in (Senior Ruby Developer for example) to see
       whether we have job offers for you.
     - >
-      If you want to go back to main menu - just type 'beginning' :) You can play a game by typing
-      'game', or ask me about our Facebook, website or any other social media. You can also try
+      If you want to go back to main menu - just type 'beginning' :) You can take part in our contest by typing
+      'contest', or ask me about our Facebook, website or any other social media. You can also try
       to ask me about something else. I cannot promise I will know answers for all questions you may
       have, but remember - I learn new stuff everyday! B) :)
+  CONTEST: >
+    Would you like to take part in contest and win awesome speakers?
+    Type 'contest' for more info! :)

@@ -5,6 +5,8 @@ gem 'bundler'
 gem 'rake'
 gem 'hanami',       '~> 0.9'
 gem 'hanami-model', '~> 0.7'
+gem 'hanami-controller'
+gem 'hanami-view'
 
 gem 'pg'
 gem 'sidekiq', '~> 4.0.2'
@@ -14,6 +16,9 @@ gem 'workable'
 gem 'nokogiri'
 gem 'i18n'
 gem 'faraday'
+
+gem 'hanami-assets'
+gem 'hanami-bootstrap'
 
 group :development do
   # Code reloading

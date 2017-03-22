@@ -20,9 +20,13 @@ class WitService
   end
 
   def clean_context
-    if context.any? && conversation.updated_at < Time.now - 15 * 60
+    if clean_conversation_context?
       repository.update(conversation.id, context: {})
     end
+  end
+
+  def clean_conversation_context?
+    context.any? && conversation.updated_at < Time.now.utc - 15 * 60
   end
 
   def session_uid

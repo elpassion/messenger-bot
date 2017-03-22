@@ -8,10 +8,11 @@ class MessageResponder
   end
 
   private
+
   attr_reader :message
 
   def run_postback
-    PostbackResponder.new(message, PostbackResponse.new.message(message.quick_reply)).send
+    PostbackResponder.new(message, postback_message).send
   end
 
   def send_to_wit
@@ -19,6 +20,10 @@ class MessageResponder
   end
 
   def quick_reply
-    message.quick_reply
+    @quick_reply ||= message.quick_reply
+  end
+
+  def postback_message
+    PostbackResponse.new.message(quick_reply)
   end
 end

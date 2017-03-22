@@ -1,4 +1,5 @@
 require 'hanami/helpers'
+require 'hanami/assets'
 
 module Web
   class Application < Hanami::Application
@@ -222,6 +223,7 @@ module Web
       # See: http://www.rubydoc.info/gems/hanami-view#Configuration
       view.prepare do
         include Hanami::Helpers
+        include Web::Assets::Helpers
       end
     end
 
