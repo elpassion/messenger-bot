@@ -7,3 +7,4 @@
 mount Facebook::Messenger::Server, at: 'bot'
 
 get '/docs/privacy_policy', to: 'docs#privacy_policy'
+get '/docs/contest_regulations', to: 'docs#contest_regulations'

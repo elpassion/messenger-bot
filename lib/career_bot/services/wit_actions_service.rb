@@ -1,8 +1,8 @@
 class WitActionsService
   def wit_actions
     [check_sentiment, clean_context, continue_game, get_details, get_job,
-     get_random_answer, get_social_network, get_user, play_game, send,
-     show_about_us, show_main_menu, start_game].reduce(:merge)
+     get_random_answer, get_social_network, get_user, play_game, show_about_us,
+     send, show_main_menu, start_game, get_contest_answer].reduce(:merge)
   end
 
   private
@@ -107,6 +107,14 @@ class WitActionsService
     {
       start_game: lambda do |request|
         WitAction::StartGameService.new(request: request).call
+      end
+    }
+  end
+
+  def get_contest_answer
+    {
+      get_contest_answer: lambda do |request|
+        WitAction::GetContestAnswerService.new(request: request).call
       end
     }
   end
