@@ -23,7 +23,12 @@ class WitResponder < BotResponder
   end
 
   def text_response
-    bot_deliver(text: response['text']) unless details
+    unless details
+      payload = { text: response['text'] }
+      add_quick_replies(payload) if response['quickreplies']
+
+      bot_deliver(payload)
+    end
   end
 
   def found_job_offers
@@ -45,6 +50,12 @@ class WitResponder < BotResponder
   def show_details
     return unless details
     JobDetailsResponder.new(session_uid: session_uid, details: details).response
+  end
+
+  def add_quick_replies(payload)
+    payload[:quick_replies] = response['quickreplies'].map do |reply|
+      { content_type: 'text', title: reply, payload: 'empty' }
+    end
   end
 
   def context

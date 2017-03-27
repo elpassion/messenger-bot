@@ -4,7 +4,7 @@ class MessageResponder
   end
 
   def send
-    quick_reply ? run_postback : send_to_wit
+    quick_reply && quick_reply != 'empty' ? run_postback : send_to_wit
   end
 
   private
