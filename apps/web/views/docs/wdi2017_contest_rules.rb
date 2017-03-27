@@ -1,5 +1,5 @@
 module Web::Views::Docs
-  class ContestRegulations
+  class Wdi2017ContestRules
     include Web::View
   end
 end

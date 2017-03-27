@@ -16,6 +16,7 @@ gem 'workable'
 gem 'nokogiri'
 gem 'i18n'
 gem 'faraday'
+gem 'slim'
 
 gem 'hanami-assets'
 gem 'hanami-bootstrap'
