@@ -1,4 +1,4 @@
-class WitAction::GetContestAnswerService < WitAction
+class WitAction::StartContestService < WitAction
   def call
     set_context_true 'contest'
     update_context(context)
