@@ -9,18 +9,18 @@ class BotResponder
   attr_reader :bot_interface, :job_repository
 
   def bot_deliver(message)
-    bot_interface.deliver(messenger_id, message)
+    bot_interface.deliver(messenger_id, message) if messenger_id
   end
 
   def messenger_id
     repository.find_by_session_uid(session_uid).messenger_id
   end
 
-  def repository
-    @repository ||= ConversationRepository.new
-  end
-
   def conversation
     repository.find_by_session_uid(session_uid)
+  end
+
+  def repository
+    @repository ||= ConversationRepository.new
   end
 end

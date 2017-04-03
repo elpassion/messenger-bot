@@ -15,8 +15,8 @@ responses:
             title: 'Tell me about ELP!'
             payload: 'ABOUT_US'
           - type: 'postback'
-            title: 'EL CONCURSO'
-            payload: 'CONTEST'
+            title: 'Internship'
+            payload: 'INTERNSHIP_INFO'
   ABOUT_US:
     - type: 'template'
       payload:
