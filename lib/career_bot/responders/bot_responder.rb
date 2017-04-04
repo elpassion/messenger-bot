@@ -13,11 +13,11 @@ class BotResponder
   end
 
   def messenger_id
-    repository.find_by_session_uid(session_uid).messenger_id
+    conversation.messenger_id
   end
 
   def conversation
-    repository.find_by_session_uid(session_uid)
+    @conversation ||= repository.find_by_session_uid(session_uid)
   end
 
   def repository

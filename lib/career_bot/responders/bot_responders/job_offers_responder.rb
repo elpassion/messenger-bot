@@ -40,7 +40,7 @@ class JobOffersResponder < BotResponder
   end
 
   def save_job_codes
-    return unless attachment_jobs
+    return unless attachment_jobs && conversation
     repository.update(conversation.id, job_codes: job_codes)
   end
 
