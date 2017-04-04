@@ -5,7 +5,7 @@ class JobDetailsResponder < BotResponder
     super(**options)
   end
 
-  def response
+  def set_response
     if no_job_codes?
       no_available_jobs_response
     elsif job_codes.length == 1

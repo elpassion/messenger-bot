@@ -7,7 +7,7 @@ Bot.on :message do |message|
   if message.text == 'test'
     message.reply(text: 'OK, I am working! <3')
   else
-    MessageResponder.new(message).send
+    MessageResponder.new(message).set_action
   end
 end
 

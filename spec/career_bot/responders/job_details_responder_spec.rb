@@ -73,7 +73,7 @@ describe JobDetailsResponder do
   describe '#response' do
 
     before(:each) do
-      subject.response
+      subject.set_response
     end
     context 'when job_codes are empty' do
       let(:job_codes) { nil }

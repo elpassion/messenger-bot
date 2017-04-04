@@ -3,7 +3,7 @@ class MessageResponder
     @message = message
   end
 
-  def send
+  def set_action
     quick_reply && quick_reply != 'empty' ? run_postback : send_to_wit
   end
 
@@ -19,11 +19,11 @@ class MessageResponder
     WitService.new(message).send
   end
 
-  def quick_reply
-    @quick_reply ||= message.quick_reply
-  end
-
   def postback_message
     PostbackResponse.new.message(quick_reply)
+  end
+
+  def quick_reply
+    @quick_reply ||= message.quick_reply
   end
 end

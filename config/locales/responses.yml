@@ -5,8 +5,8 @@ responses:
         template_type: 'button'
         text: >
           You can find job offers, get some info about my company by clicking
-          on button below. You can also take part in our special contest for WDI or
-          try to entertain me with conversation! B) Sooo, what would you like to do? :)
+          on button below. You can also play a game or try to entertain me
+          with conversation! B) Sooo, what would you like to do? :)
         buttons:
           - type: 'postback'
             title: 'I wanna find a job!'
