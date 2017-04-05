@@ -25,6 +25,8 @@ class WitResponder < BotResponder
         show_main_menu
       when :details then
         show_details
+      when :gif then
+        send_random_gif
       else
         text_response
     end
@@ -51,7 +53,12 @@ class WitResponder < BotResponder
   end
 
   def show_details
-    JobDetailsResponder.new(session_uid: session_uid, details: details).set_response
+    JobDetailsResponder.new(details: details).set_response
+  end
+
+  def send_random_gif
+    bot_deliver(attachment: { type: 'image', payload: { url: gif_url } } )
+    bot_deliver(text: I18n.t('RANDOM_GIF', locale: :responses) )
   end
 
   def add_quick_replies(payload)
@@ -78,5 +85,9 @@ class WitResponder < BotResponder
 
   def context
     @context ||= request['context']
+  end
+
+  def gif_url
+    GifService.new.random_gif_url
   end
 end
