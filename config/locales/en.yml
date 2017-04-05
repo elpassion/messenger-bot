@@ -9,7 +9,7 @@ en:
     try_again: >
       Found anything interesting? If not, you can try again! :)
       You can also ask for requirements or benefits of selected job offer!
-    job_requirements_info: 'Here are some nice-to-have things for %{position}:'
+    job_requirements_info: 'Here are some must-have things for %{position}:'
     job_benefits_info: 'We can offer you following benefits:'
     apply_for_job: >
       To see full job offer visit %{job_url}. Want to be %{position}?
