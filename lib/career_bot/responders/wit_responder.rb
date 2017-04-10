@@ -53,7 +53,7 @@ class WitResponder < BotResponder
   end
 
   def show_details
-    JobDetailsResponder.new(details: details).set_response
+    JobDetailsResponder.new(session_uid: session_uid, details: details).set_response
   end
 
   def send_random_gif
