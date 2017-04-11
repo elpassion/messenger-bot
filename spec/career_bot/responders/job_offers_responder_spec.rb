@@ -34,7 +34,7 @@ describe JobOffersResponder do
     end
 
     it 'returns all available job offers' do
-      expect(bot_interface.sent_messages[1][:attachment][:payload][:elements].size).to eq 4
+      expect(bot_interface.sent_messages[1][:attachment][:payload][:elements].size).to eq 7
     end
 
     it 'should set conversation job codes to all active job codes' do

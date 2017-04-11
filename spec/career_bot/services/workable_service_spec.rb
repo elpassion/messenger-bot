@@ -10,7 +10,7 @@ describe WorkableService do
     end
 
     it 'returns proper number of offers' do
-      expect(subject.get_jobs.count).to eq 4
+      expect(subject.get_jobs.count).to eq 7
     end
 
     it 'has proper data structure' do
@@ -19,6 +19,7 @@ describe WorkableService do
       expect(job).to have_key('shortcode')
       expect(job).to have_key('application_url')
       expect(job).to have_key('full_description')
+      expect(job).to have_key('image_url')
     end
   end
 end
