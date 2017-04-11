@@ -39,7 +39,15 @@ class WorkableService
   end
 
   def image_url(job)
-    Nokogiri::HTML(job_full_description(job)).css('img').attr('src').value
+    parsed_image(job).attr('src').value unless image_without_title?(job)
+  end
+
+  def parsed_image(job)
+    Nokogiri::HTML(job_full_description(job)).css('img')
+  end
+
+  def image_without_title?(job)
+    parsed_image(job).attr('title').value.to_s.empty?
   end
 
   def client
