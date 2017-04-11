@@ -27,6 +27,10 @@ class JobParser
     job['application_url']
   end
 
+  def image_url
+    job['image_url']
+  end
+
   private
 
   attr_reader :shortcode

@@ -2,7 +2,7 @@ class GenericTemplateElement
   def to_hash
     {
       title: job['title'],
-      image_url: "http://imgur.com/#{I18n.t('urls.images').sample}.jpg",
+      image_url: image_url,
       subtitle: job['full_title'],
       default_action: default_action,
       buttons: buttons
@@ -32,7 +32,11 @@ class GenericTemplateElement
     }
   end
 
+  def image_url
+    job['image_url'] || "http://imgur.com/#{I18n.t('urls.images').sample}.jpg"
+  end
+
   def job_shortcode
-    job['shortcode']
+    @job_shortcode ||= job['shortcode']
   end
 end
