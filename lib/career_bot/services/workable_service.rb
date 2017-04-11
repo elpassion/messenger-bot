@@ -19,8 +19,9 @@ class WorkableService
         shortcode: job['shortcode'],
         url: job['url'],
         application_url: job['application_url'],
-        full_description: job_details(job)['full_description'],
-        requirements: job_details(job)['requirements']
+        full_description: job_full_description(job),
+        requirements: job_details(job)['requirements'],
+        image_url: image_url(job)
       }
     end
   end
@@ -31,6 +32,14 @@ class WorkableService
 
   def job_details(job)
     client.job_details(job['shortcode'])
+  end
+
+  def job_full_description(job)
+    job_details(job)['full_description']
+  end
+
+  def image_url(job)
+    Nokogiri::HTML(job_full_description(job)).css('img').attr('src').value
   end
 
   def client
