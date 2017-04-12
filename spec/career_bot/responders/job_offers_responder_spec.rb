@@ -27,6 +27,7 @@ describe JobOffersResponder do
 
   subject { described_class.new(session_uid: session_uid, job_position: job_position, job_repository: job_repository, bot_interface: bot_interface) }
   context 'when no matching jobs found' do
+    let(:job_position) { 'php' }
     let(:job_repository) { MockRepository.new([], []) }
 
     it 'returns proper text message' do
@@ -39,6 +40,14 @@ describe JobOffersResponder do
 
     it 'should set conversation job codes to all active job codes' do
       expect(conversation_job_codes).to eq JobRepository.new.active_job_codes
+    end
+  end
+
+  context 'when matching keywords found' do
+    let(:job_repository) { MockRepository.new([], []) }
+
+    it 'return proper text message' do
+      expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.found_matching_job_keywords')
     end
   end
 
