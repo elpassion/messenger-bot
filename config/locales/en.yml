@@ -3,6 +3,9 @@ en:
     about_us_text: 'Cool! Which of those things you are interested in? :)'
     found_matching_jobs: 'Yayy! :) We have something you may be interested in! Check this out!'
     found_matching_descriptions: 'I have found some offers including the thing you are looking for!'
+    found_matching_job_keywords: >
+      I am afraid that we don't have opened job offer for this position now :(
+      Please send your CV to careers@elpassion.com and we will be in touch
     no_jobs_found: >
       Unfortunately we don't have any matching job offers :(
       Buuuut... you can still check out all of our open positions!
