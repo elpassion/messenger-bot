@@ -62,6 +62,6 @@ class JobOffersResponder < BotResponder
   end
 
   def matching_job_keywords
-    I18n.t('keywords', locale: :jobs).include? job_position
+    I18n.t(:keywords, locale: :jobs).include? job_position
   end
 end
