@@ -1,17 +1,18 @@
 class WitService
-  def initialize(message)
-    @message = message
+  def initialize(sender_id, text)
+    @sender_id = sender_id
+    @text = text
   end
 
   def send
     clean_context
     set_session_uid
-    client.run_actions(session_uid, message.text, context)
+    client.run_actions(session_uid, text, context)
   end
 
   private
 
-  attr_reader :message
+  attr_reader :sender_id, :text
 
   def set_session_uid
     if context.empty?
@@ -31,10 +32,6 @@ class WitService
 
   def session_uid
     conversation.session_uid
-  end
-
-  def sender_id
-    message.sender['id']
   end
 
   def repository

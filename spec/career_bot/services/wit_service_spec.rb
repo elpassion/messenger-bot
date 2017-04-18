@@ -2,7 +2,7 @@ describe WitService do
 
   let(:message) { double(:message, text: 'Play game', sender: { 'id' => messenger_id }) }
   let(:repository) { ConversationRepository.new }
-  subject { described_class.new(message) }
+  subject { described_class.new(message.sender['id'], message.text) }
 
   before do
     allow_any_instance_of(Wit).to receive(:run_actions).and_return(true)
