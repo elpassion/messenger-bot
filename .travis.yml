@@ -10,8 +10,8 @@ before_script:
 script:
 - bundle exec rspec
 services:
-- redis-server
 - postgresql
+- redis-server
 deploy:
   provider: heroku
   strategy: git

@@ -16,7 +16,7 @@ class MessageResponder
   end
 
   def send_to_wit
-    WitService.new(message).send
+    HandleWitResponseWorker.perform_async(message_sender_id, message_text)
   end
 
   def postback_message
@@ -25,5 +25,13 @@ class MessageResponder
 
   def quick_reply
     @quick_reply ||= message.quick_reply
+  end
+
+  def message_sender_id
+    message.sender['id']
+  end
+
+  def message_text
+    message.text
   end
 end
