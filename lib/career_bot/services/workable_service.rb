@@ -39,15 +39,15 @@ class WorkableService
   end
 
   def image_url(job)
-    parsed_image(job).attr('src').value unless image_without_title?(job)
+    parsed_image(job).attr('src').value if offer_with_image?(job)
   end
 
   def parsed_image(job)
     Nokogiri::HTML(job_full_description(job)).css('img')
   end
 
-  def image_without_title?(job)
-    parsed_image(job).attr('title').value.to_s.empty?
+  def offer_with_image?(job)
+    parsed_image(job).attr('title').value.to_s == 'Ad Cover'
   end
 
   def client
