@@ -7,12 +7,17 @@ class WitService
   def send
     clean_context
     set_session_uid
-    client.run_actions(session_uid, text, context)
+    run_client_actions
   end
 
   private
 
   attr_reader :sender_id, :text
+
+  def run_client_actions
+    client.run_actions(session_uid, text, context)
+    rescue WitException
+  end
 
   def set_session_uid
     if context.empty?
