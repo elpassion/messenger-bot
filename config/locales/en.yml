@@ -14,13 +14,18 @@ en:
       You can also ask for requirements or benefits of selected job offer!
     job_requirements_info: 'Here are some must-have things for %{position}:'
     job_benefits_info: 'We can offer you following benefits:'
+    job_apply_info: >
+      Want to join EL Passion and be %{position}?
+      Apply now here: %{application_url} :)
     apply_for_job: >
       To see full job offer visit %{job_url}. Want to be %{position}?
       Apply now here: %{application_url} and see you at EL Passion! :)
+    click_button_and_apply: 'Click button to apply to offer!'
     no_available_details: >
       You did not requested for any offers jet (or they are not available any more).
       What you are interested in?
-    which_offer: Nice! Which offer would you like to check?
+    which_offer_check: Nice! Which offer would you like to check?
+    which_offer_apply: Great! Which offer would you like to apply for?
     unrecognized:
       - They didn't teach me how to reply to this yet. Sorry! :(
       - Sorry, I didn't get that :(
