@@ -8,25 +8,33 @@ describe JobDetailsResponder do
   let(:title_2) { 'Ruby on Rails developer' }
   let(:title_3) { 'UX/UI designer' }
   let(:details) { 'requirements'}
+  let(:application_url_1) { 'www.jobofer1.apply.com' }
+  let(:application_url_2) { 'www.jobofer2.apply.com' }
+  let(:application_url_3) { 'www.jobofer3.apply.com' }
   let(:active_jobs) {
     [
         {
             'title' => title_1,
             'shortcode' => shortcode_1,
             'full_description' => full_description,
-            'requirements' => requirements_1
+            'requirements' => requirements_1,
+            'application_url' => application_url_1
         },
         {
             'title' => title_2,
             'shortcode' => shortcode_2,
             'full_description' => full_description,
-            'requirements' => requirements_1
-        },
+            'requirements' => requirements_1,
+            'application_url' => application_url_2
+
+  },
         {
             'title' => title_3,
             'shortcode' => shortcode_3,
             'full_description' => full_description,
-            'requirements' => requirements_2
+            'requirements' => requirements_2,
+            'application_url' => application_url_3
+
         }
     ]
   }
@@ -101,7 +109,7 @@ describe JobDetailsResponder do
           it 'should return proper end of message' do
             expect(bot_interface.sent_messages.last[:text]).to eq I18n.t('text_messages.apply_for_job', job_url: nil,
                                                                          position: title_1,
-                                                                         application_url: nil)
+                                                                         application_url: application_url_1)
           end
         end
 
@@ -121,7 +129,17 @@ describe JobDetailsResponder do
           it 'should return proper end of message' do
             expect(bot_interface.sent_messages.last[:text]).to eq I18n.t('text_messages.apply_for_job', job_url: nil,
                                                                          position: title_1,
-                                                                         application_url: nil)
+                                                                         application_url: application_url_1)
+          end
+        end
+
+        context 'when applying for a job' do
+          let(:details) { 'apply' }
+
+          it 'should return proper message' do
+            expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.job_apply_info',
+                                                                          position: title_1,
+                                                                          application_url: application_url_1)
           end
         end
       end
@@ -138,17 +156,34 @@ describe JobDetailsResponder do
     context 'when there is more then one job code' do
       context 'with valid job codes' do
         let(:job_codes) { "#{shortcode_1},#{shortcode_2},#{shortcode_3}" }
+        context 'when requesting for requirements' do
+          it 'should display proper message' do
+            expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.which_offer_check')
+          end
 
-        it 'should display proper message' do
-          expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.which_offer')
+          it 'should display quick replies' do
+            expect(bot_interface.sent_messages.first.key?(:quick_replies)).to eq true
+          end
+
+          it 'should contains 3 quick replies' do
+            expect(bot_interface.sent_messages.first[:quick_replies].length).to eq 3
+          end
         end
 
-        it 'should display quick replies' do
-          expect(bot_interface.sent_messages.first.key?(:quick_replies)).to eq true
-        end
+        context 'when applying for a job' do
+          let(:details) { 'apply' }
 
-        it 'should contains 3 quick replies' do
-          expect(bot_interface.sent_messages.first[:quick_replies].length).to eq 3
+          it 'should display proper message' do
+            expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.which_offer_apply')
+          end
+
+          it 'should display quick replies' do
+            expect(bot_interface.sent_messages.first.key?(:quick_replies)).to eq true
+          end
+
+          it 'should contains 3 quick replies' do
+            expect(bot_interface.sent_messages.first[:quick_replies].length).to eq 3
+          end
         end
       end
 
@@ -156,7 +191,7 @@ describe JobDetailsResponder do
         let(:job_codes) { "#{shortcode_1},invalid,#{shortcode_3},invalid2" }
 
         it 'should display proper message' do
-          expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.which_offer')
+          expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.which_offer_check')
         end
 
         it 'should display quick replies' do
