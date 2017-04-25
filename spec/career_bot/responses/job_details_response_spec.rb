@@ -25,7 +25,7 @@ describe JobDetailsResponse do
             application_url: application_url)]
   end
 
-  let(:job_apply_response_message) { I18n.t('text_messages.job_apply_info', position: position, application_url: application_url) }
+  let(:job_apply_response_message) { [I18n.t('text_messages.job_apply_info', position: position, application_url: application_url)] }
 
   before do
     VCR.use_cassette 'active_jobs' do

@@ -26,6 +26,11 @@ en:
       What you are interested in?
     which_offer_check: Nice! Which offer would you like to check?
     which_offer_apply: Great! Which offer would you like to apply for?
+    something_went_wrong:
+     - type: 'image'
+       payload:
+         url: 'http://i.imgur.com/TpIHWwe.jpg'
+     - 'Ouch! It looks like something went wrong :( Ask me anything, go back to main menu or type help if you need one :)'
     unrecognized:
       - They didn't teach me how to reply to this yet. Sorry! :(
       - Sorry, I didn't get that :(

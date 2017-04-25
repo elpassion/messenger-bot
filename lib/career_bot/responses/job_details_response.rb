@@ -4,44 +4,40 @@ class JobDetailsResponse
   end
 
   def messages
-    details_kind == 'apply' ? apply_text_message : list_message
+    if allowed_details_kind?
+      [text, data, apply_for_job_message].flatten.compact
+    else
+      I18n.t('text_messages.something_went_wrong')
+    end
   end
 
   private
 
   attr_reader :payload
 
-  def list_message
-    [text, data, apply_for_job_message].flatten
-  end
-
-  def apply_text_message
-    I18n.t('text_messages.job_apply_info',
-           position: job_title,
-           application_url: application_url)
-  end
-
   def text
     details[:text]
   end
 
   def data
-    details[:data].first(5).map { |element| "- #{element}" }
+    data_details.first(5).map { |element| "- #{element}" }
   end
 
   def apply_for_job_message
-    I18n.t('text_messages.apply_for_job',
-           application_url: application_url,
-           job_url: job_url,
-           position: job_title)
+    if benefits_or_requirements?
+      I18n.t('text_messages.apply_for_job', application_url: application_url,
+             job_url: job_url, position: job_title)
+    end
   end
 
   def details
     case details_kind
-    when 'requirements'
-      requirement_details_hash
-    when 'benefits'
-      benefits_details_hash
+      when 'requirements'
+        requirement_details_hash
+      when 'benefits'
+        benefits_details_hash
+      when 'apply'
+        apply_text_message
     end
   end
 
@@ -60,6 +56,13 @@ class JobDetailsResponse
     }
   end
 
+  def apply_text_message
+    { text: I18n.t('text_messages.job_apply_info',
+                   position: job_title,
+                   application_url: application_url)
+    }
+  end
+
   def job_title
     job.job_title
   end
@@ -72,6 +75,10 @@ class JobDetailsResponse
     job.job_url
   end
 
+  def data_details
+    details[:data] || []
+  end
+
   def job
     @job ||= JobParser.new(job_shortcode)
   end
@@ -82,5 +89,13 @@ class JobDetailsResponse
 
   def job_shortcode
     @job_shortcode ||= payload.split('|').last
+  end
+
+  def benefits_or_requirements?
+    %w(benefits requirements).include?(details_kind)
+  end
+
+  def allowed_details_kind?
+    %w(apply benefits requirements).include?(details_kind)
   end
 end
