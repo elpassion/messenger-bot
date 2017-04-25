@@ -40,12 +40,12 @@ class WitAction
     @repository ||= ConversationRepository.new
   end
 
-  def set_context_nil(*keys)
-    keys.each { |key| set_context_value(key, nil) }
-  end
-
   def set_context_true(*keys)
     keys.each { |key| set_context_value(key, true) }
+  end
+
+  def remove_from_context(*keys)
+    keys.each { |key| context.delete(key) }
   end
 
   def set_context_value(key, value)

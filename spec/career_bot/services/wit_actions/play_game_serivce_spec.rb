@@ -38,8 +38,6 @@ describe WitAction::PlayGameService do
                                     'winningNumber' => winning_number,
                                     'won' => true,
                                     'number' => winning_number,
-                                    'notWon' => nil,
-                                    'wrongParam' => nil
                                   )
       end
 
@@ -69,8 +67,7 @@ describe WitAction::PlayGameService do
           expect(subject.call).to include(
                                       'play' => true,
                                       'winningNumber' => winning_number,
-                                      'notWon' => 'bigger',
-                                      'wrongParam' => nil
+                                      'notWon' => 'bigger'
                                     )
         end
 
@@ -91,8 +88,7 @@ describe WitAction::PlayGameService do
           expect(subject.call).to include(
                                       'play' => true,
                                       'winningNumber' => winning_number,
-                                      'notWon' => 'smaller',
-                                      'wrongParam' => nil
+                                      'notWon' => 'smaller'
                                     )
         end
       end
@@ -113,7 +109,6 @@ describe WitAction::PlayGameService do
         expect(subject.call).to include(
                                   'play' => true,
                                   'winningNumber' => winning_number,
-                                  'notWon' => nil,
                                   'wrongParam' => true
                                 )
       end
