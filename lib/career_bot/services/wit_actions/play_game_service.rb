@@ -28,19 +28,19 @@ class WitAction::PlayGameService < WitAction
   def set_won_context
     set_context_value 'number', number
     set_context_true 'won'
-    set_context_nil 'notWon', 'wrongParam'
+    remove_from_context'notWon', 'wrongParam'
     update_counter
   end
 
   def set_not_won_context
     set_context_value 'notWon', not_won_status
-    set_context_nil 'wrongParam'
+    remove_from_context 'won', 'wrongParam'
     update_counter
   end
 
   def set_wrong_param_context
-    set_context_true 'wrongParam'
-    set_context_nil 'notWon'
+    set_context_true 'play', 'wrongParam'
+    remove_from_context 'won', 'notWon'
   end
 
   def counter

@@ -15,20 +15,20 @@ class WitResponder < BotResponder
 
   def set_response
     case context_key
-      when :job_position then
-        found_job_offers
-      when :about_us then
-        show_about_us
-      when :offer_details then
-        show_details
-      when :main_menu then
-        show_main_menu
-      when :details then
-        show_details
-      when :gif then
-        send_random_gif
-      else
-        text_response
+    when :job_position
+      found_job_offers
+    when :about_us
+      show_about_us
+    when :offer_details
+      show_details
+    when :main_menu
+      show_main_menu
+    when :details
+      show_details
+    when :gif
+      send_random_gif
+    else
+      text_response
     end
   end
 
