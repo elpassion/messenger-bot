@@ -6,18 +6,22 @@ describe DetailsQuickResponse do
   let(:title_1) { 'Senior Ruby on Rails developer' }
   let(:title_2) { 'Ruby on Rails developer' }
   let(:title_3) { 'UX/UI designer' }
+  let(:location) { 'Warsaw' }
   let(:active_jobs) {
     [
       {
         'title' => title_1,
+        'location' => location,
         'shortcode' => shortcode_1
       },
       {
         'title' => title_2,
+        'location' => location,
         'shortcode' => shortcode_2
       },
       {
         'title' => title_3,
+        'location' => location,
         'shortcode' => shortcode_3
       }
     ]
@@ -34,7 +38,7 @@ describe DetailsQuickResponse do
       expect(quick_response.reply).to eq(
                                           {
                                             content_type: 'text',
-                                            title: title_1,
+                                            title: "#{title_1} (#{location})",
                                             payload: "requirements|#{shortcode_1}"
                                           }
                                       )
@@ -45,14 +49,14 @@ describe DetailsQuickResponse do
       expect(quick_response.reply).to eq(
                                           {
                                               content_type: 'text',
-                                              title: title_3,
+                                              title: "#{title_3} (#{location})",
                                               payload: "benefits|#{shortcode_3}"
                                           }
                                       )
     end
 
     it 'should return when there is no active job with given code' do
-      quick_response = described_class.new(code: 'rendom code', details: 'benefits')
+      quick_response = described_class.new(code: 'random code', details: 'benefits')
       expect(quick_response.reply).to eq(nil)
     end
   end

@@ -25,7 +25,7 @@ describe JobOffersResponder do
     subject.response
   end
 
-  subject { described_class.new(session_uid: session_uid, job_position: job_position, job_repository: job_repository, bot_interface: bot_interface) }
+  subject { described_class.new(session_uid: session_uid, job_keyword: job_position, job_repository: job_repository, bot_interface: bot_interface) }
   context 'when no matching jobs found' do
     let(:job_position) { 'php' }
     let(:job_repository) { MockRepository.new([], []) }
@@ -35,7 +35,7 @@ describe JobOffersResponder do
     end
 
     it 'returns all available job offers' do
-      expect(bot_interface.sent_messages[1][:attachment][:payload][:elements].size).to eq 7
+      expect(bot_interface.sent_messages[1][:attachment][:payload][:elements].size).to eq 9
     end
 
     it 'should set conversation job codes to all active job codes' do

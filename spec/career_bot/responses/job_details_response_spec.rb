@@ -5,13 +5,13 @@ describe JobDetailsResponse do
   let(:application_url) { 'https://elpassion.workable.com/jobs/51167/candidates/new' }
   let(:position) { 'Senior Ruby Developer' }
   let(:job_requirements_response_messages) do
-    [I18n.t('text_messages.job_requirements_info', position: 'Senior Ruby Developer'),
+    [I18n.t('text_messages.job_requirements_info', position: 'Senior Ruby Developer', location: 'Warsaw'),
      '- Focus on clean, SOLID code', '- Attention to detail',
      '- A knack for finding simple solutions to complex issues',
      '- Being skilled in software engineering',
      '- Proven track record of using Rails in commercial projects',
      I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/51167',
-            position: position,
+            position: position, location: 'Warsaw',
             application_url: application_url)]
   end
   let(:job_benefits_response_messages) do
@@ -21,11 +21,11 @@ describe JobDetailsResponse do
      '- You decide which technology will be most appropriate for your project. Want to try something new? - Great, we love to experiment!',
      '- We practice TDD, write unit and functional tests; CI, CD, pair programming',
      I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/51167',
-            position: position,
+            position: position, location: 'Warsaw',
             application_url: application_url)]
   end
 
-  let(:job_apply_response_message) { [I18n.t('text_messages.job_apply_info', position: position, application_url: application_url)] }
+  let(:job_apply_response_message) { [I18n.t('text_messages.job_apply_info', position: position, application_url: application_url, location: 'Warsaw')] }
 
   before do
     VCR.use_cassette 'active_jobs' do

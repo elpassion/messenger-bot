@@ -19,6 +19,7 @@ class WorkableService
         shortcode: job['shortcode'],
         url: job['url'],
         application_url: job['application_url'],
+        location: job_details(job)['location']['city'],
         full_description: job_full_description(job),
         requirements: job_details(job)['requirements'],
         image_url: image_url(job)

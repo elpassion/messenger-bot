@@ -3,7 +3,7 @@ class GenericTemplateElement
     {
       title: job['title'],
       image_url: image_url,
-      subtitle: job['full_title'],
+      subtitle: job['location'],
       default_action: default_action,
       buttons: buttons
     }

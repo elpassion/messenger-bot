@@ -1,13 +1,13 @@
 describe PostbackResponder do
   let(:job_requirements_response_messages) do
-    [{ text: I18n.t('text_messages.job_requirements_info', position: 'Senior Ruby Developer') },
+    [{ text: I18n.t('text_messages.job_requirements_info', position: 'Senior Ruby Developer', location: 'Warsaw') },
      { text: '- Focus on clean, SOLID code' },
      { text: '- Attention to detail' },
      { text: '- A knack for finding simple solutions to complex issues' },
      { text: '- Being skilled in software engineering' },
      { text: '- Proven track record of using Rails in commercial projects' },
      { text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/51167',
-                   position: 'Senior Ruby Developer',
+                   position: 'Senior Ruby Developer', location: 'Warsaw',
                    application_url: 'https://elpassion.workable.com/jobs/51167/candidates/new') }]
   end
 
@@ -19,7 +19,7 @@ describe PostbackResponder do
      { text: '- You decide which technology will be most appropriate for your project. Want to try something new? - Great, we love to experiment!' },
      { text: '- We practice TDD, write unit and functional tests; CI, CD, pair programming' },
      { text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/51167',
-                    position: 'Senior Ruby Developer',
+                    position: 'Senior Ruby Developer', location: 'Warsaw',
                     application_url: 'https://elpassion.workable.com/jobs/51167/candidates/new') }]
   end
 

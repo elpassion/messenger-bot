@@ -8,6 +8,7 @@ describe JobDetailsResponder do
   let(:title_2) { 'Ruby on Rails developer' }
   let(:title_3) { 'UX/UI designer' }
   let(:details) { 'requirements'}
+  let(:location) { 'Warsaw' }
   let(:application_url_1) { 'www.jobofer1.apply.com' }
   let(:application_url_2) { 'www.jobofer2.apply.com' }
   let(:application_url_3) { 'www.jobofer3.apply.com' }
@@ -17,6 +18,7 @@ describe JobDetailsResponder do
             'title' => title_1,
             'shortcode' => shortcode_1,
             'full_description' => full_description,
+            'location' => location,
             'requirements' => requirements_1,
             'application_url' => application_url_1
         },
@@ -24,6 +26,7 @@ describe JobDetailsResponder do
             'title' => title_2,
             'shortcode' => shortcode_2,
             'full_description' => full_description,
+            'location' => location,
             'requirements' => requirements_1,
             'application_url' => application_url_2
 
@@ -32,6 +35,7 @@ describe JobDetailsResponder do
             'title' => title_3,
             'shortcode' => shortcode_3,
             'full_description' => full_description,
+            'location' => location,
             'requirements' => requirements_2,
             'application_url' => application_url_3
 
@@ -97,7 +101,7 @@ describe JobDetailsResponder do
         context 'when requesting for requirements' do
 
           it 'should return proper beginning of message' do
-            expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.job_requirements_info', position: title_1)
+            expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.job_requirements_info', position: title_1, location: 'Warsaw')
           end
 
           it 'should return proper requirements' do
@@ -108,7 +112,7 @@ describe JobDetailsResponder do
 
           it 'should return proper end of message' do
             expect(bot_interface.sent_messages.last[:text]).to eq I18n.t('text_messages.apply_for_job', job_url: nil,
-                                                                         position: title_1,
+                                                                         position: title_1, location: 'Warsaw',
                                                                          application_url: application_url_1)
           end
         end
@@ -117,7 +121,7 @@ describe JobDetailsResponder do
           let(:details) { 'benefits' }
 
           it 'should return proper beginning of message' do
-            expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.job_benefits_info', position: title_1)
+            expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.job_benefits_info', position: title_1, location: 'Warsaw')
           end
 
           it 'should return proper requirements' do
@@ -128,7 +132,7 @@ describe JobDetailsResponder do
 
           it 'should return proper end of message' do
             expect(bot_interface.sent_messages.last[:text]).to eq I18n.t('text_messages.apply_for_job', job_url: nil,
-                                                                         position: title_1,
+                                                                         position: title_1, location: 'Warsaw',
                                                                          application_url: application_url_1)
           end
         end
@@ -138,7 +142,7 @@ describe JobDetailsResponder do
 
           it 'should return proper message' do
             expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.job_apply_info',
-                                                                          position: title_1,
+                                                                          position: title_1, location: 'Warsaw',
                                                                           application_url: application_url_1)
           end
         end
@@ -203,8 +207,8 @@ describe JobDetailsResponder do
         end
 
         it 'should return proper quick replies titles' do
-          expect(bot_interface.sent_messages.first[:quick_replies].first[:title]).to eq title_1
-          expect(bot_interface.sent_messages.first[:quick_replies].last[:title]).to eq title_3
+          expect(bot_interface.sent_messages.first[:quick_replies].first[:title]).to eq ("#{title_1} (#{location})")
+          expect(bot_interface.sent_messages.first[:quick_replies].last[:title]).to eq ("#{title_3} (#{location})")
         end
       end
 
@@ -216,7 +220,7 @@ describe JobDetailsResponder do
         end
 
         it 'should contain proper message' do
-          expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.job_requirements_info', position: title_1)
+          expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.job_requirements_info', position: title_1, location: 'Warsaw')
         end
       end
 

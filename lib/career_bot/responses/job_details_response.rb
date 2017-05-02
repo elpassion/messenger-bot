@@ -26,7 +26,7 @@ class JobDetailsResponse
   def apply_for_job_message
     if benefits_or_requirements?
       I18n.t('text_messages.apply_for_job', application_url: application_url,
-             job_url: job_url, position: job_title)
+             location: job_location, job_url: job_url, position: job_title)
     end
   end
 
@@ -51,20 +51,24 @@ class JobDetailsResponse
   def requirement_details_hash
     {
       text: I18n.t('text_messages.job_requirements_info',
-                   position: job_title),
+                   position: job_title, location: job_location),
       data: job.job_requirements
     }
   end
 
   def apply_text_message
     { text: I18n.t('text_messages.job_apply_info',
-                   position: job_title,
+                   position: job_title, location: job_location,
                    application_url: application_url)
     }
   end
 
   def job_title
     job.job_title
+  end
+
+  def job_location
+    job.job_location
   end
 
   def application_url

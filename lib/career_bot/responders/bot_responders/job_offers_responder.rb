@@ -1,7 +1,7 @@
 class JobOffersResponder < BotResponder
-  def initialize(session_uid:, job_position:, **options)
+  def initialize(session_uid:, job_keyword:, **options)
     @session_uid = session_uid
-    @job_position = job_position
+    @job_keyword = job_keyword
     super(**options)
   end
 
@@ -15,7 +15,7 @@ class JobOffersResponder < BotResponder
 
   private
 
-  attr_reader :session_uid, :job_position
+  attr_reader :session_uid, :job_keyword
 
   def attachment_jobs
     @attachment_jobs ||= attachment[:data]
@@ -54,14 +54,14 @@ class JobOffersResponder < BotResponder
   end
 
   def matching_jobs
-    job_repository.get_matching_jobs(job_position)
+    job_repository.get_matching_jobs(job_keyword)
   end
 
   def matching_descriptions
-    job_repository.get_matching_descriptions(job_position)
+    job_repository.get_matching_descriptions(job_keyword)
   end
 
   def matching_job_keywords
-    I18n.t(:keywords, locale: :jobs).include? job_position
+    I18n.t(:keywords, locale: :jobs).include? job_keyword
   end
 end

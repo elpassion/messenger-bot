@@ -8,7 +8,7 @@ class DetailsQuickResponse
     if job
       {
         content_type: 'text',
-        title: job['title'],
+        title: "#{job['title']} (#{job['location']})",
         payload: payload
       }
     end

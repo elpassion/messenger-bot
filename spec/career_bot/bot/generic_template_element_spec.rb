@@ -4,7 +4,7 @@ describe GenericTemplateElement do
     {
       'id' => '93d1',
       'title' => 'Content Marketing Specialist',
-      'full_title' => 'Content Marketing Specialist - Warsaw',
+      'location' => 'Warsaw',
       'shortcode' => '32BD741385',
       'state' => 'archived',
       'url' => 'https://elpassion.workable.com/jobs/36607',
@@ -16,7 +16,7 @@ describe GenericTemplateElement do
   let(:element_hash) {
     {
       title: 'Content Marketing Specialist',
-      subtitle: 'Content Marketing Specialist - Warsaw',
+      subtitle: 'Warsaw',
       default_action: {
         type:'web_url',
         url: 'https://elpassion.workable.com/jobs/36607'

@@ -41,7 +41,7 @@ class WitResponder < BotResponder
 
   def found_job_offers
     JobOffersResponder.new(session_uid: session_uid,
-                           job_position: job_position).response
+                           job_keyword: job_position).response
   end
 
   def show_about_us

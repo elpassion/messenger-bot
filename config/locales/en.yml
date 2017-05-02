@@ -12,13 +12,13 @@ en:
     try_again: >
       Found anything interesting? If not, you can try again! :)
       You can also ask for requirements or benefits of selected job offer!
-    job_requirements_info: 'Here are some must-have things for %{position}:'
+    job_requirements_info: 'Here are some must-have things for %{position} in %{location}:'
     job_benefits_info: 'We can offer you following benefits:'
     job_apply_info: >
-      Want to join EL Passion and be %{position}?
+      Want to join EL Passion and be %{position} in %{location}?
       Apply now here: %{application_url} :)
     apply_for_job: >
-      To see full job offer visit %{job_url}. Want to be %{position}?
+      To see full job offer visit %{job_url}. Want to be %{position} in %{location}?
       Apply now here: %{application_url} and see you at EL Passion! :)
     click_button_and_apply: 'Click button to apply to offer!'
     no_available_details: >

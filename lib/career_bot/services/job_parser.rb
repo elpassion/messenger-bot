@@ -15,6 +15,10 @@ class JobParser
     job['title']
   end
 
+  def job_location
+    job['location']
+  end
+
   def job_full_description
     job['full_description']
   end

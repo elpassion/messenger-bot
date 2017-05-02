@@ -1,7 +1,7 @@
 class JobRepository
   def get_matching_jobs(key_word)
     active_jobs.select do |job|
-      job['title'].downcase.include? key_word
+      title(job).include?(key_word) || location(job).include?(key_word)
     end
   end
 
@@ -25,5 +25,13 @@ class JobRepository
 
   def active_jobs
     WorkableService.new.get_jobs
+  end
+
+  def title(job)
+    job['title'].downcase
+  end
+
+  def location(job)
+    I18n.transliterate(job['location'])
   end
 end

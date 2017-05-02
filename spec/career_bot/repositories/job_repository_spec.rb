@@ -6,23 +6,27 @@ describe JobRepository do
   let(:title_1) { 'Senior Ruby on Rails developer' }
   let(:title_2) { 'Ruby on Rails developer' }
   let(:title_3) { 'UX/UI designer' }
+  let(:location) { 'Warsaw' }
   let(:active_jobs) {
     [
         {
             'title' => title_1,
             'shortcode' => shortcode_1,
+            'location' => location,
             'full_description' => full_description_1,
             'requirements' => requirements_1
         },
         {
             'title' => title_2,
             'shortcode' => shortcode_2,
+            'location' => location,
             'full_description' => full_description_1,
             'requirements' => requirements_1
         },
         {
             'title' => title_3,
             'shortcode' => shortcode_3,
+            'location' => location,
             'full_description' => full_description_2,
             'requirements' => requirements_2
         }
