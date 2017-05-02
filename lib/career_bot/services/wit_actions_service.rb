@@ -3,7 +3,7 @@ class WitActionsService
     [check_sentiment, clean_context, continue_game, get_details, get_job,
      get_random_answer, get_social_network, get_user, play_game, show_about_us,
      send, show_main_menu, start_game, start_contest, get_contest_answer,
-     send_random_gif].reduce(:merge)
+     send_random_gif, get_yes_no_answer].reduce(:merge)
   end
 
   private
@@ -132,6 +132,14 @@ class WitActionsService
     {
       send_random_gif: lambda do |request|
         WitAction::SendRandomGifService.new(request: request).call
+      end
+    }
+  end
+
+  def get_yes_no_answer
+    {
+      get_yes_no_answer: lambda do |request|
+        WitAction::GetYesNoAnswerService.new(request: request).call
       end
     }
   end
