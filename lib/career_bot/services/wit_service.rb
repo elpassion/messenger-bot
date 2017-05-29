@@ -17,6 +17,7 @@ class WitService
   def run_client_actions
     client.run_actions(session_uid, text, context)
     rescue WitException
+    client.run_actions(session_uid, 'error', context)
   end
 
   def set_session_uid
