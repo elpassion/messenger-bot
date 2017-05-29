@@ -27,6 +27,8 @@ class WitResponder < BotResponder
       show_details
     when :gif
       send_random_gif
+    when :error
+      send_error_message
     else
       text_response
     end
@@ -65,6 +67,11 @@ class WitResponder < BotResponder
     payload[:quick_replies] = response['quickreplies'].map do |reply|
       { content_type: 'text', title: reply, payload: 'empty' }
     end
+  end
+
+  def send_error_message
+    bot_deliver(attachment: I18n.t('text_messages.something_went_wrong')[0])
+    bot_deliver(text: I18n.t('text_messages.something_went_wrong')[1])
   end
 
   def job_position
