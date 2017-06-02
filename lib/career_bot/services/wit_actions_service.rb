@@ -32,6 +32,10 @@ class WitActionsService
   end
 
   def generate_class(name)
-    "WitAction::#{name.camelize}Service".constantize
+    "WitAction::#{generate_class_name(name)}Service".constantize
+  end
+
+  def generate_class_name(name)
+    name.split('_').map {|name_part| name_part.capitalize}.join
   end
 end

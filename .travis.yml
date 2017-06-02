@@ -3,7 +3,6 @@ sudo: false
 rvm: 2.3.3
 addons:
   postgresql: '9.4'
-cache: bundler
 before_script:
 - HANAMI_ENV=test bundle exec hanami db create
 - HANAMI_ENV=test bundle exec hanami db migrate
