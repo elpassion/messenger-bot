@@ -8,12 +8,10 @@ wit_actions:
     - get_random_answer
     - get_social_network
     - get_user
+    - get_yes_no_answer
     - play_game
+    - send_error_message
+    - send_random_gif
     - show_about_us
     - show_main_menu
     - start_game
-    - start_contest
-    - get_contest_answer
-    - send_random_gif
-    - get_yes_no_answer
-    - send_error_message
