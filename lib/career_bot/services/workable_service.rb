@@ -22,7 +22,7 @@ class WorkableService
         location: job_details(job)['location']['city'],
         full_description: job_full_description(job),
         requirements: job_details(job)['requirements'],
-        image_url: image_url(job)
+        image_url: get_image_url(job)
       }
     end
   end
@@ -37,6 +37,10 @@ class WorkableService
 
   def job_full_description(job)
     job_details(job)['full_description']
+  end
+
+  def get_image_url(job)
+    image_url(job) if parsed_image(job).any?
   end
 
   def image_url(job)
