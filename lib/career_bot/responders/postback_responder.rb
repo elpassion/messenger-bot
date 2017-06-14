@@ -1,7 +1,7 @@
 class PostbackResponder
   def send
     messages.each do |message|
-      message.is_a?(String) ? postback.reply(text: message) : postback.reply(attachment: message)
+      message.is_a?(String) ? postback.reply(text: message) : postback.reply({attachment: message})
     end
   end
 

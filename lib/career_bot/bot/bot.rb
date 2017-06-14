@@ -15,5 +15,5 @@ Bot.on :message do |message|
 end
 
 Bot.on :postback do |postback|
-  PostbackResponder.new(postback, PostbackResponse.new.message(postback.payload)).send
+  PostbackResponder.new(postback, PostbackResponse.new.message(postback.payload, postback.sender['id'])).send
 end

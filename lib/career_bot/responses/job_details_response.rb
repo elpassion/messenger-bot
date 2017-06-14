@@ -1,11 +1,12 @@
 class JobDetailsResponse
-  def initialize(payload)
+  def initialize(payload, sender_id = nil)
     @payload = payload
+    @sender_id = sender_id
   end
 
   def messages
     if allowed_details_kind?
-      [text, data, apply_for_job_message].flatten.compact
+      details_kind == 'apply' ? apply_text_message : list_message
     else
       I18n.t('text_messages.something_went_wrong')
     end
@@ -13,7 +14,17 @@ class JobDetailsResponse
 
   private
 
-  attr_reader :payload
+  attr_reader :payload, :sender_id
+
+  def list_message
+    [text, data, apply_for_job_message].flatten
+  end
+
+  def apply_text_message
+    repository.update(conversation.id, apply: true)
+    repository.update(conversation.id, candidate_info: { 'job' => { 'shortcode' => job_shortcode}})
+    'set apply to true'
+  end
 
   def text
     details[:text]
@@ -56,13 +67,6 @@ class JobDetailsResponse
     }
   end
 
-  def apply_text_message
-    { text: I18n.t('text_messages.job_apply_info',
-                   position: job_title, location: job_location,
-                   application_url: application_url)
-    }
-  end
-
   def job_title
     job.job_title
   end
@@ -101,5 +105,13 @@ class JobDetailsResponse
 
   def allowed_details_kind?
     %w(apply benefits requirements).include?(details_kind)
+  end
+
+  def conversation
+    @conversation ||= repository.find_by_messenger_id(sender_id)
+  end
+
+  def repository
+    @repository ||= ConversationRepository.new
   end
 end

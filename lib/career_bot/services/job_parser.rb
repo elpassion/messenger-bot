@@ -35,7 +35,15 @@ class JobParser
     job['image_url']
   end
 
-  private
+  def job_questions
+    job['questions']
+  end
+
+  def form_fields
+    job['form_fields']
+  end
+
+  # private
 
   attr_reader :shortcode
 
