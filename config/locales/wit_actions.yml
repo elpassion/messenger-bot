@@ -15,3 +15,4 @@ wit_actions:
     - show_about_us
     - show_main_menu
     - start_game
+    - update_notifications

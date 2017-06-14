@@ -16,7 +16,7 @@ responses:
             payload: 'ABOUT_US'
           - type: 'postback'
             title: 'Internship'
-            payload: 'INTERNSHIP_INFO'
+            payload: 'internship'
   ABOUT_US:
     - type: 'template'
       payload:
@@ -65,11 +65,6 @@ responses:
     - Would you like to do something else now? Play a game? See main menu? Anything? :D
   PEOPLE: 'You can check our squad here: http://www.elpassion.com/about-us/'
   RANDOM_GIF: 'Hope you like GIFs with animals! :)'
-  INTERNSHIP_INFO: >
-    Unfortunately we dont have any upcoming internships for now :(
-    But stay tuned, there will be something in the future! :D Is there anything else
-    may I help you with? Maybe you want to play a game or go back to beginning? We can also
-    talk about anything you want! :)
   JOB_OFFERS: >
     Nice! :D Fortunately, we are looking for some cool people to join us!
     Sooo... What kind of job are you interested in?
@@ -83,6 +78,3 @@ responses:
       'contest', or ask me about our Facebook, website or any other social media. You can also try
       to ask me about something else. I cannot promise I will know answers for all questions you may
       have, but remember - I learn new stuff everyday! B) :)
-  CONTEST: >
-    Would you like to take part in contest and win awesome JBL Trip speaker?
-    Type >contest< for more info! :)
