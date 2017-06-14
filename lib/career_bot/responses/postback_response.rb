@@ -1,6 +1,6 @@
 class PostbackResponse
   def message(payload)
-    response(payload) || JobDetailsResponse.new(payload).messages
+    response(payload) || JobDetailsResponse.new(payload).messages || payload
   end
 
   def response(payload)
