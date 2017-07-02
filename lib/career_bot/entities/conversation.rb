@@ -8,5 +8,6 @@ class Conversation < Hanami::Entity
     attribute :job_codes,       Types::String
     attribute :apply,           Types::Bool
     attribute :candidate_info,  Types::Hash
+    attribute :notifications,   Types::Bool
   end
 end

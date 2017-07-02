@@ -1,6 +1,6 @@
 class PostbackResponse
-  def message(payload, sender_id = nil)
-    response(payload) || JobDetailsResponse.new(payload, sender_id).messages
+  def message(payload)
+    response(payload) || JobDetailsResponse.new(payload).messages || payload
   end
 
   def response(payload)

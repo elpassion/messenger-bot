@@ -12,6 +12,10 @@ end
 task :preload do
 end
 
+task send_notifications: :environment do
+  SendNotificationsWorker.perform_async
+end
+
 task get_active_job_offers: :environment do
   SetActiveJobsWorker.perform_async
 end

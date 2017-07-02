@@ -10,4 +10,8 @@ class ConversationRepository < Hanami::Repository
   def find_or_create_by_messenger_id(messenger_id)
     find_by_messenger_id(messenger_id) || create(messenger_id: messenger_id)
   end
+
+  def with_notifications_allowed
+    conversations.where(notifications: true)
+  end
 end
