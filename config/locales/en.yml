@@ -37,5 +37,7 @@ en:
       - Could you try one more time? I did not understand what you said to me :(
       - I missed what you said. Could you try one more time?
       - I'm sorry, I don't know how to answer that yet :(
+  facebook_urls:
+    user_profile: 'https://graph.facebook.com/v2.6/%{messenger_id}?fields=first_name&access_token=%{access_token}'
   urls:
     images: ['wnhRECo', 'PQejdXE', 'VIN45s2', 'sNsxzI7', 'dyMrIZN', 'tk9h7S8', '2qRQFLG']
