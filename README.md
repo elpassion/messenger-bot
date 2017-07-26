@@ -30,7 +30,7 @@ You can start your own project from the scratch but you can also use the one cre
 
 → **`clean_context`** - cleans conversation context after game. <br/>Also, when user didn't write anything by more than 15 minutes, context cleans by default when he starts conversation with bot again. 
 
-→ **`continue_game`**, **`play_game`**, **`start_game`**, **`get_yes_no_answer_service`** - methods used in simple 'guess my number' game:
+→ **`play_game`**, **`start_game`** - methods used in simple 'guess my number' game:
 
 <p align="center">
 <a href="url"><img src="http://i.imgur.com/79AZggX.jpg" height="60%" width="60%" ></a>

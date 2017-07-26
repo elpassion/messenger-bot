@@ -2,7 +2,6 @@ wit_actions:
   method_names:
     - check_sentiment
     - clean_context
-    - continue_game
     - get_details
     - get_job
     - get_random_answer
