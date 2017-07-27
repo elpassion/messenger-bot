@@ -21,9 +21,11 @@ class JobDetailsResponse
   end
 
   def apply_text_message
-    repository.update(conversation.id, apply: true)
-    repository.update(conversation.id, candidate_info: { 'job' => { 'shortcode' => job_shortcode}})
-    'set apply to true'
+    repository.update(conversation.id, apply: true,
+                      apply_job_shortcode: job_shortcode,
+                      text_answers: {},
+                      complex_answers:{} )
+    "Are you ready to fill the form and apply for #{job_title} position? You have to do it in one take! Type yes to get started :)"
   end
 
   def text
@@ -36,7 +38,7 @@ class JobDetailsResponse
 
   def apply_for_job_message
     if benefits_or_requirements?
-      I18n.t('text_messages.apply_for_job', application_url: application_url,
+      I18n.t('text_messages.apply_for_job',
              location: job_location, job_url: job_url, position: job_title)
     end
   end
@@ -108,7 +110,7 @@ class JobDetailsResponse
   end
 
   def conversation
-    @conversation ||= repository.find_by_messenger_id(sender_id)
+    repository.find_by_messenger_id(sender_id)
   end
 
   def repository

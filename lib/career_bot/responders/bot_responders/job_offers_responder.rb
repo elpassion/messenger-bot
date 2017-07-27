@@ -10,7 +10,8 @@ class JobOffersResponder < BotResponder
     bot_deliver(text: attachment[:text])
     return unless attachment_jobs
     bot_deliver(attachment: GenericTemplate.new(attachment_jobs).to_hash)
-    bot_deliver(text: I18n.t('text_messages.try_again'))
+    bot_deliver(text: I18n.t('text_messages.try_again_1'))
+    bot_deliver(text: I18n.t('text_messages.try_again_2'))
   end
 
   private
