@@ -53,7 +53,7 @@ class WitAction
   end
 
   def messenger_id
-    conversation.messenger_id
+    conversation.messenger_id if conversation
   end
 
   def messenger_user_repository

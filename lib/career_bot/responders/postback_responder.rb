@@ -27,7 +27,7 @@ class PostbackResponder
   end
 
   def payload
-    @payload ||= postback.payload
+    @payload ||= postback.payload ? postback.payload : postback.quick_reply
   end
 
   def messenger_id

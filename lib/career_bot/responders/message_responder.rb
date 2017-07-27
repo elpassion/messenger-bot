@@ -5,7 +5,7 @@ class MessageResponder
 
   def set_action
     if conversation.apply
-      apply
+      run_apply_process
     else
       quick_reply && quick_reply != 'empty' ? run_postback : send_to_wit
     end
@@ -15,8 +15,8 @@ class MessageResponder
 
   attr_reader :message
 
-  def apply
-    ApplyResponder.new(conversation_id: conversation.id).response
+  def run_apply_process
+    ApplyResponderWorker.perform_async(conversation.id, message_text, params)
   end
 
   def run_postback
@@ -45,6 +45,14 @@ class MessageResponder
 
   def message_text
     message.text
+  end
+
+  def params
+    { attachment_url: attachment_url, quick_reply: message.quick_reply }
+  end
+
+  def attachment_url
+    message.attachments.first['payload']['url'] if message.attachments
   end
 
   def repository
