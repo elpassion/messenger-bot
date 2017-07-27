@@ -10,7 +10,7 @@ class MockPostback
     sent_messages << message
   end
 
-  def payload
+  def quick_reply
     @payload
   end
 end

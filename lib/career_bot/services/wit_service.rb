@@ -33,7 +33,7 @@ class WitService
   end
 
   def clean_conversation_context?
-    context.any? && conversation.updated_at < Time.now.utc - 15 * 60
+    context.any? && conversation.updated_at < Time.now.utc - 5 * 60
   end
 
   def session_uid

@@ -93,25 +93,5 @@ describe WitAction::PlayGameService do
         end
       end
     end
-
-    context 'when user value is empty' do
-      let(:user_value) { nil }
-
-      it 'updates conversation context' do
-        expect {
-          subject.call
-        }.to change {
-          repository.find(conversation.id).context
-        }
-      end
-
-      it 'should return wrong param status' do
-        expect(subject.call).to include(
-                                  'play' => true,
-                                  'winningNumber' => winning_number,
-                                  'wrongParam' => true
-                                )
-      end
-    end
   end
 end
