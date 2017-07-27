@@ -1,4 +1,7 @@
 class WorkableService
+  HANDLED_QUESTION_TYPES = %w(string file free_text).freeze
+  REQUIRED_FIELDS = %w(first_name last_name email).freeze
+
   def set_jobs
     Sidekiq.redis do |connection|
       connection.set('jobs', parsed_jobs.to_json)
@@ -37,12 +40,28 @@ class WorkableService
     client.job_details(job['shortcode'])
   end
 
-  def job_questions(job)
-    job_application_form(job)['questions']
+  def job_form_fields(job)
+    form_with_required_fields(job).each_with_index.map do |question, index|
+      { 'index' => index }.merge(question)
+    end
   end
 
-  def job_form_fields(job)
-    job_application_form(job)['form_fields']
+  def job_questions(job)
+    job_application_form(job)['questions'].each_with_index.map do |question, index|
+      { 'index' => job_form_fields(job).size + index }.merge(question)
+    end
+  end
+
+  def form_with_required_fields(job)
+    fields = required_fields + job_application_form(job)['form_fields']
+
+    fields.select { |field| HANDLED_QUESTION_TYPES.include?(field['type']) }
+  end
+
+  def required_fields
+    REQUIRED_FIELDS.map do |element|
+      { 'key' => element, 'type' => 'string', 'required' => true }
+    end
   end
 
   def job_full_description(job)
@@ -81,6 +100,6 @@ class WorkableService
   end
 
   def conn
-    @conn ||= Faraday.new(url: "https://www.workable.com")
+    @conn ||= Faraday.new(url: 'https://www.workable.com')
   end
 end
