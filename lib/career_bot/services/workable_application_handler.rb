@@ -1,12 +1,10 @@
 class WorkableApplicationHandler < BotResponder
   def post_candidate_answers
-    response = post_application_form_request
-    parsed_response = JSON.parse(response.body)
-
-    if parsed_response['error']
-      on_post_failure(parsed_response['error'])
+    if workable_response.body.empty?
+      bot_deliver(text: I18n.t('apply_process.something_went_wrong'))
+      bot_deliver(text: I18n.t('apply_process.try_again'))
     else
-      bot_deliver(text: I18n.t('apply_process.form_submitted'))
+      on_workable_post_success
     end
   end
 
@@ -72,10 +70,24 @@ class WorkableApplicationHandler < BotResponder
     conversation.complex_answers.map { |key, value| value[:to_send] }.join(', ')
   end
 
-  def on_post_failure(error)
+  def on_candidate_creation_failure(error)
     bot_deliver(text: I18n.t('apply_process.form_error'))
     bot_deliver(text: error)
     bot_deliver(text: I18n.t('apply_process.try_again'))
+  end
+
+  def workable_response
+    @workable_response ||= post_application_form_request
+  end
+
+  def on_workable_post_success
+    parsed_response = JSON.parse(workable_response.body)
+
+    if parsed_response['error']
+      on_candidate_creation_failure(parsed_response['error'])
+    else
+      bot_deliver(text: I18n.t('apply_process.form_submitted'))
+    end
   end
 
   def conn

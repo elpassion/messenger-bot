@@ -51,6 +51,7 @@ en:
       And fit in one message per question, please! Remember - you can stop application process
       anytime you want! Just type QUIT or LEAVE. Good luck! :)
     form_error: 'Ouch! I got following error after submitting the form:'
+    something_went_wrong: 'Ouch! It looks like something went wrong while sending your responses. :('
     next_question: 'Okay! Next question then!'
     try_again: "Keep calm, type APPLY and try again! :)"
     form_submitted: "Cool! The form has been submitted! We'll be in touch! :)"
