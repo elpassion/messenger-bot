@@ -3,16 +3,15 @@ workable_form:
     first_name: >
       What is your first name? Yep, right, I could take your name from your
       Facebook profile but I am not sure if it's your real name or what. :D
-    last_name: "Such a fancy name! And what's your last name?"
+    last_name: "And what's your last name?"
     email: 'How about your email address?'
-    phone: "Phone number? No worries, I won't use it for wrong or weird purposes :P"
+    phone: "Phone number? No worries, I won't use it for wrong or weird purposes. :P"
     avatar: >
       Could you upload your picture? We support following file
-      types: jpg, jpeg, gif, png ;) You can skip this question if you don't want to upload anything.
+      types: jpg, jpeg, gif, png. ;) You can skip this question if you don't want to upload anything.
     experience: 'Thanks! And now... Could you tell me about your experience, please?'
     summary: "Cool! In this part - it's your time to shine! Write something about yourself! :)"
     resume: >
       Do you have any CV doc? If you want, you can drop it now!
-      Type SKIP if you don't want to upload anything :)
-      Supported file types: pdf, doc, docx, odt, rtf, html, htm, txt :)
-
+      Type SKIP if you don't want to upload anything. :)
+      Supported file types: pdf, doc, docx, odt, rtf, html, htm, txt. :)

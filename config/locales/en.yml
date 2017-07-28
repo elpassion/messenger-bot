@@ -4,16 +4,16 @@ en:
     found_matching_jobs: 'Yayy! :) We have something you may be interested in! Check this out!'
     found_matching_descriptions: 'I have found some offers including the thing you are looking for!'
     found_matching_job_keywords: >
-      I'm afraid we don't have open job offers for this position now :(
+      I'm afraid we don't have open job offers for this position now. :(
       Please send your CV to careers@elpassion.com and we'll be in touch! :)
     no_jobs_found: >
-      Unfortunately we don't have any matching job offers :(
+      Unfortunately we don't have any matching job offers. :(
       Buuuut... you can still check out all of our open positions!
     try_again_1: >
       Found anything interesting? If not - you can try again! :)
       You can also ask for requirements or benefits of selected job offer!
     try_again_2: >
-      NEW FEATURE ALERT! :D Type apply or click on Apply button and
+      NEW FEATURE ALERT! :D Type APPLY or click on Apply button and
       start recruitment process via Messenger!
     job_requirements_info: 'Here are some must-have things for %{position} in %{location}:'
     job_benefits_info: 'We can offer you the following benefits:'
@@ -33,34 +33,50 @@ en:
      - type: 'image'
        payload:
          url: 'http://i.imgur.com/TpIHWwe.jpg'
-     - 'Ouch! It looks like something went wrong :( Ask me anything, go back to main menu or type help if you need one :)'
+     - "Ouch! It looks like something went wrong. :( Ask me anything, go back to main menu or type help if you need one. :)"
     unrecognized:
       - They didn't teach me how to reply to this yet. Sorry! :(
-      - Sorry, I didn't get that :(
-      - Could you try one more time? I did not understand what you said to me :(
+      - Sorry, I didn't get that. :(
+      - Could you try one more time? I did not understand what you said to me. :(
       - I missed what you said. Could you try one more time?
-      - I'm sorry, I don't know how to answer that yet :(
+      - I'm sorry, I don't know how to answer that yet. :(
   facebook_urls:
     user_profile: 'https://graph.facebook.com/v2.6/%{messenger_id}?fields=first_name&access_token=%{access_token}'
   urls:
     images: ['wnhRECo', 'PQejdXE', 'VIN45s2', 'sNsxzI7', 'dyMrIZN', 'tk9h7S8', '2qRQFLG']
   apply_process:
     start: >
-      Cool! <3 Let me ask you a few questions now :) Try to be as much descriptive as you can.
+      Cool! Let's start application process for %{job_title} then! <3 Let me ask you
+      a few questions. :) Try to be as much descriptive as you can.
       And fit in one message per question, please! Remember - you can stop application process
       anytime you want! Just type QUIT or LEAVE. Good luck! :)
     form_error: 'Ouch! I got following error after submitting the form:'
+    next_question: 'Okay! Next question then!'
     try_again: "Keep calm, type APPLY and try again! :)"
     form_submitted: "Cool! The form has been submitted! We'll be in touch! :)"
-    responses_not_saved: 'Okay! Your responses were not saved! You can try again anytime you want :)'
+    responses_not_saved: 'Okay! Your responses were not saved! You can try again anytime you want. :)'
     responses_saved: >
       And we are done! Your responses have been recorded, you can check them below
-      and approve (or not). Then I will save your Candidate Profile to our database :)
+      and approve (or not). Then I will save your Candidate Profile to our database. :)
       How quick & simple it was! :D
-    are_information_correct: Are those information correct? Confirm and I will save your replies :)
+    are_information_correct: Are those information correct? Confirm and I will save your replies. :)
     quit: >
-      Okay! You quit the apply process. You can start it again anytime you want :)
+      Okay! You quit the apply process. You can start it again anytime you want. :)
       Is there anything else I can help you with?
     multi_lines_allowed: >
-      You don't have to fit in one message here :)
-    go_on: "Response recorded, go on! Type NEXT when UR ready to go. :)"
+      You don't have to fit in one message here. :)
+    go_on: "Response recorded, go on! Type NEXT when you're ready to go. :)"
+    positive_keywords:
+      - 'yes'
+      - yep
+      - tak
+      - yeah
+      - sure
+    quit_keywords:
+      - exit
+      - quit
+      - leave
+      - stop
+    skip_keywords:
+      - skip
+      - next
