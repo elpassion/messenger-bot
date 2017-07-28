@@ -7,7 +7,6 @@ class ApplyResponder < BotResponder
   end
 
   def response
-    check_if_quit_application_process
     save_question_answer
     handle_multi_lines_answer
   end
@@ -16,22 +15,11 @@ class ApplyResponder < BotResponder
 
   attr_reader :conversation_id, :message, :params
 
-  def run_proper_scenario
-    case
-      when question_index == 0 && conversation.apply
-        start_apply_process
-      when question_index < questions_size && conversation.apply
-        deliver_question
-      when question_index == questions_size
-        deliver_answers_summary
-      when question_index == questions_size + 1
-        post_candidate_answers
+  def save_question_answer
+    if save_question?
+      JobFormAnswersHandler.new(conversation, previous_question,
+                                message, params).add_answer_to_repository
     end
-  end
-
-  def start_apply_process
-    bot_deliver(text: I18n.t('apply_process.start'))
-    deliver_question
   end
 
   def handle_multi_lines_answer
@@ -44,18 +32,37 @@ class ApplyResponder < BotResponder
     end
   end
 
-  def deliver_question
-    bot_deliver(text: question_message[:text],
-                quick_replies: question_message[:quick_replies])
-    if current_question['type'] == 'free_text'
-      bot_deliver(text: I18n.t('apply_process.multi_lines_allowed'))
+  def update_conversation_index
+    repository.update(conversation_id, question_index: question_index + 1)
+  end
+
+  def run_proper_scenario
+    case
+      when stop_apply_process?
+        quit_application_process
+      when question_index == 0
+        start_application_process
+      when (question_index < questions_size)
+        deliver_question
+      when question_index == questions_size
+        deliver_answers_summary
+      when question_index == questions_size + 1
+        post_candidate_answers
     end
   end
 
-  def save_question_answer
-    if save_question?
-      JobFormAnswersHandler.new(conversation, previous_question,
-                                message, params).add_answer_to_repository
+  def start_application_process
+    repository.update(conversation.id, apply: true,
+                      text_answers: {}, complex_answers:{} )
+    bot_deliver(text: I18n.t('apply_process.start', job_title: job_title))
+    deliver_question
+  end
+
+  def deliver_question
+    bot_deliver(text: question_message[:text],
+    quick_replies: question_message[:quick_replies])
+    if current_question['type'] == 'free_text'
+      bot_deliver(text: I18n.t('apply_process.multi_lines_allowed'))
     end
   end
 
@@ -71,10 +78,6 @@ class ApplyResponder < BotResponder
     end
 
     clear_conversation_data
-  end
-
-  def update_conversation_index
-    repository.update(conversation_id, question_index: question_index + 1)
   end
 
   def parsed_questions
@@ -116,19 +119,26 @@ class ApplyResponder < BotResponder
 
   def save_question?
     question_index.between?(1, questions_size) &&
-      (params['attachment_url'] || !message_includes_any?(%w(skip next)))
+      (params['attachment_url'] ||
+        !message_includes_any?(I18n.t('apply_process.skip_keywords')))
   end
 
-  def check_if_quit_application_process
-    if message_includes_any?(%w(exit quit leave stop))
-      clear_conversation_data
-      bot_deliver(text: I18n.t('apply_process.quit'))
-    end
+  def stop_apply_process?
+    message_includes_any?(I18n.t('apply_process.quit_keywords'))
+  end
+
+  def job_title
+    JobParser.new(conversation.apply_job_shortcode).job_title
+  end
+
+  def quit_application_process
+    clear_conversation_data
+    bot_deliver(text: I18n.t('apply_process.quit'))
   end
 
   def send_user_responses?
     params['quick_reply'] == 'true' ||
-      message_includes_any?(%w(yes yep yeah tak sure))
+      message_includes_any?(I18n.t('apply_process.positive_keywords'))
   end
 
   def message_includes_any?(words_array)

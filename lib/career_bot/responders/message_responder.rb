@@ -20,7 +20,17 @@ class MessageResponder
   end
 
   def run_postback
-    PostbackResponder.new(message, postback_message).send
+    if quick_reply.split('|').first == 'apply'
+      start_apply_process
+    else
+      PostbackResponder.new(message, postback_message).send_postback_messages
+    end
+  end
+
+  def start_apply_process
+    repository.update(conversation.id, question_index: 0,
+                      apply_job_shortcode: quick_reply.split('|').last)
+    ApplyResponder.new(conversation.id, message_text, {}).response
   end
 
   def send_to_wit

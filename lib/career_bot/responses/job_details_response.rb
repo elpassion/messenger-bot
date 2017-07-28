@@ -6,7 +6,7 @@ class JobDetailsResponse
 
   def messages
     if allowed_details_kind?
-      details_kind == 'apply' ? apply_text_message : list_message
+      handle_message_response
     else
       I18n.t('text_messages.something_went_wrong')
     end
@@ -16,16 +16,18 @@ class JobDetailsResponse
 
   attr_reader :payload, :sender_id
 
-  def list_message
-    [text, data, apply_for_job_message].flatten
+  def handle_message_response
+    benefits_or_requirements? ? list_message : start_application_process
   end
 
-  def apply_text_message
-    repository.update(conversation.id, apply: true,
-                      apply_job_shortcode: job_shortcode,
-                      text_answers: {},
-                      complex_answers:{} )
-    "Are you ready to fill the form and apply for #{job_title} position? You have to do it in one take! Type yes to get started :)"
+  def start_application_process
+    repository.update(conversation.id, question_index: 0,
+                      apply_job_shortcode: payload.split('|').last)
+    ApplyResponder.new(conversation.id, payload, {}).response
+  end
+
+  def list_message
+    [text, data, apply_for_job_message].flatten.compact
   end
 
   def text
@@ -49,8 +51,6 @@ class JobDetailsResponse
         requirement_details_hash
       when 'benefits'
         benefits_details_hash
-      when 'apply'
-        apply_text_message
     end
   end
 
@@ -110,7 +110,7 @@ class JobDetailsResponse
   end
 
   def conversation
-    repository.find_by_messenger_id(sender_id)
+    @conversation ||= repository.find_by_messenger_id(sender_id)
   end
 
   def repository
