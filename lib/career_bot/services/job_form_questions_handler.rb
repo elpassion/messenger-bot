@@ -30,7 +30,8 @@ class JobFormQuestionsHandler < BotResponder
   end
 
   def get_body_by_key
-    I18n.t("questions.#{current_question['key']}", locale: :workable_form)
+    I18n.t("questions.#{current_question['key']}", locale: :workable_form,
+      default: current_question['key'].split('_').join(' ').capitalize + '?')
   end
 
   def choices_quick_replies(choices)

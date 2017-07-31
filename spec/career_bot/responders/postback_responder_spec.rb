@@ -1,4 +1,5 @@
 describe PostbackResponder do
+  let(:sender_id) { '123123123' }
   let(:job_requirements_response_messages) do
     [{ text: I18n.t('text_messages.job_requirements_info', position: 'Senior Ruby Developer', location: 'Warsaw') },
      { text: '- Focus on clean, SOLID code' },
@@ -56,49 +57,49 @@ describe PostbackResponder do
 
   it 'handles WELCOME_PAYLOAD postback' do
     postback = MockPostback.new('WELCOME_PAYLOAD')
-    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply)).send
+    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply, sender_id)).send
     expect(postback.sent_messages).to eq([{ attachment: I18n.t('WELCOME_PAYLOAD', locale: :responses).first }])
   end
 
   it 'handles JOB_OFFERS postback' do
     postback = MockPostback.new('JOB_OFFERS')
-    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply)).send
+    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply, sender_id)).send
     expect(postback.sent_messages).to eq([{ text: I18n.t('JOB_OFFERS', locale: :responses) }])
   end
 
   it 'handles ABOUT_US postback' do
     postback = MockPostback.new('ABOUT_US')
-    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply)).send
+    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply, sender_id)).send
     expect(postback.sent_messages).to eq([{ attachment: I18n.t('ABOUT_US', locale: :responses).first }])
   end
 
   it 'handles WHAT_WE_DO postback' do
     postback = MockPostback.new('WHAT_WE_DO')
-    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply)).send
+    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply, sender_id)).send
     expect(postback.sent_messages).to eq(what_we_do_message)
   end
 
   it 'handles COMPANY postback' do
     postback = MockPostback.new('COMPANY')
-    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply)).send
+    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply, sender_id)).send
     expect(postback.sent_messages).to eq(company_message)
   end
 
   it 'handles PEOPLE postback' do
     postback = MockPostback.new('PEOPLE')
-    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply)).send
+    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply, sender_id)).send
     expect(postback.sent_messages).to eq([{ text: I18n.t('PEOPLE', locale: :responses) }])
   end
 
   it 'handles benefits postback' do
     postback = MockPostback.new('benefits|AF3C224021')
-    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply)).send
+    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply, sender_id)).send
     expect(postback.sent_messages).to eq(job_benefits_response_messages)
   end
 
   it 'handles requirements postback' do
     postback = MockPostback.new('requirements|AF3C224021')
-    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply)).send
+    described_class.new(postback, PostbackResponse.new.message(postback.quick_reply, sender_id)).send
     expect(postback.sent_messages).to eq(job_requirements_response_messages)
   end
 end

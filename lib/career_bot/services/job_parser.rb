@@ -43,7 +43,7 @@ class JobParser
     job['form_fields']
   end
 
-  # private
+  private
 
   attr_reader :shortcode
 

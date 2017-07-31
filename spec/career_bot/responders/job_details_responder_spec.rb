@@ -80,11 +80,12 @@ describe JobDetailsResponder do
 
   before do
     allow_any_instance_of(WorkableService).to receive(:get_jobs).and_return(active_jobs)
+    allow_any_instance_of(ApplyResponder).to receive(:response).and_return(nil)
   end
 
   describe '#response' do
 
-    before(:each) do
+    before do
       subject.set_response
     end
     context 'when job_codes are empty' do
@@ -125,9 +126,9 @@ describe JobDetailsResponder do
           end
 
           it 'should return proper requirements' do
-            expect(bot_interface.sent_messages[1][:text]).to eq "- #{parsed_benefist(full_description).first}"
-            expect(bot_interface.sent_messages[2][:text]).to eq "- #{parsed_benefist(full_description)[1]}"
-            expect(bot_interface.sent_messages[5][:text]).to eq "- #{parsed_benefist(full_description)[4]}"
+            expect(bot_interface.sent_messages[1][:text]).to eq "- #{parsed_benefits(full_description).first}"
+            expect(bot_interface.sent_messages[2][:text]).to eq "- #{parsed_benefits(full_description)[1]}"
+            expect(bot_interface.sent_messages[5][:text]).to eq "- #{parsed_benefits(full_description)[4]}"
           end
 
           it 'should return proper end of message' do
@@ -141,9 +142,8 @@ describe JobDetailsResponder do
           let(:details) { 'apply' }
 
           it 'should return proper message' do
-            expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.job_apply_info',
-                                                                          position: title_1, location: 'Warsaw',
-                                                                          application_url: application_url_1)
+            expect(bot_interface.sent_messages).to eq []
+
           end
         end
       end
@@ -220,7 +220,8 @@ describe JobDetailsResponder do
         end
 
         it 'should contain proper message' do
-          expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.job_requirements_info', position: title_1, location: 'Warsaw')
+          message = I18n.t('text_messages.job_requirements_info', position: title_1, location: 'Warsaw')
+          expect(bot_interface.sent_messages.first[:text]).to eq message
         end
       end
 
@@ -242,7 +243,7 @@ describe JobDetailsResponder do
     Nokogiri::HTML(requirements).css('li').map { |li| li.text }
   end
 
-  def parsed_benefist(benefits)
+  def parsed_benefits(benefits)
     Nokogiri::HTML(benefits.split('Benefits').last).css('li').map { |li| li.text }
   end
 end
