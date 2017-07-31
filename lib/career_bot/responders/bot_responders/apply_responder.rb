@@ -77,7 +77,7 @@ class ApplyResponder < BotResponder
       bot_deliver(text: I18n.t('apply_process.responses_not_saved'))
     end
 
-    clear_conversation_data
+    clear_conversation_apply_data
   end
 
   def parsed_questions
@@ -132,7 +132,7 @@ class ApplyResponder < BotResponder
   end
 
   def quit_application_process
-    clear_conversation_data
+    clear_conversation_apply_data
     bot_deliver(text: I18n.t('apply_process.quit'))
   end
 
@@ -145,7 +145,7 @@ class ApplyResponder < BotResponder
     message && (message.downcase.split & words_array).any?
   end
 
-  def clear_conversation_data
+  def clear_conversation_apply_data
     repository.update(conversation_id, apply: false, question_index: 0,
                       text_answers: {}, complex_answers: {})
   end

@@ -24,6 +24,7 @@ class JobDetailsResponse
     repository.update(conversation.id, question_index: 0,
                       apply_job_shortcode: payload.split('|').last)
     ApplyResponder.new(conversation.id, payload, {}).response
+    []
   end
 
   def list_message
