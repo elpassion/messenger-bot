@@ -1,11 +1,12 @@
 class JobDetailsResponse
-  def initialize(payload)
+  def initialize(payload, sender_id = nil)
     @payload = payload
+    @sender_id = sender_id
   end
 
   def messages
     if allowed_details_kind?
-      [text, data, apply_for_job_message].flatten.compact
+      handle_message_response
     else
       I18n.t('text_messages.something_went_wrong')
     end
@@ -13,7 +14,22 @@ class JobDetailsResponse
 
   private
 
-  attr_reader :payload
+  attr_reader :payload, :sender_id
+
+  def handle_message_response
+    benefits_or_requirements? ? list_message : start_application_process
+  end
+
+  def start_application_process
+    repository.update(conversation.id, question_index: 0,
+                      apply_job_shortcode: payload.split('|').last)
+    ApplyResponder.new(conversation.id, payload, {}).response
+    []
+  end
+
+  def list_message
+    [text, data, apply_for_job_message].flatten.compact
+  end
 
   def text
     details[:text]
@@ -25,7 +41,7 @@ class JobDetailsResponse
 
   def apply_for_job_message
     if benefits_or_requirements?
-      I18n.t('text_messages.apply_for_job', application_url: application_url,
+      I18n.t('text_messages.apply_for_job',
              location: job_location, job_url: job_url, position: job_title)
     end
   end
@@ -36,8 +52,6 @@ class JobDetailsResponse
         requirement_details_hash
       when 'benefits'
         benefits_details_hash
-      when 'apply'
-        apply_text_message
     end
   end
 
@@ -53,13 +67,6 @@ class JobDetailsResponse
       text: I18n.t('text_messages.job_requirements_info',
                    position: job_title, location: job_location),
       data: job.job_requirements
-    }
-  end
-
-  def apply_text_message
-    { text: I18n.t('text_messages.job_apply_info',
-                   position: job_title, location: job_location,
-                   application_url: application_url)
     }
   end
 
@@ -101,5 +108,13 @@ class JobDetailsResponse
 
   def allowed_details_kind?
     %w(apply benefits requirements).include?(details_kind)
+  end
+
+  def conversation
+    @conversation ||= repository.find_by_messenger_id(sender_id)
+  end
+
+  def repository
+    @repository ||= ConversationRepository.new
   end
 end

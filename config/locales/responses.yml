@@ -78,3 +78,10 @@ responses:
       'contest', or ask me about our Facebook, website or any other social media. You can also try
       to ask me about something else. I cannot promise I will know answers for all questions you may
       have, but remember - I learn new stuff everyday! B) :)
+  boolean_postback:
+    - content_type: 'text'
+      title: 'Yes'
+      payload: 'true'
+    - content_type: 'text'
+      title: 'No'
+      payload: 'false'

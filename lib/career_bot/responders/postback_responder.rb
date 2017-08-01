@@ -3,6 +3,12 @@ class PostbackResponder
     payload_included_in_wit_actions? ? send_to_wit(payload) : send_postback_messages
   end
 
+  def send_postback_messages
+    messages.each do |message|
+      message.is_a?(String) ? postback.reply(text: message) : postback.reply(attachment: message)
+    end
+  end
+
   private
 
   attr_reader :postback, :messages
@@ -20,14 +26,8 @@ class PostbackResponder
     WitService.new(messenger_id, payload).send
   end
 
-  def send_postback_messages
-    messages.each do |message|
-      message.is_a?(String) ? postback.reply(text: message) : postback.reply(attachment: message)
-    end
-  end
-
   def payload
-    @payload ||= postback.quick_reply
+    @payload ||= postback.payload
   end
 
   def messenger_id

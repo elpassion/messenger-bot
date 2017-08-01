@@ -1,4 +1,4 @@
-describe MessengerUserRepository do
+describe GetUserData do
   let(:messenger_id) { 'messenger_id' }
   let(:user_first_name) { 'Jane' }
   let(:facebook_user_data) {

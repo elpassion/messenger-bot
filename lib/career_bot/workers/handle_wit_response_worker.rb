@@ -6,7 +6,7 @@ class HandleWitResponseWorker
     2 * (count + 1)
   end
 
-  def perform(sender_id, text)
-    WitService.new(sender_id, text).send
+  def perform(recipient_id, text)
+    WitService.new(recipient_id, text).send
   end
 end

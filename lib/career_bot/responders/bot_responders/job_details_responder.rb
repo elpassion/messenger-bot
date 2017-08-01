@@ -57,7 +57,7 @@ class JobDetailsResponder < BotResponder
   end
 
   def job_details_responses
-    Array(JobDetailsResponse.new(single_job_code_payload).messages)
+    Array(JobDetailsResponse.new(single_job_code_payload, messenger_id).messages)
   end
 
   def single_job_code_payload

@@ -1,7 +1,9 @@
 class PostbackResponse
-  def message(payload)
-    response(payload) || JobDetailsResponse.new(payload).messages || payload
+  def message(payload, sender_id)
+    response(payload) || JobDetailsResponse.new(payload, sender_id).messages || payload
   end
+
+  private
 
   def response(payload)
     I18n.t(payload, locale: :responses) if I18n.exists?(payload, :responses)

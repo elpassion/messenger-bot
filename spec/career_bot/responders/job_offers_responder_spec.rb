@@ -63,7 +63,7 @@ describe JobOffersResponder do
     end
 
     it 'should set conversation job codes to matched titles' do
-      expect(conversation_job_codes).to eq ['1234', '2345']
+      expect(conversation_job_codes).to eq %w(1234 2345)
     end
   end
 

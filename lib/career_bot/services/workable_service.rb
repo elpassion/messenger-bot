@@ -1,4 +1,7 @@
 class WorkableService
+  HANDLED_QUESTION_TYPES = %w(string file free_text).freeze
+  REQUIRED_FIELDS = %w(first_name last_name email).freeze
+
   def set_jobs
     Sidekiq.redis do |connection|
       connection.set('jobs', parsed_jobs.to_json)
@@ -22,7 +25,9 @@ class WorkableService
         location: job_details(job)['location']['city'],
         full_description: job_full_description(job),
         requirements: job_details(job)['requirements'],
-        image_url: get_image_url(job)
+        image_url: get_image_url(job),
+        form_fields: job_form_fields(job),
+        questions: job_questions(job)
       }
     end
   end
@@ -33,6 +38,34 @@ class WorkableService
 
   def job_details(job)
     client.job_details(job['shortcode'])
+  end
+
+  def job_application_form(job)
+    client.job_application_form(job['shortcode'])
+  end
+
+  def job_form_fields(job)
+    form_with_required_fields(job).each_with_index.map do |question, index|
+      { 'index' => index }.merge(question)
+    end
+  end
+
+  def job_questions(job)
+    job_application_form(job)['questions'].each_with_index.map do |question, index|
+      { 'index' => job_form_fields(job).size + index }.merge(question)
+    end
+  end
+
+  def form_with_required_fields(job)
+    fields = required_fields + job_application_form(job)['form_fields']
+
+    fields.select { |field| HANDLED_QUESTION_TYPES.include?(field['type']) }
+  end
+
+  def required_fields
+    REQUIRED_FIELDS.map do |element|
+      { 'key' => element, 'type' => 'string', 'required' => true }
+    end
   end
 
   def job_full_description(job)

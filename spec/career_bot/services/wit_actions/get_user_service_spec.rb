@@ -15,7 +15,7 @@ describe WitAction::GetUserService do
   subject { described_class.new(request: request) }
 
   before do
-    allow_any_instance_of(MessengerUserRepository).to receive(:name).and_return(user_first_name)
+    allow_any_instance_of(GetUserData).to receive(:name).and_return(user_first_name)
   end
 
   describe '#call' do
