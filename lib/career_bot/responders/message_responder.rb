@@ -4,10 +4,13 @@ class MessageResponder
   end
 
   def set_action
-    if conversation.apply
-      run_apply_process
-    else
-      quick_reply && quick_reply != 'empty' ? run_postback : send_to_wit
+    case
+      when conversation.apply
+        run_apply_process
+      when quick_reply && quick_reply != 'empty'
+        run_postback
+      else
+        send_to_wit
     end
   end
 

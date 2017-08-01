@@ -40,6 +40,10 @@ class WorkableService
     client.job_details(job['shortcode'])
   end
 
+  def job_application_form(job)
+    client.job_application_form(job['shortcode'])
+  end
+
   def job_form_fields(job)
     form_with_required_fields(job).each_with_index.map do |question, index|
       { 'index' => index }.merge(question)
@@ -86,20 +90,5 @@ class WorkableService
 
   def client
     @client ||= Workable::Client.new(api_key: ENV['WORKABLE_API_KEY'], subdomain: 'elpassion')
-  end
-
-  def job_application_form(job)
-    JSON.parse(get_application_form_request(job).body)
-  end
-
-  def get_application_form_request(job)
-    conn.get do |req|
-      req.url "/spi/v3/accounts/elpassion/jobs/#{job['shortcode']}/application_form"
-      req.headers['Authorization']= "Bearer #{ENV['WORKABLE_API_KEY']}"
-    end
-  end
-
-  def conn
-    @conn ||= Faraday.new(url: 'https://www.workable.com')
   end
 end

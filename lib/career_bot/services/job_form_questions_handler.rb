@@ -1,4 +1,4 @@
-class JobFormQuestionsHandler < BotResponder
+class JobFormQuestionsHandler
   def question_message
     { text: current_question_body,
       quick_replies: set_quick_replies }

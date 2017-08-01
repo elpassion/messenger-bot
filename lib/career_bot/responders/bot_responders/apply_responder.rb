@@ -8,7 +8,7 @@ class ApplyResponder < BotResponder
 
   def response
     save_question_answer
-    handle_multi_lines_answer
+    run_next_conversation_step
   end
 
   private
@@ -22,14 +22,18 @@ class ApplyResponder < BotResponder
     end
   end
 
-  def handle_multi_lines_answer
+  def run_next_conversation_step
     if save_question? && previous_question['type'] == 'free_text'
-      bot_deliver(text: I18n.t('apply_process.go_on'))
-      save_question_answer
+      handle_multi_line_answer
     else
       update_conversation_index
       run_proper_scenario
     end
+  end
+
+  def handle_multi_line_answer
+    bot_deliver(text: I18n.t('apply_process.go_on'))
+    save_question_answer
   end
 
   def update_conversation_index
@@ -54,7 +58,7 @@ class ApplyResponder < BotResponder
   def start_application_process
     repository.update(conversation.id, apply: true,
                       text_answers: {}, complex_answers:{} )
-    bot_deliver(text: I18n.t('apply_process.start', job_title: job_title))
+    bot_deliver(text: I18n.t('apply_process.start', job_title: job.job_title))
     deliver_question
   end
 
@@ -125,10 +129,6 @@ class ApplyResponder < BotResponder
 
   def stop_apply_process?
     message_includes_any?(I18n.t('apply_process.quit_keywords'))
-  end
-
-  def job_title
-    JobParser.new(conversation.apply_job_shortcode).job_title
   end
 
   def quit_application_process
