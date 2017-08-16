@@ -88,5 +88,19 @@ You can start your own project from the scratch but you can also use the one cre
 → **`show_about_us`**, **`show_main_menu`** - allows user to acces main menu and 'about us' info without clicking on buttons:
 
 <p align="center">
-<a href="url"><img src="http://i.imgur.com/DXYyJ61.jpg" height="60%" width="60%" ></a>
+<img src="http://i.imgur.com/DXYyJ61.jpg" height="60%" width="60%" >
 </p>
+
+-> **`update_notifications`** - allows user to subscribe to notifications.
+
+<p align="center">
+<img src="http://i.imgur.com/KLt9jHt.jpg" height="60%" width="60%" >
+</p>
+
+**How to send a message to subscribed users?**
+
+<p align="center">
+<img src="http://i.imgur.com/S0CFSSr.png" height="60%" width="60%" >
+</p>
+
+For now - you need to go to Wit.ai story called Broadcast, type the message you want to send, hit `Save`. Then you need to execute rake task - to do that type `bundle exec rake send_notifications`.
