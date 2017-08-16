@@ -3,7 +3,7 @@
 
 ### ‼️ NEW FEATURE ALERT: Application proccess via Messenger ‼️
 <p align="center">
-<img src="https://gifyu.com/images/apply.gif" alt="Apply process">
+<img src="https://gfycat.com/JubilantEmotionalGnu">
 </p>
 Now you can apply for selected job offer through Messenger. Bot uses question parsed from Workable offers, saves user responses and send them back to Workable. Paste your Workable token to ENV variables to make it work - and it's done!
 
