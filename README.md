@@ -1,5 +1,12 @@
 [![Build Status](https://travis-ci.com/elpassion/messenger-bot.svg?token=NWdyptbVPpAmiYqrQqZx&branch=master)](https://travis-ci.com/elpassion/messenger-bot)
 # 🤖⭐️🤖 EL Passion Career Bot 🤖⭐️🤖
+
+### ‼️ NEW FEATURE ALERT: Application proccess via Messenger ‼️
+<p align="center">
+<img src="https://gifyu.com/images/apply.gif" alt="Apply process">
+</p>
+Now you can apply for selected job offer through Messenger. Bot uses question parsed from Workable offers, saves user responses and send them back to Workable. Paste your Workable token to ENV variables to make it work - and it's done!
+
 ### 👉 Developer Setup (without [wit.ai](https://wit.ai/)) 👈
 1. After cloning the repo, go to [Messenger Platform Quick Start](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) and follow the instructions. You will need to create Facebook Page & App and provide `ACCESS_TOKEN`, `APP_SECRET` variables to `.env.development` file (you can find all useful variable names in `.env.sample` - you can copy it to your .env file and then paste your variables). 
 
