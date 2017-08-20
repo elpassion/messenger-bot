@@ -7,6 +7,7 @@ wit_actions:
     - get_random_answer
     - get_social_network
     - get_user
+    - get_random_joke
     - get_yes_no_answer
     - play_game
     - send_error_message
