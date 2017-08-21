@@ -1,15 +1,15 @@
 class SendNotificationsWorker
   include Sidekiq::Worker
 
-  def perform
+  def perform(message)
     conversations.each do |conversation|
-      WitService.new(conversation.messenger_id, 'broadcast').send
+      FacebookMessenger.new.deliver(conversation.messenger_id, { text: message })
     end
   end
 
   private
 
   def conversations
-    ConversationRepository.new.with_notifications_allowed
+    @conversations ||= ConversationRepository.new.with_notifications_allowed
   end
 end

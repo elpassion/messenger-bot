@@ -12,8 +12,8 @@ end
 task :preload do
 end
 
-task send_notifications: :environment do
-  SendNotificationsWorker.perform_async
+task :send_notifications, [:message] => :environment do |t, message|
+  SendNotificationsWorker.perform_async(message.first[1])
 end
 
 task get_active_job_offers: :environment do
