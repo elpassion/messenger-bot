@@ -4,9 +4,7 @@ class PostbackResponder
   end
 
   def send_postback_messages
-    messages.each do |message|
-      message.is_a?(String) ? postback.reply(text: message) : postback.reply(attachment: message)
-    end
+    messages.each { |message| postback.reply(message) }
   end
 
   private

@@ -1,22 +1,24 @@
-class JobOffersResponder < BotResponder
-  def initialize(session_uid:, job_keyword:, **options)
-    @session_uid = session_uid
+class JobOffersResponder
+  def initialize(conversation:, job_keyword:)
+    @conversation = conversation
     @job_keyword = job_keyword
-    super(**options)
   end
 
   def response
     save_job_codes
-    bot_deliver(text: attachment[:text])
-    return unless attachment_jobs
-    bot_deliver(attachment: GenericTemplate.new(attachment_jobs).to_hash)
-    bot_deliver(text: I18n.t('text_messages.try_again_1'))
-    bot_deliver(text: I18n.t('text_messages.try_again_2'))
+    responses = [{ text: attachment[:text] }]
+    if attachment_jobs
+      responses.concat([{ attachment: GenericTemplate.new(attachment_jobs).to_hash },
+       { text: I18n.t('text_messages.try_again_1') },
+       { text: I18n.t('text_messages.try_again_2') }])
+    end
+
+    responses
   end
 
   private
 
-  attr_reader :session_uid, :job_keyword
+  attr_reader :conversation, :job_keyword
 
   def attachment_jobs
     @attachment_jobs ||= attachment[:data]
@@ -46,8 +48,7 @@ class JobOffersResponder < BotResponder
   end
 
   def save_job_codes
-    return unless attachment_jobs && conversation
-    repository.update(conversation.id, job_codes: job_codes)
+    repository.update(conversation.id, job_codes: job_codes) if attachment_jobs
   end
 
   def job_codes
@@ -55,14 +56,18 @@ class JobOffersResponder < BotResponder
   end
 
   def matching_jobs
-    job_repository.get_matching_jobs(job_keyword)
+    JobRepository.new.get_matching_jobs(job_keyword)
   end
 
   def matching_descriptions
-    job_repository.get_matching_descriptions(job_keyword)
+    JobRepository.new.get_matching_descriptions(job_keyword)
   end
 
   def matching_job_keywords
     I18n.t(:keywords, locale: :jobs).include? job_keyword
+  end
+
+  def repository
+    @repository ||= ConversationRepository.new
   end
 end

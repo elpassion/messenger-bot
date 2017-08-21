@@ -28,7 +28,9 @@ class JobDetailsResponse
   end
 
   def list_message
-    [text, data, apply_for_job_message].flatten.compact
+    [text, data, apply_for_job_message].flatten.compact.map do |message|
+      { text: message }
+    end
   end
 
   def text

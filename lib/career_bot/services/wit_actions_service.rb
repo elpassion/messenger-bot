@@ -8,7 +8,9 @@ class WitActionsService
   def send
     {
       send: lambda do |request, response|
-        WitResponder.new(request, response).send_response
+        responses = WitResponder.new(conversation(request), request, response).responses
+
+        responses.map { |message| deliver_message(request, message) }
       end
     }
   end
@@ -37,5 +39,17 @@ class WitActionsService
 
   def generate_class_name(name)
     name.split('_').map {|name_part| name_part.capitalize}.join
+  end
+
+  def deliver_message(request, message)
+    FacebookMessenger.new.deliver(messenger_id(request), message)
+  end
+
+  def conversation(request)
+    @conversation ||= ConversationRepository.new.find_by_session_uid(request['session_id'])
+  end
+
+  def messenger_id(request)
+    @messenger_id ||= conversation(request).messenger_id
   end
 end
