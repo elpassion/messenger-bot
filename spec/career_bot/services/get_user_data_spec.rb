@@ -19,7 +19,7 @@ describe GetUserData do
 
   describe '#name' do
     it 'should return user name' do
-      expect(subject.name).to eq user_first_name
+      expect(subject.first_name).to eq user_first_name
     end
   end
 end

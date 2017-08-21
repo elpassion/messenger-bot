@@ -55,13 +55,4 @@ class WitAction
   def messenger_id
     conversation.messenger_id if conversation
   end
-
-  def messenger_user_repository
-    @messenger_user_repository ||=
-      GetUserData.new(messenger_id: messenger_id)
-  end
-
-  def user_first_name
-    messenger_user_repository.name
-  end
 end

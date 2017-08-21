@@ -1,5 +1,5 @@
 class GetUserData
-  def name
+  def first_name
     user_data['first_name']
   end
 
