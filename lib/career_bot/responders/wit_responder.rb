@@ -83,12 +83,8 @@ class WitResponder
     @details ||= context['details']
   end
 
-  def session_uid
-    @session_uid ||= request['session_id']
-  end
-
   def context_key
-    context.keys.first.to_sym if context.keys.any?
+    @context_key ||= context.keys.first.to_sym if context.keys.any?
   end
 
   def context
