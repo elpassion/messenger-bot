@@ -101,3 +101,7 @@ You can start your own project from the scratch but you can also use the one cre
 
 You need to execute rake task with message you want to send as an attribute.
 To do that, type `bundle exec rake send_notifications['Message to send.']`. That's it.
+
+<p align="center">***********************************</p>
+
+**If you have any troubles with configuration - here are our emails: urszula.kowalska@elpassion.pl, katarzyna.laszczewska@elpassion.pl. Feel free to contact us anytime you need! 😁**
