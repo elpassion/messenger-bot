@@ -13,22 +13,8 @@ class MessageData
     @apply ||= conversation.apply
   end
 
-  def text
-    @text ||= message['message']['text']
-  end
-
-  def attachment_url
-    return unless message['message']['attachments']
-    @attachment_url ||= message['message']['attachments'].first['payload']['url']
-  end
-
   def conversation_id
     @conversation_id = conversation.id
-  end
-
-  def quick_reply
-    return unless message['message']['quick_reply']
-    @quick_reply ||= message['message']['quick_reply']['payload']
   end
 
   def entities

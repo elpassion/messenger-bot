@@ -1,6 +1,6 @@
 class MessageResponder
-  def initialize(message_data)
-    @message_data = message_data
+  def initialize(message)
+    @message = message
   end
 
   def set_action
@@ -16,7 +16,7 @@ class MessageResponder
 
   private
 
-  attr_reader :message_data
+  attr_reader :message
 
   def run_apply_process
     ApplyResponderWorker.perform_async(conversation_id, message_text, params)
@@ -26,8 +26,7 @@ class MessageResponder
     if quick_reply.split('|').first == 'apply'
       start_apply_process
     else
-      PostbackResponder.new(message_data.message, postback_message)
-        .send_postback_messages
+      PostbackResponder.new(message, postback_message).send_postback_messages
     end
   end
 
@@ -38,7 +37,7 @@ class MessageResponder
   end
 
   def process_message
-    MessengerResponderWorker.perform_async(message_data.message)
+    MessengerResponderWorker.perform_async(message_hash)
     # HandleWitResponseWorker.perform_async(message_sender_id, message_text)
   end
 
@@ -47,11 +46,20 @@ class MessageResponder
   end
 
   def params
-    { attachment_url: message_data.attachment_url, quick_reply: quick_reply }
+    { attachment_url: attachment_url, quick_reply: quick_reply }
   end
 
   def quick_reply
-    @quick_reply ||= message_data.quick_reply
+    @quick_reply ||= message.quick_reply
+  end
+
+  def attachment_url
+    return unless message.attachments
+    @attachment_url ||= message.attachments.first['payload']['url']
+  end
+
+  def message_text
+    @message_text ||= message.text
   end
 
   def conversation_id
@@ -62,11 +70,15 @@ class MessageResponder
     @message_sender_id ||= message_data.sender_id
   end
 
-  def message_text
-    @message_text ||= message_data.text
-  end
-
   def repository
     @repository ||= message_data.repository
+  end
+
+  def message_data
+    @message_data ||= MessageData.new(message_hash)
+  end
+
+  def message_hash
+    @message_hash ||= message.messaging
   end
 end

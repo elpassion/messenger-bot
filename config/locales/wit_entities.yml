@@ -52,13 +52,14 @@ wit_entities:
   nothing:
     action: get_user
     text: As you wish.... I am quite sad about that! Sooo... Have a nice day, %{name}! B) It was very glad to talk to ya! :)
+  offer_details:
+    action: get_details
   okay: >
     :) Is there anything else I can help you with?
   order: Nice, but If you want order anything, you should try somewhere else! :D I don't do stuff like this (yet)! :(
   portfolio: We are proud to have supported Wirtualna Polska, GoldenLine, ZnanyLekarz, Estimote, Rightmove and RWE.
   position:
     action: get_job
-    text: to be done
   sentiment:
     action: check_sentiment
     positive: >
