@@ -6,9 +6,10 @@ class MessageResponder
   def set_action
     case
       when message.text == 'test'
-        deliver_messages(I18n.t('test_message'))
+        message.reply(I18n.t('test_message'))
       when message.attachments && conversation.apply == false
-        deliver_messages([I18n.t('attachment_response'), gif_response])
+        message.reply(I18n.t('attachment_response'))
+        message.reply(gif_response)
       when conversation.apply
         run_apply_process
       when quick_reply && quick_reply != 'empty'
@@ -21,7 +22,6 @@ class MessageResponder
   private
 
   attr_reader :message
-
   def gif_response
     { attachment: { type: 'image',
                     payload: { url: GifService.new.random_gif_url } } }
