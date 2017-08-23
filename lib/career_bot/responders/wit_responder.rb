@@ -61,7 +61,7 @@ class WitResponder
 
   def send_random_gif
     [{ attachment: { type: 'image', payload: { url: gif_url } } },
-    { text: I18n.t('RANDOM_GIF', locale: :responses) }]
+    { text: I18n.t('RANDOM_GIF', locale: :responses)[0] }]
   end
 
   def add_quick_replies(payload)
