@@ -8,7 +8,8 @@ class WitActionsService
   def send
     {
       send: lambda do |request, response|
-        responses = WitResponder.new(conversation(request), request, response).responses
+        conversation = conversation(request)
+        responses = WitResponder.new(conversation, request, response).responses
 
         responses.map { |message| deliver_message(request, message) }
       end
@@ -46,7 +47,7 @@ class WitActionsService
   end
 
   def conversation(request)
-    @conversation ||= ConversationRepository.new.find_by_session_uid(request['session_id'])
+    ConversationRepository.new.find_by_session_uid(request['session_id'])
   end
 
   def messenger_id(request)

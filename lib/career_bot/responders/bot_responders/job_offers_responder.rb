@@ -5,9 +5,9 @@ class JobOffersResponder
   end
 
   def response
-    save_job_codes
     responses = [{ text: attachment[:text] }]
     if attachment_jobs
+      save_job_codes
       responses.concat([{ attachment: GenericTemplate.new(attachment_jobs).to_hash },
        { text: I18n.t('text_messages.try_again_1') },
        { text: I18n.t('text_messages.try_again_2') }])
@@ -48,7 +48,7 @@ class JobOffersResponder
   end
 
   def save_job_codes
-    repository.update(conversation.id, job_codes: job_codes) if attachment_jobs
+    repository.update(conversation.id, job_codes: job_codes)
   end
 
   def job_codes
