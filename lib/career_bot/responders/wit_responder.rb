@@ -15,22 +15,22 @@ class WitResponder
 
   def set_responses
     case context_key
-    when :job_position
-      found_job_offers
-    when :about_us
-      show_about_us
-    when :offer_details
-      show_details
-    when :main_menu
-      show_main_menu
-    when :details
-      show_details
-    when :gif
-      send_random_gif
-    when :error
-      send_error_message
-    else
-      text_response
+      when :job_position
+        found_job_offers
+      when :about_us
+        show_about_us
+      when :offer_details
+        show_details
+      when :main_menu
+        show_main_menu
+      when :details
+        show_details
+      when :gif
+        send_random_gif
+      when :error
+        send_error_message
+      else
+        text_response
     end
   end
 
@@ -56,7 +56,7 @@ class WitResponder
 
   def show_details
     JobDetailsResponder.new(conversation: conversation,
-                            details: details).set_response
+                            details: details).responses
   end
 
   def send_random_gif

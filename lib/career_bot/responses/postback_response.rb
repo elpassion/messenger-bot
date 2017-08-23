@@ -7,7 +7,9 @@ class PostbackResponse
 
   def response(payload)
    if I18n.exists?(payload, :responses)
-     { text: I18n.t(payload, locale: :responses) }
+     I18n.t(payload, locale: :responses).map do |response|
+       response.is_a?(Hash) ? { attachment: response} : { text: response }
+     end
    end
   end
 

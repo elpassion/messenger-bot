@@ -1,6 +1,5 @@
 describe JobDetailsResponder do
 
-  let(:bot_interface) { MockMessenger.new }
   let(:shortcode_1) { 'shortcode1' }
   let(:shortcode_2) { 'shortcode2' }
   let(:shortcode_3) { 'shortcode3' }
@@ -76,7 +75,7 @@ describe JobDetailsResponder do
   let(:session_uid) { 'session_uid' }
   let!(:conversation) { create(:conversation, session_uid: session_uid, job_codes: job_codes)}
 
-  subject { described_class.new(session_uid: session_uid, details: details, bot_interface: bot_interface) }
+  subject { described_class.new(conversation: conversation, details: details) }
 
   before do
     allow_any_instance_of(WorkableService).to receive(:get_jobs).and_return(active_jobs)
@@ -86,12 +85,13 @@ describe JobDetailsResponder do
   describe '#response' do
 
     before do
-      subject.set_response
+      subject.responses
     end
+
     context 'when job_codes are empty' do
       let(:job_codes) { nil }
       it 'should return proper message' do
-        expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.no_available_details')
+        expect(subject.responses.first[:text]).to eq I18n.t('text_messages.no_available_details')
       end
     end
 
@@ -102,17 +102,17 @@ describe JobDetailsResponder do
         context 'when requesting for requirements' do
 
           it 'should return proper beginning of message' do
-            expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.job_requirements_info', position: title_1, location: 'Warsaw')
+            expect(subject.responses.first[:text]).to eq I18n.t('text_messages.job_requirements_info', position: title_1, location: 'Warsaw')
           end
 
           it 'should return proper requirements' do
-            expect(bot_interface.sent_messages[1][:text]).to eq "- #{parsed_requirements(requirements_1).first}"
-            expect(bot_interface.sent_messages[2][:text]).to eq "- #{parsed_requirements(requirements_1)[1]}"
-            expect(bot_interface.sent_messages[5][:text]).to eq "- #{parsed_requirements(requirements_1)[4]}"
+            expect(subject.responses[1][:text]).to eq "- #{parsed_requirements(requirements_1).first}"
+            expect(subject.responses[2][:text]).to eq "- #{parsed_requirements(requirements_1)[1]}"
+            expect(subject.responses[5][:text]).to eq "- #{parsed_requirements(requirements_1)[4]}"
           end
 
           it 'should return proper end of message' do
-            expect(bot_interface.sent_messages.last[:text]).to eq I18n.t('text_messages.apply_for_job', job_url: nil,
+            expect(subject.responses.last[:text]).to eq I18n.t('text_messages.apply_for_job', job_url: nil,
                                                                          position: title_1, location: 'Warsaw',
                                                                          application_url: application_url_1)
           end
@@ -122,17 +122,17 @@ describe JobDetailsResponder do
           let(:details) { 'benefits' }
 
           it 'should return proper beginning of message' do
-            expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.job_benefits_info', position: title_1, location: 'Warsaw')
+            expect(subject.responses.first[:text]).to eq I18n.t('text_messages.job_benefits_info', position: title_1, location: 'Warsaw')
           end
 
           it 'should return proper requirements' do
-            expect(bot_interface.sent_messages[1][:text]).to eq "- #{parsed_benefits(full_description).first}"
-            expect(bot_interface.sent_messages[2][:text]).to eq "- #{parsed_benefits(full_description)[1]}"
-            expect(bot_interface.sent_messages[5][:text]).to eq "- #{parsed_benefits(full_description)[4]}"
+            expect(subject.responses[1][:text]).to eq "- #{parsed_benefits(full_description).first}"
+            expect(subject.responses[2][:text]).to eq "- #{parsed_benefits(full_description)[1]}"
+            expect(subject.responses[5][:text]).to eq "- #{parsed_benefits(full_description)[4]}"
           end
 
           it 'should return proper end of message' do
-            expect(bot_interface.sent_messages.last[:text]).to eq I18n.t('text_messages.apply_for_job', job_url: nil,
+            expect(subject.responses.last[:text]).to eq I18n.t('text_messages.apply_for_job', job_url: nil,
                                                                          position: title_1, location: 'Warsaw',
                                                                          application_url: application_url_1)
           end
@@ -142,7 +142,7 @@ describe JobDetailsResponder do
           let(:details) { 'apply' }
 
           it 'should return proper message' do
-            expect(bot_interface.sent_messages).to eq []
+            expect(subject.responses).to eq []
 
           end
         end
@@ -152,7 +152,7 @@ describe JobDetailsResponder do
         let(:job_codes) { 'invalid' }
 
         it 'should return proper message' do
-          expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.no_available_details')
+          expect(subject.responses.first[:text]).to eq I18n.t('text_messages.no_available_details')
         end
       end
     end
@@ -162,15 +162,15 @@ describe JobDetailsResponder do
         let(:job_codes) { "#{shortcode_1},#{shortcode_2},#{shortcode_3}" }
         context 'when requesting for requirements' do
           it 'should display proper message' do
-            expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.which_offer_check')
+            expect(subject.responses.first[:text]).to eq I18n.t('text_messages.which_offer_check')
           end
 
           it 'should display quick replies' do
-            expect(bot_interface.sent_messages.first.key?(:quick_replies)).to eq true
+            expect(subject.responses.first.key?(:quick_replies)).to eq true
           end
 
           it 'should contains 3 quick replies' do
-            expect(bot_interface.sent_messages.first[:quick_replies].length).to eq 3
+            expect(subject.responses.first[:quick_replies].length).to eq 3
           end
         end
 
@@ -178,15 +178,15 @@ describe JobDetailsResponder do
           let(:details) { 'apply' }
 
           it 'should display proper message' do
-            expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.which_offer_apply')
+            expect(subject.responses.first[:text]).to eq I18n.t('text_messages.which_offer_apply')
           end
 
           it 'should display quick replies' do
-            expect(bot_interface.sent_messages.first.key?(:quick_replies)).to eq true
+            expect(subject.responses.first.key?(:quick_replies)).to eq true
           end
 
           it 'should contains 3 quick replies' do
-            expect(bot_interface.sent_messages.first[:quick_replies].length).to eq 3
+            expect(subject.responses.first[:quick_replies].length).to eq 3
           end
         end
       end
@@ -195,20 +195,20 @@ describe JobDetailsResponder do
         let(:job_codes) { "#{shortcode_1},invalid,#{shortcode_3},invalid2" }
 
         it 'should display proper message' do
-          expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.which_offer_check')
+          expect(subject.responses.first[:text]).to eq I18n.t('text_messages.which_offer_check')
         end
 
         it 'should display quick replies' do
-          expect(bot_interface.sent_messages.first.key?(:quick_replies)).to eq true
+          expect(subject.responses.first.key?(:quick_replies)).to eq true
         end
 
         it 'should contains 3 quick replies' do
-          expect(bot_interface.sent_messages.first[:quick_replies].length).to eq 2
+          expect(subject.responses.first[:quick_replies].length).to eq 2
         end
 
         it 'should return proper quick replies titles' do
-          expect(bot_interface.sent_messages.first[:quick_replies].first[:title]).to eq ("#{title_1} (#{location})")
-          expect(bot_interface.sent_messages.first[:quick_replies].last[:title]).to eq ("#{title_3} (#{location})")
+          expect(subject.responses.first[:quick_replies].first[:title]).to eq ("#{title_1}")
+          expect(subject.responses.first[:quick_replies].last[:title]).to eq ("#{title_3}")
         end
       end
 
@@ -216,12 +216,12 @@ describe JobDetailsResponder do
         let(:job_codes) { "#{shortcode_1},invalid,invalid2" }
 
         it 'should not contain quick replies' do
-          expect(bot_interface.sent_messages.first.key?(:quick_replies)).to eq false
+          expect(subject.responses.first.key?(:quick_replies)).to eq false
         end
 
         it 'should contain proper message' do
           message = I18n.t('text_messages.job_requirements_info', position: title_1, location: 'Warsaw')
-          expect(bot_interface.sent_messages.first[:text]).to eq message
+          expect(subject.responses.first[:text]).to eq message
         end
       end
 
@@ -229,11 +229,11 @@ describe JobDetailsResponder do
         let(:job_codes) { 'invalid,invalid2' }
 
         it 'should not contain quick replies' do
-          expect(bot_interface.sent_messages.first.key?(:quick_replies)).to eq false
+          expect(subject.responses.first.key?(:quick_replies)).to eq false
         end
 
         it 'should contain proper message' do
-          expect(bot_interface.sent_messages.first[:text]).to eq I18n.t('text_messages.no_available_details')
+          expect(subject.responses.first[:text]).to eq I18n.t('text_messages.no_available_details')
         end
       end
     end

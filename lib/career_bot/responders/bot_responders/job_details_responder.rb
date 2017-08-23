@@ -4,15 +4,15 @@ class JobDetailsResponder
     @details = details
   end
 
-  def set_response
-    [responses].flatten(1)
+  def responses
+    [set_responses].flatten(1)
   end
 
   private
 
   attr_reader :conversation, :details
 
-  def responses
+  def set_responses
     case job_codes.length
       when 0 then no_available_jobs_response
       when 1 then one_available_job_response

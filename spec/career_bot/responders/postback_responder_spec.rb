@@ -64,7 +64,7 @@ describe PostbackResponder do
   it 'handles JOB_OFFERS postback' do
     postback = MockPostback.new('JOB_OFFERS')
     described_class.new(postback, PostbackResponse.new.message(postback.quick_reply, sender_id)).send
-    expect(postback.sent_messages).to eq([{ text: I18n.t('JOB_OFFERS', locale: :responses) }])
+    expect(postback.sent_messages).to eq([{ text: I18n.t('JOB_OFFERS', locale: :responses).first }])
   end
 
   it 'handles ABOUT_US postback' do
@@ -88,7 +88,7 @@ describe PostbackResponder do
   it 'handles PEOPLE postback' do
     postback = MockPostback.new('PEOPLE')
     described_class.new(postback, PostbackResponse.new.message(postback.quick_reply, sender_id)).send
-    expect(postback.sent_messages).to eq([{ text: I18n.t('PEOPLE', locale: :responses) }])
+    expect(postback.sent_messages).to eq([{ text: I18n.t('PEOPLE', locale: :responses).first }])
   end
 
   it 'handles benefits postback' do
