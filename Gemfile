@@ -34,6 +34,7 @@ group :test, :development do
   gem 'vcr'
   gem 'webmock'
   gem 'factory_girl'
+  gem 'rb-readline'
 end
 
 group :test do

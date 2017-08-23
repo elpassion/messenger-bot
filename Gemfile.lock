@@ -134,6 +134,7 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     rake (12.0.0)
+    rb-readline (0.5.5)
     redis (3.3.2)
     rom (2.0.2)
       concurrent-ruby (~> 1.0)
@@ -229,6 +230,7 @@ DEPENDENCIES
   pg
   pry
   rake
+  rb-readline
   rspec
   shotgun
   sidekiq (~> 4.0.2)
