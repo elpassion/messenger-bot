@@ -51,6 +51,6 @@ class WitActionsService
   end
 
   def messenger_id(request)
-    @messenger_id ||= conversation(request).messenger_id
+    conversation(request).messenger_id
   end
 end
