@@ -62,7 +62,7 @@ class MessageResponder
   end
 
   def message_sender_id
-    @message_sender_id ||= message.sender['id']
+    message.sender['id']
   end
 
   def message_text
