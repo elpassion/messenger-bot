@@ -10,12 +10,11 @@ describe WitAction::CheckSentimentService do
     }
   }
   let(:repository) { ConversationRepository.new }
-  let(:user_first_name) { 'Jane' }
-
   subject { described_class.new(request: request) }
 
   before do
-    allow_any_instance_of(GetUserData).to receive(:name).and_return(user_first_name)
+    allow_any_instance_of(GetUserData)
+      .to receive(:first_name).and_return('John')
   end
 
   describe '#call' do
@@ -25,11 +24,6 @@ describe WitAction::CheckSentimentService do
       it 'should return positive status' do
         expect(subject.call['positive']).to eq true
       end
-
-      it 'should return user name' do
-        expect(subject.call['name']).to eq user_first_name
-      end
-
     end
 
     context 'with negative sentiment' do

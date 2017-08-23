@@ -1,34 +1,36 @@
-class JobDetailsResponder < BotResponder
-  def initialize(session_uid:, details:, **options)
-    @session_uid = session_uid
+class JobDetailsResponder
+  def initialize(conversation:, details:)
+    @conversation = conversation
     @details = details
-    super(**options)
   end
 
-  def set_response
-    if no_job_codes?
-      no_available_jobs_response
-    elsif job_codes.length == 1
-      one_available_job_response
-    else
-      show_quick_responses
-    end
+  def responses
+    [set_responses].flatten(1)
   end
 
   private
 
-  attr_reader :session_uid, :details
+  attr_reader :conversation, :details
+
+  def set_responses
+    case job_codes.length
+      when 0 then no_available_jobs_response
+      when 1 then one_available_job_response
+      else show_quick_responses
+    end
+  end
 
   def show_quick_responses
-    bot_deliver(
-      text: I18n.t("text_messages.which_offer_#{detail}"),
-      quick_replies: quick_replies
-    )
+    { text: I18n.t("text_messages.which_offer_#{detail}"),
+      quick_replies: quick_replies }
   end
 
   def quick_replies
     job_codes.map do |code|
-      DetailsQuickResponse.new(code: code, details: details).reply
+      job = JobRepository.new.get_job(code).first
+      { content_type: 'text', title: "#{job['title']}",
+        payload: "#{details}|#{code}"
+      }
     end
   end
 
@@ -37,15 +39,7 @@ class JobDetailsResponder < BotResponder
   end
 
   def no_available_jobs_response
-    bot_deliver(text: I18n.t('text_messages.no_available_details'))
-  end
-
-  def one_available_job_response
-    job_details_responses.each { |line| bot_deliver(text: line) }
-  end
-
-  def no_job_codes?
-    job_codes.empty?
+    { text: I18n.t('text_messages.no_available_details') }
   end
 
   def job_codes
@@ -56,8 +50,8 @@ class JobDetailsResponder < BotResponder
     conversation.job_codes ? conversation.job_codes.split(',') : []
   end
 
-  def job_details_responses
-    Array(JobDetailsResponse.new(single_job_code_payload, messenger_id).messages)
+  def one_available_job_response
+    JobDetailsResponse.new(single_job_code_payload, conversation.messenger_id).messages
   end
 
   def single_job_code_payload

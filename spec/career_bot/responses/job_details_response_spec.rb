@@ -5,22 +5,24 @@ describe JobDetailsResponse do
   let(:position) { 'Senior Ruby Developer' }
   let(:sender_id) { '123123' }
   let(:job_requirements_response_messages) do
-    [I18n.t('text_messages.job_requirements_info', position: 'Senior Ruby Developer', location: 'Warsaw'),
-     '- Focus on clean, SOLID code', '- Attention to detail',
-     '- A knack for finding simple solutions to complex issues',
-     '- Being skilled in software engineering',
-     '- Proven track record of using Rails in commercial projects',
-     I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/51167',
-            position: position, location: 'Warsaw')]
+    [{ text: I18n.t('text_messages.job_requirements_info', position: 'Senior Ruby Developer', location: 'Warsaw') },
+     { text: '- Focus on clean, SOLID code' },
+     { text:  '- Attention to detail' },
+     { text: '- A knack for finding simple solutions to complex issues' },
+     { text: '- Being skilled in software engineering' },
+     { text: '- Proven track record of using Rails in commercial projects' },
+     { text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/51167',
+                    position: position, location: 'Warsaw') }]
   end
   let(:job_benefits_response_messages) do
-    [I18n.t('text_messages.job_benefits_info'),
-     '- We offer clear and fair compensation system based entirely on thorough assessment of your skills. ',
-     '- Salary range 10000 - 14600 PLN net', '- IDE license, if you want one - you can choose your own editor',
-     '- You decide which technology will be most appropriate for your project. Want to try something new? - Great, we love to experiment!',
-     '- We practice TDD, write unit and functional tests; CI, CD, pair programming',
-     I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/51167',
-            position: position, location: 'Warsaw')]
+    [{ text: I18n.t('text_messages.job_benefits_info') },
+     { text: '- We offer clear and fair compensation system based entirely on thorough assessment of your skills. '},
+     { text: '- Salary range 10000 - 14600 PLN net' },
+     { text: '- IDE license, if you want one - you can choose your own editor' },
+     { text: '- You decide which technology will be most appropriate for your project. Want to try something new? - Great, we love to experiment!' },
+     { text: '- We practice TDD, write unit and functional tests; CI, CD, pair programming' },
+     { text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/51167',
+                   position: position, location: 'Warsaw')}]
   end
 
   let(:job_apply_response_message) { [] }

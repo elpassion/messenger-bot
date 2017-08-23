@@ -15,16 +15,14 @@ describe WitAction::GetUserService do
   subject { described_class.new(request: request) }
 
   before do
-    allow_any_instance_of(GetUserData).to receive(:name).and_return(user_first_name)
+    allow_any_instance_of(GetUserData)
+      .to receive(:first_name).and_return(user_first_name)
   end
 
   describe '#call' do
     it 'does not update conversation context' do
-      expect {
-        subject.call
-      }.not_to change {
-        repository.find(conversation.id).context
-      }
+      expect { subject.call }
+        .not_to change { repository.find(conversation.id).context }
     end
 
     it 'should return users name' do
