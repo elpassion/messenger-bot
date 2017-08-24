@@ -17,6 +17,8 @@ wit_entities:
     Well, it depends on how skilled you are! In EL Passion we have Salary Formula system and everything is clear.
     Want to know more? Don't hesitate to apply for specified job offer and we will talk then :)
   feelings: Glad to read that! <3 Please tell me is there anything I can help you with? :)
+  gif:
+    action: send_random_gif
   got_it: I am pretty sure I do :)
   goodbye:
     action: get_user
@@ -40,12 +42,21 @@ wit_entities:
       or ask me about our Facebook, website or any other social media. You can also try to ask me about something else.
       I cannot promise I will know answers for all questions you may have, but remember - I learn new stuff everyday! B) :)
   job_request: Oh hi there! :) What kind of job are you interested in?
+  joke:
+    action: get_random_joke
+    text:
+      - >
+        %{joke}
+      - >
+        As you can see, I'm also a joke master! :D :D
   language: Nope :( I am pretty good in English, though! :)
   laugh: Oh, I've made you laugh! How cool is that! B) I'm still learn lot about you, humans.
   looking_for_job:
     action: get_job
     text: to be done
   make_me: Seriously?!?! I am kinda robot, but I don't do stuff like that! :P Anything else?
+  main_menu:
+    action: show_main_menu
   marry_me: I am really flattered! :) But maybe you should look for someone more real than me? :) I keep my fingers crossed!
   meaning_of_life: The answer is 42
   newsletter: Unfortunetly we don't have any newsletter :(
@@ -72,6 +83,7 @@ wit_entities:
       Of course we have %{social_network}! Here is the link: %{address}. You are welcome :*
     not_found: >
       Unfortunately we don't have %{social_network}
+  something_else: Cool! What would you like to talk about? :)
   talk: Sure! What would you like to talk about? :)
   technologies: In EL Passion we create web applications using RoR, Elixir, React/Redux, Ember.js & mobile applications with Kotlin and Swift.
   user_name: Magic! :P I am a very smart Bot, don't you think? :)

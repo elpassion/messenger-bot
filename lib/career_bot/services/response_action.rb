@@ -4,7 +4,9 @@ class ResponseAction
   end
 
   def call
-    bot_deliver(text: modified_entity_text)
+    modified_entity_text.each do |text|
+      bot_deliver(text: text)
+    end
   end
 
   private
@@ -33,7 +35,7 @@ class ResponseAction
   end
 
   def modified_entity_text
-    I18n.t(value, merge_translation_hash)
+    Array(I18n.t(value, merge_translation_hash))
   end
 
   def merge_translation_hash
