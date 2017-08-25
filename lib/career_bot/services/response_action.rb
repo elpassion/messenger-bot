@@ -14,7 +14,7 @@ class ResponseAction
   attr_reader :message_data
 
   def user_first_name
-    messenger_user_repository.name
+    messenger_user_repository.first_name
   end
 
   def messenger_user_repository

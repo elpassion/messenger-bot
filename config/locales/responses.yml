@@ -63,11 +63,16 @@ responses:
       Dribbble: https://dribbble.com/elpassion and our Blog: https://blog.elpassion.com/.
       Feel invited to check them out! :)
     - Would you like to do something else now? Play a game? See main menu? Anything? :D
-  PEOPLE: 'You can check our squad here: http://www.elpassion.com/about-us/'
-  RANDOM_GIF: 'Hope you like GIFs with animals! :)'
-  JOB_OFFERS: >
-    Nice! :D Fortunately, we are looking for some cool people to join us!
-    Sooo... What kind of job are you interested in?
+  PEOPLE:
+    - >
+      You can check our squad here: http://www.elpassion.com/about-us/
+  RANDOM_GIF:
+    - >
+      Hope you like GIFs with animals! :)
+  JOB_OFFERS:
+    - >
+      Nice! :D Fortunately, we are looking for some cool people to join us!
+      Sooo... What kind of job are you interested in?
   HELP:
     - >
       I am just a bot, you know :) But I am also quite simple in use! :D

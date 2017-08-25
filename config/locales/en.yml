@@ -44,6 +44,10 @@ en:
     user_profile: 'https://graph.facebook.com/v2.6/%{messenger_id}?fields=first_name&access_token=%{access_token}'
   urls:
     images: ['wnhRECo', 'PQejdXE', 'VIN45s2', 'sNsxzI7', 'dyMrIZN', 'tk9h7S8', '2qRQFLG']
+  test_message:
+    text: 'OK, I am working! <3'
+  attachment_response:
+    text: 'I love it! <3 Check this out! :D'
   apply_process:
     start: >
       Cool! Let's start application process for %{job_title} then! <3 Let me ask you

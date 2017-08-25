@@ -5,6 +5,11 @@ class MessageResponder
 
   def set_action
     case
+      when message.text == 'test'
+        message.reply(I18n.t('test_message'))
+      when message.attachments && conversation.apply == false
+        message.reply(I18n.t('attachment_response'))
+        message.reply(gif_response)
       when message_data.apply
         run_apply_process
       when quick_reply && quick_reply != 'empty'
@@ -17,6 +22,10 @@ class MessageResponder
   private
 
   attr_reader :message
+  def gif_response
+    { attachment: { type: 'image',
+                    payload: { url: GifService.new.random_gif_url } } }
+  end
 
   def run_apply_process
     ApplyResponderWorker.perform_async(conversation_id, message_text, params)
@@ -80,5 +89,11 @@ class MessageResponder
 
   def message_hash
     @message_hash ||= message.messaging
+  end
+
+  def deliver_messages(messages)
+    messages.each do |message|
+      FacebookMessenger.new.deliver(message_sender_id, message)
+    end
   end
 end
