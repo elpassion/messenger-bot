@@ -35,6 +35,7 @@ group :test, :development do
   gem 'webmock'
   gem 'factory_girl'
   gem 'rb-readline'
+  gem 'simplecov', :require => false
 end
 
 group :test do
