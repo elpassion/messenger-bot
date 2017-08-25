@@ -90,10 +90,4 @@ class MessageResponder
   def message_hash
     @message_hash ||= message.messaging
   end
-
-  def deliver_messages(messages)
-    messages.each do |message|
-      FacebookMessenger.new.deliver(message_sender_id, message)
-    end
-  end
 end

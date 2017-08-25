@@ -30,8 +30,6 @@ class MessageData
     conversation.session_uid
   end
 
-  private
-
   def conversation
     @conversation = repository.find_by_messenger_id(sender_id)
   end

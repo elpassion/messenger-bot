@@ -1,10 +1,16 @@
 class ResponseAction::GetDetailsService < ResponseAction
   def call
-    JobDetailsResponder.new(session_uid: message_data.session_uid,
-                            details: details).set_response
+    responses.each do |response|
+      bot_deliver(response)
+    end
   end
 
   private
+
+  def responses
+    JobDetailsResponder.new(conversation: message_data.conversation,
+                            details: details).responses
+  end
 
   def details
     @details ||= entities[entities.keys.first].first['value']

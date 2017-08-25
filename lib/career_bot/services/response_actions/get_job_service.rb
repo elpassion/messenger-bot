@@ -1,10 +1,16 @@
 class ResponseAction::GetJobService < ResponseAction
   def call
-    JobOffersResponder.new(session_uid: message_data.session_uid,
-                           job_keyword: position).response
+    responses.each do |response|
+      bot_deliver(response)
+    end
   end
 
   private
+
+  def responses
+    JobOffersResponder.new(conversation: message_data.conversation,
+                           job_keyword: position).response
+  end
 
   def position
     @position ||= entities[entities.keys.first].first['value']
