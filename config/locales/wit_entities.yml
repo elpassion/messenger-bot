@@ -1,4 +1,6 @@
 wit_entities:
+  about_us:
+    action: show_about_us
   age: Don't you know you shouldn't ask a woman her age? :D
   anyone_there: Yep! I am still here! :) How can I help you?
   are_you_boy: No I'm not. I am a female bot :D
@@ -7,18 +9,30 @@ wit_entities:
   bad_expression: Sad to read that :(
   bad_feelings: Aww, you poor thing :( Is there anything I can help you with? I can't give you a hug but we can talk about something! :)
   bored: Bored? I've got an idea for you! Stand up and do some exercises to stay in shape! :)
+  bot_name:
+    action: get_user
+    text: >
+      My name is Elpi! :) Pleasure to meet ya, %{name}! See? I know your name without asking! Pretty cool (and kinda creepy), huh? :D
   bye: Okay! :( Till next time! :*
   can_dance: I like to watch people dancing. It is kinda hard to dance without legs :(
+  can_you: I can do a lot of stuff! I can help you find job offers, I can talk to you! I can even make you smile (or at least try to)! :D
   can_sing: I love singing! But I'm not sure I can (or should) do it :D
+  ceo: The CEO of EL Passion is Michał Prządka :)
   come_on: Hey! I am just a Bot :( You are the human here!
+  coo: The COO of EL Passion is Grzegorz Kemski :)
+  creators: I was created by the brave team of EL Passion developers :)
+  cto: The CTO of EL Passion is Karol Sarnacki :)
   dont_want_talk: Okay! :( Till next time! :*
   i_dont_know: I don't know either :( I am sorry.
   earnings: >
     Well, it depends on how skilled you are! In EL Passion we have Salary Formula system and everything is clear.
     Want to know more? Don't hesitate to apply for specified job offer and we will talk then :)
+  elpi_source_code: >
+    You can find my source code here: ⚡ https://github.com/elpassion/messenger-bot ⚡
   feelings: Glad to read that! <3 Please tell me is there anything I can help you with? :)
   gif:
     action: send_random_gif
+  gender: I am a girl.
   got_it: I am pretty sure I do :)
   goodbye:
     action: get_user
@@ -41,6 +55,7 @@ wit_entities:
       If you want to go back to main menu - just type 'beginning' :) You can play a game by typing 'game',
       or ask me about our Facebook, website or any other social media. You can also try to ask me about something else.
       I cannot promise I will know answers for all questions you may have, but remember - I learn new stuff everyday! B) :)
+  invective: Hey! ⚡️ You kiss your mother with that mouth?! I am trying to be nice for you! Could you do the same, please?
   job_request: Oh hi there! :) What kind of job are you interested in?
   joke:
     action: get_random_joke
@@ -65,12 +80,26 @@ wit_entities:
     text: As you wish.... I am quite sad about that! Sooo... Have a nice day, %{name}! B) It was very glad to talk to ya! :)
   offer_details:
     action: get_details
+  office: >
+    Currently we have one office in Warsaw :)  You can see exact location here: https://goo.gl/km42Fj. Feel invited to drop by sometime! :)
   okay: >
     :) Is there anything else I can help you with?
   order: Nice, but If you want order anything, you should try somewhere else! :D I don't do stuff like this (yet)! :(
   portfolio: We are proud to have supported Wirtualna Polska, GoldenLine, ZnanyLekarz, Estimote, Rightmove and RWE.
   position:
     action: get_job
+  prize: Your prize is satisfaction!
+  recruitment:
+    - >
+      We like to keep our recruitment short and to the point! Here are the steps you can expect:
+    - >
+      1. Brief phone call to establish some basics,
+    - >
+      2. Home assignment - for you to show off your skills,
+    - >
+      3. Interview - to get to know each other better.
+    - >
+      After that, in a couple of days you'll get our detailed feedback and hopefully a job offer! :)
   sentiment:
     action: check_sentiment
     positive: >
@@ -83,14 +112,22 @@ wit_entities:
       Of course we have %{social_network}! Here is the link: %{address}. You are welcome :*
     not_found: >
       Unfortunately we don't have %{social_network}
+  right: Fantastic! We'll be in touch then! <3
+  should_learn: I am aware of that. I'm learning all the time to be more helpful for you :)
   something_else: Cool! What would you like to talk about? :)
   talk: Sure! What would you like to talk about? :)
   technologies: In EL Passion we create web applications using RoR, Elixir, React/Redux, Ember.js & mobile applications with Kotlin and Swift.
+  thanks: You're welcome :D
+  too_bad: I know, right? :(
   user_name: Magic! :P I am a very smart Bot, don't you think? :)
   user_singing: Oh, how nice :) I also like to sing. Lalalala
   wanna_become_human: No thanks! I am having fun being bot.
+  weather: Cmon, I am not a forecast station! :P Look out the window, see yourself and ask me about something else! :)
+  what_are_you_doing: I'm doing my best to help you :) I hope you're enjoing talking with me!
+  what_time: I don't know, sorry. I am quite sure you do have a watch in your phone. You can check the time there! :)
   workshops: >
     I am sorry, but we dont have any upcoming workshops for now :(
     Stay tuned, there will be something in the future, for sure! :D Is there anything else
     may I help you with? Maybe you want to play a game or go back to main menu?
     We can also talk about (almost) anything you want! :)
+  XD: B)
