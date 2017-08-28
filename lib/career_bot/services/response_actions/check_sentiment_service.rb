@@ -1,4 +1,6 @@
 class ResponseAction::CheckSentimentService < ResponseAction
+  private
+
   def data
     { name: user_first_name }
   end
@@ -6,8 +8,6 @@ class ResponseAction::CheckSentimentService < ResponseAction
   def value
     sentiment
   end
-
-  private
 
   def sentiment
     @sentiment ||= entities[entities.keys.first].first['value']

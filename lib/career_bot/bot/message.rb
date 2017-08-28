@@ -5,9 +5,11 @@ class Message
 
   def send_message
     if entities.keys.any? { |key| I18n.exists?(key, :wit_entities) }
-      message_content
+      Array(message_content).each do |text|
+        deliver_messages(single_response(text))
+      end
     else
-      bot_deliver(text: "I don't understand")
+      deliver_messages(text: "I don't understand")
     end
   end
 
@@ -15,13 +17,17 @@ class Message
     if entity.is_a?(Hash) && entity.has_key?(:action)
       ActionResponseService.new(entity[:action], message_data).run
     else
-      Array(entity).each { |text| bot_deliver(text: text) }
+      entity
     end
   end
 
   private
 
   attr_reader :message
+
+  def single_response(text)
+    text.is_a?(String) ? { text: text } : text
+  end
 
   def session_uid
     conversation.session_uid
@@ -55,7 +61,7 @@ class Message
     @message_data ||= MessageData.new(message)
   end
 
-  def bot_deliver(message)
+  def deliver_messages(message)
     bot_interface.deliver(sender_id, message) if sender_id
   end
 

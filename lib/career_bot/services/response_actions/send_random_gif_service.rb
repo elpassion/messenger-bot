@@ -1,7 +1,7 @@
 class ResponseAction::SendRandomGifService < ResponseAction
-  def call
-    bot_deliver(attachment: { type: 'image', payload: { url: gif_url } } )
-    bot_deliver(text: I18n.t('RANDOM_GIF', locale: :responses) )
+  def responses
+    [ { attachment: { type: 'image', payload: { url: gif_url } } } ,
+      { text: I18n.t('RANDOM_GIF', locale: :responses)[0] } ]
   end
 
   private

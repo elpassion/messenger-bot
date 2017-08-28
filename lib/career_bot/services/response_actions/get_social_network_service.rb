@@ -1,4 +1,6 @@
 class ResponseAction::GetSocialNetworkService < ResponseAction
+  private
+
   def data
     if social_network_address
       { social_network: social_network, address: social_network_address }
@@ -10,8 +12,6 @@ class ResponseAction::GetSocialNetworkService < ResponseAction
   def value
     social_network_address ? 'found' : 'not_found'
   end
-
-  private
 
   def social_network_address
     return unless social_network_exists?

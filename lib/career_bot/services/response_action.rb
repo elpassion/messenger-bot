@@ -3,43 +3,32 @@ class ResponseAction
     @message_data = message_data
   end
 
-  def call
-    modified_entity_text.each do |text|
-      bot_deliver(text: text)
-    end
+  def responses
+    I18n.t(value, merge_translation_hash)
   end
 
   private
 
   attr_reader :message_data
 
+  def single_response(text)
+    text.is_a?(String) ? { text: text } : text
+  end
+
+  def merge_translation_hash
+    { locale: :wit_entities, scope: entity_key }.merge(data)
+  end
+
   def user_first_name
     messenger_user_repository.first_name
   end
 
   def messenger_user_repository
-    @messenger_user_repository ||=
-      GetUserData.new(messenger_id: sender_id)
-  end
-
-  def bot_deliver(message)
-    bot_interface.deliver(sender_id, message) if sender_id
-  end
-
-  def bot_interface
-    @bot_interface = FacebookMessenger.new
+    GetUserData.new(messenger_id: sender_id)
   end
 
   def sender_id
     @sender_id ||= message_data.sender_id
-  end
-
-  def modified_entity_text
-    Array(I18n.t(value, merge_translation_hash))
-  end
-
-  def merge_translation_hash
-    {locale: :wit_entities, scope: entity_key}.merge(data)
   end
 
   def entity_key

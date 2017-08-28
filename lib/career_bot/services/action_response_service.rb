@@ -5,7 +5,7 @@ class ActionResponseService
   end
 
   def run
-    generate_class.new(message_data).call
+    Array(generate_class.new(message_data).responses)
   end
 
   private

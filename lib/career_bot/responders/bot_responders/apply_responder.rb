@@ -32,7 +32,7 @@ class ApplyResponder < BotResponder
   end
 
   def handle_multi_line_answer
-    bot_deliver(text: I18n.t('apply_process.go_on'))
+    deliver_messages(text: I18n.t('apply_process.go_on'))
     save_question_answer
   end
 
@@ -58,15 +58,15 @@ class ApplyResponder < BotResponder
   def start_application_process
     repository.update(conversation.id, apply: true,
                       text_answers: {}, complex_answers:{} )
-    bot_deliver(text: I18n.t('apply_process.start', job_title: job.job_title))
+    deliver_messages(text: I18n.t('apply_process.start', job_title: job.job_title))
     deliver_question
   end
 
   def deliver_question
-    bot_deliver(text: question_message[:text],
-    quick_replies: question_message[:quick_replies])
+    deliver_messages(text: question_message[:text],
+                     quick_replies: question_message[:quick_replies])
     if current_question['type'] == 'free_text'
-      bot_deliver(text: I18n.t('apply_process.multi_lines_allowed'))
+      deliver_messages(text: I18n.t('apply_process.multi_lines_allowed'))
     end
   end
 
@@ -78,7 +78,7 @@ class ApplyResponder < BotResponder
     if send_user_responses?
       WorkableApplicationHandler.new(conversation).post_candidate_answers
     else
-      bot_deliver(text: I18n.t('apply_process.responses_not_saved'))
+      deliver_messages(text: I18n.t('apply_process.responses_not_saved'))
     end
 
     clear_conversation_apply_data
@@ -133,7 +133,7 @@ class ApplyResponder < BotResponder
 
   def quit_application_process
     clear_conversation_apply_data
-    bot_deliver(text: I18n.t('apply_process.quit'))
+    deliver_messages(text: I18n.t('apply_process.quit'))
   end
 
   def send_user_responses?

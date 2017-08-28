@@ -1,10 +1,10 @@
 class ResponseAction::GetRandomJokeService < ResponseAction
-
-  def modified_entity_text
+  def responses
     I18n.t('text' ,:locale=>:wit_entities, :scope=>"joke").map do |joke_line|
       I18n.interpolate(joke_line, joke: random_joke)
     end
   end
+
   private
 
   def random_joke
