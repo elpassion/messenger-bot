@@ -4,12 +4,8 @@ class Message
   end
 
   def send_message
-    if entities.keys.any? { |key| I18n.exists?(key, :wit_entities) }
-      Array(message_content).each do |text|
-        deliver_messages(single_response(text))
-      end
-    else
-      deliver_messages(text: "I don't understand")
+    Array(message_content).each do |text|
+      deliver_messages(single_response(text))
     end
   end
 
