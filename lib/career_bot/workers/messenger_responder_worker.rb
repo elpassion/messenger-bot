@@ -7,6 +7,6 @@ class MessengerResponderWorker
   end
 
   def perform(message)
-    Message.new(message).send_message
+    ProcessedMessageResponder.new(message).send_message
   end
 end

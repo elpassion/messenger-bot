@@ -7,7 +7,7 @@ class MessageResponder
     case
       when message.text == 'test'
         message.reply(I18n.t('test_message'))
-      when message.attachments && conversation.apply == false
+      when message.attachments && message_data.apply == false
         message.reply(I18n.t('attachment_response'))
         message.reply(gif_response)
       when message_data.apply

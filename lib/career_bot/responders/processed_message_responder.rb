@@ -1,4 +1,4 @@
-class Message
+class ProcessedMessageResponder
   def initialize(message)
     @message = message
   end
