@@ -74,7 +74,13 @@ class MessageResponder
   end
 
   def attachment_url
-    message.attachments.first['payload']['url'] if message.attachments
+    if message_attachments && message_attachments.first['payload']
+      message_attachments.first['payload']['url']
+    end
+  end
+
+  def message_attachments
+    @message_attachments ||= message.attachments
   end
 
   def repository
