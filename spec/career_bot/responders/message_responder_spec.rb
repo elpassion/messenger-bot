@@ -18,7 +18,6 @@ describe MessageResponder do
 
   let!(:conversation) { create(:conversation, messenger_id: messenger_id, apply: apply) }
   let(:apply) { false }
-  let(:repository) { ConversationRepository.new}
 
   let(:gif) { { url: 'www.fake-gif-url.com'} }
 

@@ -9,6 +9,10 @@ class ProcessedMessageResponder
     end
   end
 
+  private
+
+  attr_reader :message
+
   def message_content
     if entity.is_a?(Hash) && entity.has_key?(:action)
       ActionResponseService.new(entity[:action], message_data).run
@@ -17,28 +21,8 @@ class ProcessedMessageResponder
     end
   end
 
-  private
-
-  attr_reader :message
-
   def single_response(text)
     text.is_a?(String) ? { text: text } : text
-  end
-
-  def session_uid
-    conversation.session_uid
-  end
-
-  def sender_id
-    @sender_id ||= message_data.sender_id
-  end
-
-  def modified_entity_text
-    I18n.t(@value, merge_translation_hash)
-  end
-
-  def merge_translation_hash
-    { locale: :wit_entities, scope: entity_key }.merge(@data)
   end
 
   def entity
@@ -58,10 +42,10 @@ class ProcessedMessageResponder
   end
 
   def deliver_messages(message)
-    bot_interface.deliver(sender_id, message) if sender_id
+    FacebookMessenger.new.deliver(sender_id, message) if sender_id
   end
 
-  def bot_interface
-    @bot_interface = FacebookMessenger.new
+  def sender_id
+    @sender_id ||= message_data.sender_id
   end
 end
