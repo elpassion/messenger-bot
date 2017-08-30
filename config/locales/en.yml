@@ -77,6 +77,8 @@ en:
       - tak
       - yeah
       - sure
+      - confirm
+      - save
     quit_keywords:
       - exit
       - quit
