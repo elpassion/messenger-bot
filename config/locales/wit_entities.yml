@@ -96,9 +96,9 @@ wit_entities:
     - After that, in a couple of days you'll get our detailed feedback and hopefully a job offer! :)
   sentiment:
     action: check_sentiment
-    positive: >
+    positive:
       Thank you %{name}, you are very nice! <3
-    negative: >
+    negative:
       I see that you are frustrated. Feel free to contact with real person by https://www.messenger.com/t/170864136326039
   social_network:
     action: get_social_network
@@ -119,7 +119,7 @@ wit_entities:
   weather: Cmon, I am not a forecast station! :P Look out the window, see yourself and ask me about something else! :)
   what_are_you_doing: I'm doing my best to help you :) I hope you're enjoing talking with me!
   what_time: I don't know, sorry. I am quite sure you do have a watch in your phone. You can check the time there! :)
-  workshops: >
+  workshops:
     I am sorry, but we dont have any upcoming workshops for now :(
     Stay tuned, there will be something in the future, for sure! :D Is there anything else
     may I help you with? Maybe you want to play a game or go back to main menu?

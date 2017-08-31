@@ -6,8 +6,6 @@ describe ProcessedMessageResponder do
   let(:message) { { 'mid' => 'mid.$cAAE9Omda6aFkWqwzJ1eKWbq719NM', 'seq' => 207062, 'text' => 'some text' , 'nlp' => {'entities' => @entities } } }
 
   let(:messenger_id) { '123' }
-  let!(:conversation) { create(:conversation, messenger_id: messenger_id) }
-
 
   subject(:responder) { described_class.new(message_hash)}
   before do
@@ -46,26 +44,12 @@ describe ProcessedMessageResponder do
         expect(I18n.t('body', locale: :jokes).include?(responder.send_message.first)).to eq true
       end
 
-      it 'returns proper comment as a second line' do
-        @entities = { 'joke' => [{ 'value' =>  'Tell me a joke',
-                                   'type' =>  'value' }] }
-
-        expect(responder.send_message.last).to eq I18n.t('text', locale: :wit_entities, scope: :joke).last
-      end
-
-      it 'returns proper answer for facebook request' do
+      it 'returns proper answer for social network request' do
         @entities = { 'social_network' => [{ 'value' =>  'facebook',
                                    'type' =>  'value' }] }
 
         address = I18n.t('facebook', locale: :social_networks)
         expect(responder.send_message.last).to eq I18n.t('found', locale: :wit_entities, scope: :social_network, social_network: 'facebook', address: address)
-      end
-
-      it 'returns proper answer for snapchat' do
-        @entities = { 'social_network' => [{ 'value' =>  'snapchat',
-                                             'type' =>  'value' }] }
-
-        expect(responder.send_message.last).to eq I18n.t('not_found', locale: :wit_entities, scope: :social_network, social_network: 'snapchat')
       end
     end
   end

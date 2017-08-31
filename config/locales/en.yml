@@ -20,7 +20,7 @@ en:
     job_apply_info: >
       Want to join EL Passion and be %{position} in %{location}?
       Type APPLY to start application process! :)
-    apply_for_job: >
+    apply_for_job:
       To see full job offer visit %{job_url}. Want to be %{position} in %{location}?
       Type APPLY to start application process and see you at EL Passion! :)
     click_button_and_apply: 'Click button to apply to offer!'
