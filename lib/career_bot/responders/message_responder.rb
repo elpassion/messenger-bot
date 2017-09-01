@@ -66,8 +66,13 @@ class MessageResponder
   end
 
   def attachment_url
-    return unless message.attachments
-    @attachment_url ||= message.attachments.first['payload']['url']
+    if message_attachments && message_attachments.first['payload']
+      message_attachments.first['payload']['url']
+    end
+  end
+
+  def message_attachments
+    @message_attachments ||= message.attachments
   end
 
   def message_text
