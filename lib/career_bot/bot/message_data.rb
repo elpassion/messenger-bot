@@ -25,11 +25,6 @@ class MessageData
     @repository = ConversationRepository.new
   end
 
-  # probably to remove after JobOffersResponder refactor
-  def session_uid
-    conversation.session_uid
-  end
-
   def conversation
     @conversation = repository.find_by_messenger_id(sender_id)
   end

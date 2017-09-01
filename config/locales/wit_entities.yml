@@ -88,6 +88,11 @@ wit_entities:
   position:
     action: get_job
   prize: Your prize is satisfaction!
+  random_fact:
+    action: get_random_number_fact
+    text:
+      - Random number fact for ya! B)
+      - '%{fact}'
   recruitment:
     - We like to keep our recruitment short and to the point! Here are the steps you can expect
     - 1. Brief phone call to establish some basics,
