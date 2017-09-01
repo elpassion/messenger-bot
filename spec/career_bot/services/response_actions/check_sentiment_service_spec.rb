@@ -3,10 +3,12 @@ describe ResponseAction::CheckSentimentService do
                         'timestamp' => 1503933164327,
                         'message' => message } }
 
-  let(:message) { { 'mid' => 'mid.$cAAE9Omda6aFkWqwzJ1eKWbq719NM', 'seq' => 207062, 'text' => 'some text' , 'nlp' => {'entities' => @entities } } }
+  let(:message) { { 'mid' => 'mid.$cAAE9Omda6aFkWqwzJ1eKWbq719NM', 'seq' => 207062, 'text' => 'some text' , 'nlp' => {'entities' => entities } } }
 
   let(:messenger_id) { '123' }
   let!(:conversation) { create(:conversation, messenger_id: messenger_id) }
+  let(:entities) { { 'sentiment' => [{ 'value' => @sentiment,
+                                       'type' => 'value' }] } }
   let(:message_data) { MessageData.new(message_hash) }
   let(:user_data) { {'first_name' => name, 'id' => messenger_id} }
   let(:name) { 'Jon' }
@@ -19,17 +21,13 @@ describe ResponseAction::CheckSentimentService do
 
   describe '#responses' do
     it 'returns proper response when positive sentiment' do
-      @entities = { 'sentiment' => [{ 'value' => 'positive',
-                                      'type' => 'value' }] }
-
-      expect(subject.responses).to eq I18n.t('positive', locale: :wit_entities, scope: :sentiment, name: name)
+      @sentiment = 'positive'
+      expect(subject.responses).to eq I18n.t(@sentiment, locale: :wit_entities, scope: :sentiment, name: name)
     end
 
     it 'returns proper response when negative sentiment' do
-      @entities = { 'sentiment' => [{ 'value' => 'negative',
-                                      'type' => 'value' }] }
-
-      expect(subject.responses).to eq I18n.t('negative', locale: :wit_entities, scope: :sentiment)
+      @sentiment = 'negative'
+      expect(subject.responses).to eq I18n.t(@sentiment, locale: :wit_entities, scope: :sentiment)
     end
   end
 end

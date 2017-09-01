@@ -12,7 +12,7 @@ wit_entities:
   bored: Bored? I've got an idea for you! Stand up and do some exercises to stay in shape! :)
   bot_name:
     action: get_user
-    text: >
+    text:
       My name is Elpi! :) Pleasure to meet ya, %{name}! See? I know your name without asking! Pretty cool (and kinda creepy), huh? :D
   bye: Okay! :( Till next time! :*
   can_dance: I like to watch people dancing. It is kinda hard to dance without legs :(
@@ -25,7 +25,7 @@ wit_entities:
   cto: The CTO of EL Passion is Karol Sarnacki :)
   dont_want_talk: Okay! :( Till next time! :*
   i_dont_know: I don't know either :( I am sorry.
-  earnings: >
+  earnings:
     Well, it depends on how skilled you are! In EL Passion we have Salary Formula system and everything is clear.
     Want to know more? Don't hesitate to apply for specified job offer and we will talk then :)
   elpi_source_code: >
@@ -37,11 +37,11 @@ wit_entities:
   got_it: I am pretty sure I do :)
   goodbye:
     action: get_user
-    text: >
+    text:
       Goodbye, %{name}! Till the next time! Pleasure to talk with you <3 Have a great day! :*
   greetings:
     action: get_user
-    text: >
+    text:
       Hi %{name}! My name is Elpi and I will be your guide :D What would you like to do? :)
       We can talk about (almost) anything you want! I suggest something connected with my company,
       job offers or programming though :D Features alert! Play a game, get a random gif,
@@ -79,9 +79,9 @@ wit_entities:
     text: As you wish.... I am quite sad about that! Sooo... Have a nice day, %{name}! B) It was very glad to talk to ya! :)
   offer_details:
     action: get_details
-  office: >
+  office:
     Currently we have one office in Warsaw :)  You can see exact location here: https://goo.gl/km42Fj. Feel invited to drop by sometime! :)
-  okay: >
+  okay:
     :) Is there anything else I can help you with?
   order: Nice, but If you want order anything, you should try somewhere else! :D I don't do stuff like this (yet)! :(
   portfolio: We are proud to have supported Wirtualna Polska, GoldenLine, ZnanyLekarz, Estimote, Rightmove and RWE.
@@ -109,7 +109,7 @@ wit_entities:
     action: get_social_network
     found: >
       Of course we have %{social_network}! Here is the link: %{address}. You are welcome :*
-    not_found: >
+    not_found:
       Unfortunately we don't have %{social_network}
   right: Fantastic! We'll be in touch then! <3
   should_learn: I am aware of that. I'm learning all the time to be more helpful for you :)
