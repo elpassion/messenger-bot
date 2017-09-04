@@ -4,18 +4,11 @@ class MessageResponder
   end
 
   def response
-    test_message
-    set_action
-  end
-
-  private
-
-  attr_reader :message
-
-  def set_action
-    if message_data.apply
+    if message.text == 'test'
+      message.reply(I18n.t('test_message'))
+    elsif message_data.apply
       run_apply_process
-    elsif message.attachments
+    elsif message_attachments
       gif_response
     elsif quick_reply && quick_reply != 'empty'
       run_postback
@@ -24,10 +17,9 @@ class MessageResponder
     end
   end
 
-  def test_message
-    return unless message.text == 'test'
-    message.reply(I18n.t('test_message'))
-  end
+  private
+
+  attr_reader :message
 
   def gif_response
     message.reply(I18n.t('attachment_response'))
@@ -59,15 +51,15 @@ class MessageResponder
   end
 
   def process_message
-    if message_data.entities.keys.any? { |key| key_exists(key) }
+    if check_entity_key
       MessengerResponderWorker.perform_async(message_hash)
     else
       HandleWitResponseWorker.perform_async(message_sender_id, message_text)
     end
   end
 
-  def key_exists(key)
-    I18n.exists?(key, :wit_entities)
+  def check_entity_key
+    message_data.entities.keys.any? { |key| I18n.exists?(key, :wit_entities) }
   end
 
   def postback_message

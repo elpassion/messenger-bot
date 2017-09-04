@@ -1,9 +1,8 @@
-class ApplyResponder < BotResponder
-  def initialize(conversation_id, message, params = {}, **options)
+class ApplyResponder
+  def initialize(conversation_id, message, params = {})
     @conversation_id = conversation_id
     @message = message
     @params = params
-    super(**options)
   end
 
   def response
@@ -148,5 +147,13 @@ class ApplyResponder < BotResponder
   def clear_conversation_apply_data
     repository.update(conversation_id, apply: false, question_index: 0,
                       text_answers: {}, complex_answers: {})
+  end
+
+  def deliver_messages(message)
+    FacebookMessenger.new.deliver(conversation.messenger_id, message)
+  end
+
+  def repository
+    @repository ||= ConversationRepository.new
   end
 end

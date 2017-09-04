@@ -14,8 +14,8 @@ class ProcessedMessageResponder
   attr_reader :message
 
   def message_content
-    if entity.is_a?(Hash) && entity.has_key?(:action)
-      ActionResponseService.new(entity[:action], message_data).run
+    if entity.is_a?(Hash) && entity.key?(:action)
+      ActionService.new(entity[:action], message_data).run
     else
       entity
     end

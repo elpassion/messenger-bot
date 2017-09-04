@@ -1,4 +1,4 @@
-class ActionResponseService
+class ActionService
   def initialize(action, message_data)
     @action = action
     @message_data = message_data
@@ -17,6 +17,6 @@ class ActionResponseService
   end
 
   def generate_class_name
-    action.split('_').map { |name_part| name_part.capitalize }.join
+    action.split('_').map(&:capitalize).join
   end
 end
