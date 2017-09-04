@@ -31,7 +31,7 @@ Now you can apply for selected job offer through Messenger. Bot uses question pa
 You can start your own project from the scratch but you can also use the one created by us. You will find it [here](https://wit.ai/klaszcze/elpassion-bot-live/entities). 
 
 **Our Wit.ai stories use following methods implemented on backend:<br/><br/>**
-**Warning: Because wit.ai stories are deprecated we are moving stories implementation [here](https://github.com/elpassion/messenger-bot/blob/master/config/locales/wit_entities.yml)** 
+**Warning: Because wit.ai stories are deprecated we are moving stories implementation [here](https://github.com/elpassion/messenger-bot/blob/master/config/locales/wit_entities.yml)<br/><br/>** 
 → **`check_sentiment`** - used to check user's input - if there are any insult words, bot sends message with link to conversation with real person:
 
 <p align="center">
