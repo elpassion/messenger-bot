@@ -3,28 +3,28 @@ en:
     about_us_text: 'Cool! Which of those things you are interested in? :)'
     found_matching_jobs: 'Yayy! :) We have something you may be interested in! Check this out!'
     found_matching_descriptions: 'I have found some offers including the thing you are looking for!'
-    found_matching_job_keywords: >
+    found_matching_job_keywords:
       I'm afraid we don't have open job offers for this position now. :(
       Please send your CV to careers@elpassion.com and we'll be in touch! :)
-    no_jobs_found: >
+    no_jobs_found:
       Unfortunately we don't have any matching job offers. :(
       Buuuut... you can still check out all of our open positions!
-    try_again_1: >
+    try_again_1:
       Found anything interesting? If not - you can try again! :)
       You can also ask for requirements or benefits of selected job offer!
-    try_again_2: >
+    try_again_2:
       NEW FEATURE ALERT! :D Type APPLY or click on Apply button and
       start recruitment process via Messenger!
     job_requirements_info: 'Here are some must-have things for %{position} in %{location}:'
     job_benefits_info: 'We can offer you the following benefits:'
-    job_apply_info: >
+    job_apply_info:
       Want to join EL Passion and be %{position} in %{location}?
       Type APPLY to start application process! :)
-    apply_for_job: >
+    apply_for_job:
       To see full job offer visit %{job_url}. Want to be %{position} in %{location}?
       Type APPLY to start application process and see you at EL Passion! :)
     click_button_and_apply: 'Click button to apply to offer!'
-    no_available_details: >
+    no_available_details:
       You did not requested for any offers jet (or they are not available any more).
       What you are interested in?
     which_offer_check: Nice! Which offer would you like to check?
@@ -49,7 +49,7 @@ en:
   attachment_response:
     text: 'I love it! <3 Check this out! :D'
   apply_process:
-    start: >
+    start:
       Cool! Let's start application process for %{job_title} then! <3 Let me ask you
       a few questions. :) Try to be as much descriptive as you can.
       And fit in one message per question, please! Remember - you can stop application process
@@ -60,19 +60,19 @@ en:
     try_again: "Keep calm, type APPLY and try again! :)"
     form_submitted: "Cool! The form has been submitted! We'll be in touch! :)"
     responses_not_saved: 'Okay! Your responses were not saved! You can try again anytime you want. :)'
-    responses_saved: >
+    responses_saved:
       And we are done! Your responses have been recorded, you can check them below
       and approve (or not). Then I will save your Candidate Profile to our database. :)
       How quick & simple it was! :D
     are_information_correct: Are those information correct? Confirm and I will save your replies. :)
-    quit: >
+    quit:
       Okay! You quit the apply process. You can start it again anytime you want. :)
       Is there anything else I can help you with?
-    multi_lines_allowed: >
+    multi_lines_allowed:
       You don't have to fit in one message here. :)
     go_on: "Response recorded, go on! Type NEXT when you're ready to go. :)"
     positive_keywords:
-      - 'yes'
+      - yes
       - yep
       - tak
       - yeah

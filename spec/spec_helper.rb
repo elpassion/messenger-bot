@@ -1,5 +1,12 @@
 # Require this file for unit tests
 ENV['HANAMI_ENV'] ||= 'test'
+require 'simplecov'
+SimpleCov.start do
+  add_filter '/spec/'
+  add_filter '/config/'
+  add_filter '/db/'
+  add_group 'Services', '/lib/career_bot/services/'
+end
 
 require_relative '../config/environment'
 Hanami.boot
