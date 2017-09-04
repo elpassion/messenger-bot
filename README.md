@@ -21,14 +21,17 @@ Now you can apply for selected job offer through Messenger. Bot uses question pa
 
 2. Paste `WIT_ACCESS_TOKEN` to .env in career_bot application.
 
-3. We use Sidekiq to handle Wit.ai requests and responses, so you need to start it locally (use the following command: `bundle exec sidekiq -e development -c 5 -r ./config/environment.rb`)
+3. Go to Facebook developers page and past your `WIT_ACCESS_TOKEN` in Messenger Settings in `Build-in NLP' section
 
-4. Voila! Now you can add stories to Wit.ai (see [quickstart](https://wit.ai/docs/quickstart) for details) and test them  by writing with messenger-bot. Enjoy! 😄
+4. We use Sidekiq to handle Wit.ai requests and responses, so you need to start it locally (use the following command: `bundle exec sidekiq -e development -c 5 -r ./config/environment.rb`)
+
+5. Voila! Now you can add stories to Wit.ai (see [quickstart](https://wit.ai/docs/quickstart) for details) and test them  by writing with messenger-bot. Enjoy! 😄
 
 ### 👉 Using existing Wit.ai project 👈
 You can start your own project from the scratch but you can also use the one created by us. You will find it [here](https://wit.ai/klaszcze/elpassion-bot-live/entities). 
 
 **Our Wit.ai stories use following methods implemented on backend:<br/><br/>**
+**Warning: Because wit.ai stories are deprecated we are moving stories implementation [here](https://github.com/elpassion/messenger-bot/blob/master/config/locales/wit_entities.yml)** 
 → **`check_sentiment`** - used to check user's input - if there are any insult words, bot sends message with link to conversation with real person:
 
 <p align="center">
