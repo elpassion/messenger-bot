@@ -3,26 +3,38 @@ class MessageResponder
     @message = message
   end
 
-  def set_action
-    case
-      when message.text == 'test'
-        message.reply(I18n.t('test_message'))
-      when message.attachments && message_data.apply == false
-        message.reply(I18n.t('attachment_response'))
-        message.reply(gif_response)
-      when message_data.apply
-        run_apply_process
-      when quick_reply && quick_reply != 'empty'
-        run_postback
-      else
-        process_message
-    end
+  def response
+    test_message
+    set_action
   end
 
   private
 
   attr_reader :message
+
+  def set_action
+    if message_data.apply
+      run_apply_process
+    elsif message.attachments
+      gif_response
+    elsif quick_reply && quick_reply != 'empty'
+      run_postback
+    else
+      process_message
+    end
+  end
+
+  def test_message
+    return unless message.text == 'test'
+    message.reply(I18n.t('test_message'))
+  end
+
   def gif_response
+    message.reply(I18n.t('attachment_response'))
+    message.reply(send_gif)
+  end
+
+  def send_gif
     { attachment: { type: 'image',
                     payload: { url: GifService.new.random_gif_url } } }
   end
@@ -41,16 +53,21 @@ class MessageResponder
 
   def start_apply_process
     repository.update(conversation_id,
-     question_index: 0, apply_job_shortcode: quick_reply.split('|').last)
+                      question_index: 0,
+                      apply_job_shortcode: quick_reply.split('|').last)
     ApplyResponder.new(conversation_id, message_text, {}).response
   end
 
   def process_message
-    if message_data.entities.keys.any? { |key| I18n.exists?(key, :wit_entities) }
+    if message_data.entities.keys.any? { |key| key_exists(key) }
       MessengerResponderWorker.perform_async(message_hash)
     else
       HandleWitResponseWorker.perform_async(message_sender_id, message_text)
     end
+  end
+
+  def key_exists(key)
+    I18n.exists?(key, :wit_entities)
   end
 
   def postback_message
@@ -66,9 +83,8 @@ class MessageResponder
   end
 
   def attachment_url
-    if message_attachments && message_attachments.first['payload']
-      message_attachments.first['payload']['url']
-    end
+    return unless message_attachments && message_attachments.first['payload']
+    message_attachments.first['payload']['url']
   end
 
   def message_attachments

@@ -1,6 +1,6 @@
 class ResponseAction::GetRandomNumberFactService < ResponseAction
   def responses
-    I18n.t('text' ,locale: :wit_entities, scope: :random_fact).map do |fact|
+    I18n.t('text', locale: :wit_entities, scope: :random_fact).map do |fact|
       I18n.interpolate(fact, fact: random_fact)
     end
   end

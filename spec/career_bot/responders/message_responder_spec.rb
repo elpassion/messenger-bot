@@ -27,13 +27,13 @@ describe MessageResponder do
 
   subject { described_class.new(bot_message) }
 
-  describe '#set_action' do
+  describe '#response' do
     context 'whit test input' do
       let(:text) { 'test' }
 
       it 'returns test answer' do
         expect(bot_message).to receive(:reply).with(I18n.t('test_message'))
-        subject.set_action
+        subject.response
       end
     end
 
@@ -46,7 +46,7 @@ describe MessageResponder do
         expect(bot_message).to receive(:reply).with(I18n.t('attachment_response'))
         expect(bot_message).to receive(:reply).with({ attachment: {type: 'image', payload: { url: gif } } })
 
-        subject.set_action
+        subject.response
       end
     end
 
@@ -56,7 +56,7 @@ describe MessageResponder do
 
       it 'runs apply responder worker' do
         expect {
-          subject.set_action
+          subject.response
         }.to change(ApplyResponderWorker.jobs, :size).by(1)
       end
     end
@@ -83,7 +83,7 @@ describe MessageResponder do
                                                                    position: 'Senior Ruby Developer', location: 'Warsaw',
                                                                    application_url: 'https://elpassion.workable.com/jobs/51167/candidates/new') } )
 
-        subject.set_action
+        subject.response
       end
     end
 
@@ -94,7 +94,7 @@ describe MessageResponder do
 
         it 'runs HandleWitResponderWorker' do
           expect {
-            subject.set_action
+            subject.response
           }.to change(HandleWitResponseWorker.jobs, :size).by(1)
         end
 
@@ -108,7 +108,7 @@ describe MessageResponder do
 
         it 'runs MessengerResponderWorker' do
           expect {
-            subject.set_action
+            subject.response
           }.to change(MessengerResponderWorker.jobs, :size).by(1)
         end
       end
