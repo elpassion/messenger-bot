@@ -88,7 +88,7 @@ You can start your own project from the scratch but you can also use the one cre
 <a href="url"><img src="http://i.imgur.com/VGCMZZC.jpg" height="60%" width="60%" ></a>
 </p>
 
-→ **`show_about_us`**, **`show_main_menu`** - allows user to acces main menu and 'about us' info without clicking on buttons:
+→ **`show_about_us`**, **`show_main_menu`** - allows user to acces main menu and 'about us' info without clicking on the buttons:
 
 <p align="center">
 <img src="http://i.imgur.com/DXYyJ61.jpg" height="60%" width="60%" >
