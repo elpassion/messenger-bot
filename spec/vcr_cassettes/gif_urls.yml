@@ -1,0 +1,78 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=animals
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.giphy.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Ranges:
+      - bytes
+      - bytes
+      - bytes
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, Accept
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Age:
+      - '0'
+      - '0'
+      X-Robots-Tag:
+      - noindex
+      X-Kong-Upstream-Latency:
+      - '88'
+      X-Kong-Proxy-Latency:
+      - '0'
+      Via:
+      - 1.1 varnish
+      - kong/0.11.0.1-enterprise-edition
+      X-Rule-Debug:
+      - '1'
+      X-Cachiness-Rule-Name:
+      - fastly_default
+      X-Cachiness-Edge-Timeout:
+      - '1200.000'
+      X-Cachiness-Origin-Respect:
+      - respect_origin
+      Content-Length:
+      - '352'
+      Date:
+      - Wed, 18 Oct 2017 09:48:52 GMT
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-ams4441-AMS
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1508320133.749661,VS0,VE181
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"type":"gif","id":"SB5fjrUhAeLte","url":"http:\/\/giphy.com\/gifs\/dog-hug-SB5fjrUhAeLte","image_original_url":"https:\/\/media1.giphy.com\/media\/SB5fjrUhAeLte\/giphy.gif","image_url":"https:\/\/media1.giphy.com\/media\/SB5fjrUhAeLte\/giphy.gif","image_mp4_url":"https:\/\/media1.giphy.com\/media\/SB5fjrUhAeLte\/giphy.mp4","image_frames":"39","image_width":"300","image_height":"300","fixed_height_downsampled_url":"https:\/\/media1.giphy.com\/media\/SB5fjrUhAeLte\/200_d.gif","fixed_height_downsampled_width":"200","fixed_height_downsampled_height":"200","fixed_width_downsampled_url":"https:\/\/media1.giphy.com\/media\/SB5fjrUhAeLte\/200w_d.gif","fixed_width_downsampled_width":"200","fixed_width_downsampled_height":"200","fixed_height_small_url":"https:\/\/media1.giphy.com\/media\/SB5fjrUhAeLte\/100.gif","fixed_height_small_still_url":"https:\/\/media1.giphy.com\/media\/SB5fjrUhAeLte\/100_s.gif","fixed_height_small_width":"100","fixed_height_small_height":"100","fixed_width_small_url":"https:\/\/media1.giphy.com\/media\/SB5fjrUhAeLte\/100w.gif","fixed_width_small_still_url":"https:\/\/media1.giphy.com\/media\/SB5fjrUhAeLte\/100w_s.gif","fixed_width_small_width":"100","fixed_width_small_height":"100","username":"","caption":""},"meta":{"status":200,"msg":"OK","response_id":"59e723843559676b77081d20"}}'
+    http_version: 
+  recorded_at: Wed, 18 Oct 2017 09:48:52 GMT
+recorded_with: VCR 3.0.3

@@ -19,3 +19,7 @@ end
 task get_active_job_offers: :environment do
   SetActiveJobsWorker.perform_async
 end
+
+task set_random_gif_urls: :environment do
+  SetRandomGifUrlsWorker.perform_async
+end

@@ -121,7 +121,7 @@ class ApplyResponder
   end
 
   def save_question?
-    question_index.between?(1, questions_size) &&
+    question_index.between?(1, questions_size) && !stop_apply_process? &&
       (params['attachment_url'] ||
         !message_includes_any?(I18n.t('apply_process.skip_keywords')))
   end
