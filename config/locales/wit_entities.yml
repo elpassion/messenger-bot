@@ -45,7 +45,7 @@ wit_entities:
       Hi %{name}! My name is Elpi and I will be your guide :D What would you like to do? :)
       We can talk about (almost) anything you want! I suggest something connected with my company,
       job offers or programming though :D Features alert! Play a game, get a random gif,
-      find job offer or apply for specified job! Pretty cool, huh...? :) So? How can I help you:)
+      find job offer or apply for specified job! Pretty cool, huh...? :) So? How can I help you? :)
   have_nice_day: Thank you so much! <3 Have a funtastic day, too! :*
   how_are_you: Not bad actually, thanks! B) I am having a lot of fun chatting with you. It is quite a good day! And you? How are you today? :)
   help:
