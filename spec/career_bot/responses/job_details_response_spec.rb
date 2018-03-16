@@ -1,28 +1,29 @@
 describe JobDetailsResponse do
-  let(:requirements_payload) { 'requirements|AF3C224021' }
-  let(:benefits_payload) { 'benefits|AF3C224021' }
-  let(:apply_payload) { 'apply|AF3C224021' }
-  let(:position) { 'Senior Ruby Developer' }
+  let(:requirements_payload) { 'requirements|50E5C4179C' }
+  let(:benefits_payload) { 'benefits|50E5C4179C' }
+  let(:apply_payload) { 'apply|50E5C4179C' }
+  let(:position) { 'Ruby Developer' }
   let(:sender_id) { '123123' }
   let(:job_requirements_response_messages) do
-    [{ text: I18n.t('text_messages.job_requirements_info', position: 'Senior Ruby Developer', location: 'Warsaw') },
-     { text: '- Focus on clean, SOLID code' },
+    [{ text: I18n.t('text_messages.job_requirements_info', position: 'Ruby Developer', location: 'Warsaw') },
+     { text: '- Focus on clean, readable code' },
      { text:  '- Attention to detail' },
-     { text: '- A knack for finding simple solutions to complex issues' },
-     { text: '- Being skilled in software engineering' },
-     { text: '- Proven track record of using Rails in commercial projects' },
-     { text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/51167',
+     { text: '- Insistence on adhering to good programming practices' },
+     { text: '- Having worked on least one commercial project in Rails' },
+     { text: '- Being familiar with SQL beyond ActiveRecord ' },
+     { text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/636000',
                     position: position, location: 'Warsaw') }]
   end
   let(:job_benefits_response_messages) do
     [{ text: I18n.t('text_messages.job_benefits_info') },
-     { text: '- We offer clear and fair compensation system based entirely on thorough assessment of your skills. '},
-     { text: '- Salary range 10000 - 14600 PLN net' },
-     { text: '- IDE license, if you want one - you can choose your own editor' },
+     { text: '- We offer clear and fair compensation system based entirely on a thorough assessment of your skills' },
+     { text: '- Salary range 5800 - 10200 PLN net ' },
+     { text: "- Choose your prefered editor. Get an IDE license, if you'd want one" },
      { text: '- You decide which technology will be most appropriate for your project. Want to try something new? - Great, we love to experiment!' },
      { text: '- We practice TDD, write unit and functional tests; CI, CD, pair programming' },
-     { text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/51167',
-                   position: position, location: 'Warsaw')}]
+     { text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/636000',
+                    position: 'Ruby Developer', location: 'Warsaw',
+                    application_url: 'https://elpassion.workable.com/jobs/636000/candidates/new') }]
   end
 
   let(:job_apply_response_message) { [] }

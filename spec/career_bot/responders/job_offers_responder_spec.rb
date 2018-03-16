@@ -24,7 +24,7 @@ describe JobOffersResponder do
     end
 
     it 'returns all available job offers' do
-      expect(subject.response[1][:attachment][:payload][:elements].size).to eq 9
+      expect(subject.response[1][:attachment][:payload][:elements].size).to eq 6
     end
 
     it 'should set conversation job codes to all active job codes' do
@@ -41,18 +41,18 @@ describe JobOffersResponder do
   end
 
   context 'when found jobs with matching title' do
-    let(:job_position) { 'account' }
+    let(:job_position) { 'ruby' }
 
     it 'returns proper text message' do
       expect(subject.response.first[:text]).to eq I18n.t('text_messages.found_matching_jobs')
     end
 
     it 'returns proper amount of job offers' do
-      expect(subject.response[1][:attachment][:payload][:elements].size).to eq 1
+      expect(subject.response[1][:attachment][:payload][:elements].size).to eq 2
     end
 
     it 'should set conversation job codes to matched titles' do
-      expect(conversation_job_codes.size).to eq 1
+      expect(conversation_job_codes.size).to eq 2
     end
   end
 
@@ -64,11 +64,11 @@ describe JobOffersResponder do
     end
 
     it 'returns proper amount of job offers' do
-      expect(subject.response[1][:attachment][:payload][:elements].size).to eq 4
+      expect(subject.response[1][:attachment][:payload][:elements].size).to eq 5
     end
 
     it 'should set conversation job codes to matched description' do
-      expect(conversation_job_codes.size).to eq 4
+      expect(conversation_job_codes.size).to eq 5
     end
   end
 

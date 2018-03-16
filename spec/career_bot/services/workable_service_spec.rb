@@ -10,7 +10,7 @@ describe WorkableService do
     end
 
     it 'returns proper number of offers' do
-      expect(subject.get_jobs.count).to eq 9
+      expect(subject.get_jobs.count).to eq 6
     end
 
     it 'has proper data structure' do
