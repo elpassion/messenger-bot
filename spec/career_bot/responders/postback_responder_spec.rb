@@ -1,27 +1,27 @@
 describe PostbackResponder do
   let(:sender_id) { '123123123' }
   let(:job_requirements_response_messages) do
-    [{ text: I18n.t('text_messages.job_requirements_info', position: 'Senior Ruby Developer', location: 'Warsaw') },
-     { text: '- Focus on clean, SOLID code' },
+    [{ text: I18n.t('text_messages.job_requirements_info', position: 'Ruby Developer', location: 'Warsaw') },
+     { text: '- Focus on clean, readable code' },
      { text: '- Attention to detail' },
-     { text: '- A knack for finding simple solutions to complex issues' },
-     { text: '- Being skilled in software engineering' },
-     { text: '- Proven track record of using Rails in commercial projects' },
-     { text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/51167',
-                   position: 'Senior Ruby Developer', location: 'Warsaw',
-                   application_url: 'https://elpassion.workable.com/jobs/51167/candidates/new') }]
+     { text: '- Insistence on adhering to good programming practices' },
+     { text: '- Having worked on least one commercial project in Rails' },
+     { text: '- Being familiar with SQL beyond ActiveRecord ' },
+     { text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/636000',
+                   position: 'Ruby Developer', location: 'Warsaw',
+                   application_url: 'https://elpassion.workable.com/jobs/636000/candidates/new') }]
   end
 
   let(:job_benefits_response_messages) do
     [{ text: I18n.t('text_messages.job_benefits_info') },
-     { text: '- We offer clear and fair compensation system based entirely on thorough assessment of your skills. ' },
-     { text: '- Salary range 10000 - 14600 PLN net' },
-     { text: '- IDE license, if you want one - you can choose your own editor' },
+     { text: '- We offer clear and fair compensation system based entirely on a thorough assessment of your skills' },
+     { text: '- Salary range 5800 - 10200 PLN net ' },
+     { text: "- Choose your prefered editor. Get an IDE license, if you'd want one" },
      { text: '- You decide which technology will be most appropriate for your project. Want to try something new? - Great, we love to experiment!' },
      { text: '- We practice TDD, write unit and functional tests; CI, CD, pair programming' },
-     { text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/51167',
-                    position: 'Senior Ruby Developer', location: 'Warsaw',
-                    application_url: 'https://elpassion.workable.com/jobs/51167/candidates/new') }]
+     { text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/636000',
+                    position: 'Ruby Developer', location: 'Warsaw',
+                    application_url: 'https://elpassion.workable.com/jobs/636000/candidates/new') }]
   end
 
   let(:what_we_do_message) do
@@ -92,13 +92,13 @@ describe PostbackResponder do
   end
 
   it 'handles benefits postback' do
-    postback = MockPostback.new('benefits|AF3C224021')
+    postback = MockPostback.new('benefits|50E5C4179C')
     described_class.new(postback, PostbackResponse.new.message(postback.quick_reply, sender_id)).send
     expect(postback.sent_messages).to eq(job_benefits_response_messages)
   end
 
   it 'handles requirements postback' do
-    postback = MockPostback.new('requirements|AF3C224021')
+    postback = MockPostback.new('requirements|50E5C4179C')
     described_class.new(postback, PostbackResponse.new.message(postback.quick_reply, sender_id)).send
     expect(postback.sent_messages).to eq(job_requirements_response_messages)
   end

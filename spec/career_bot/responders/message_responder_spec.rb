@@ -70,17 +70,17 @@ describe MessageResponder do
         end
       end
 
-      let(:quick_reply) { 'requirements|AF3C224021' }
+      let(:quick_reply) { 'requirements|50E5C4179C' }
 
       it 'returns proper job details' do
-        expect(bot_message).to receive(:reply).with({ text: 'Here are some must-have things for Senior Ruby Developer in Warsaw:' })
-        expect(bot_message).to receive(:reply).with({ text: '- Focus on clean, SOLID code' })
+        expect(bot_message).to receive(:reply).with({ text: 'Here are some must-have things for Ruby Developer in Warsaw:' })
+        expect(bot_message).to receive(:reply).with({ text: '- Focus on clean, readable code' })
         expect(bot_message).to receive(:reply).with({ text: '- Attention to detail' })
-        expect(bot_message).to receive(:reply).with({ text: '- A knack for finding simple solutions to complex issues' })
-        expect(bot_message).to receive(:reply).with({ text: '- Being skilled in software engineering' })
-        expect(bot_message).to receive(:reply).with({ text: '- Proven track record of using Rails in commercial projects' })
-        expect(bot_message).to receive(:reply).with({ text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/51167',
-                                                                   position: 'Senior Ruby Developer', location: 'Warsaw',
+        expect(bot_message).to receive(:reply).with({ text: '- Insistence on adhering to good programming practices' })
+        expect(bot_message).to receive(:reply).with({ text: '- Having worked on least one commercial project in Rails' })
+        expect(bot_message).to receive(:reply).with({ text: '- Being familiar with SQL beyond ActiveRecord ' })
+        expect(bot_message).to receive(:reply).with({ text: I18n.t('text_messages.apply_for_job', job_url: 'https://elpassion.workable.com/jobs/636000',
+                                                                   position: 'Ruby Developer', location: 'Warsaw',
                                                                    application_url: 'https://elpassion.workable.com/jobs/51167/candidates/new') } )
 
         subject.response
