@@ -258,7 +258,7 @@ module Web
       # See: http://hanamirb.org/guides/applications/logging
       #
       # Logger level. It defaults to ERROR
-      logger.level :error
+      logger = Hanami::Logger.new(level: :error)
     end
 
     ##
@@ -276,10 +276,8 @@ module Web
       # logger.stream "log/production.log"
       #
       # Logger level. It defaults to INFO
-      logger.level :info
+      logger = Hanami::Logger.new(level: :info, formatter: :json)
 
-      # Logger format.
-      logger.format :json
     end
   end
 end
