@@ -14,6 +14,14 @@ class ProcessedMessageResponder
   attr_reader :message
 
   def message_content
+    if check_entity_key
+      get_data_from_entity
+    else
+      I18n.t('text_messages.unrecognized').sample
+    end
+  end
+
+  def get_data_from_entity
     if entity.is_a?(Hash) && entity.key?(:action)
       ActionService.new(entity[:action], message_data).run
     else
@@ -31,6 +39,10 @@ class ProcessedMessageResponder
 
   def entity_key
     entities.keys.first
+  end
+
+  def check_entity_key
+    entities.keys.any? { |key| I18n.exists?(key, :wit_entities) }
   end
 
   def entities
