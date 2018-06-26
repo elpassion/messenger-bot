@@ -92,12 +92,11 @@ describe MessageResponder do
 
         let(:text) { 'Uncategorised message' }
 
-        it 'runs HandleWitResponderWorker' do
+        it 'runs MessengerResponderWorker' do
           expect {
             subject.response
-          }.to change(HandleWitResponseWorker.jobs, :size).by(1)
+          }.to change(MessengerResponderWorker.jobs, :size).by(1)
         end
-
       end
 
       context 'with wit entity' do
