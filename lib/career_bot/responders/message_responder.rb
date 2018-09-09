@@ -51,15 +51,7 @@ class MessageResponder
   end
 
   def process_message
-    if check_entity_key
-      MessengerResponderWorker.perform_async(message_hash)
-    else
-      HandleWitResponseWorker.perform_async(message_sender_id, message_text)
-    end
-  end
-
-  def check_entity_key
-    message_data.entities.keys.any? { |key| I18n.exists?(key, :wit_entities) }
+    MessengerResponderWorker.perform_async(message_hash)
   end
 
   def postback_message
